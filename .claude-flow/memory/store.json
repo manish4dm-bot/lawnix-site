@@ -440,6 +440,15 @@
       "lastAccessed": "2026-11-09T06:44:22.332Z",
       "accessCount": 0,
       "expiresAt": "2026-12-09T06:44:22.332Z"
+    },
+    "cmd-1794206704615": {
+      "key": "cmd-1794206704615",
+      "value": "{\"command\":\"python3 - <<'EOF'\\np='site/build.py'; s=open(p).read()\\nold='''# HTTPS redirect is turned on once AutoSSL has issued the certificate.\\n# www -> apex'''\\nnew='''# Force HTTPS (certificate issued by AutoSSL on 2026-11-09)\\nRewriteCond %{HTTPS} !=on\\nRewriteCond %{HTTP:X-Forwarded-Proto} !https\\nRewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]\\n# www -> apex'''\\nassert old in s; open(p,'w').write(s.replace(old,new,1))\\nEOF\\nsed -i '' 's#RewriteRule ^ %{REQUEST_SCHEME}://%1%{REQUEST_URI} \\\\[L,R=301\\\\]#RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]#' site/build.py && python3 site/build.py | head -1 && grep -n \\\"Rewrite\\\" docs/.htaccess && git add -A && git -c user.name=\\\"Manish Kumar\\\" -c user.email=\\\"manish4dm@gmail.com\\\" commit -q -m \\\"Force HTTPS now that the certificate is live\\n\\nCo-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>\\\" && git push -q origin main && echo pushed\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-11-09T06:45:04.615Z",
+      "lastAccessed": "2026-11-09T06:45:04.615Z",
+      "accessCount": 0,
+      "expiresAt": "2026-12-09T06:45:04.615Z"
     }
   },
   "version": "3.0.0"

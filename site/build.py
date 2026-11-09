@@ -72,7 +72,7 @@ def head(title: str, desc: str, path: str, image: str = "/static/img/og-default.
 <a class="skip" href="#main">Skip to content</a>
 <header class="header">
   <div class="wrap">
-    <a class="logo" href="/" aria-label="Lawnix home">Lawn<b>ix</b><sup>TM</sup></a>
+    <a class="logo" href="/" aria-label="Lawnix home"><img class="logo-img" src="/static/img/logo-wordmark.png" alt="Lawnix" width="640" height="100"></a>
     <nav class="nav" aria-label="Main">
       {''.join(f'<a href="{h}">{E(t)}</a>' for t, h in C.NAV)}
       <a class="btn btn-primary" href="{product_url(C.PRODUCTS[0])}">Buy the LX-30</a>
@@ -94,7 +94,7 @@ def footer() -> str:
   <div class="wrap">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a class="logo" href="/">Lawn<b>ix</b><sup>TM</sup></a>
+        <a class="logo" href="/" aria-label="Lawnix home"><img class="logo-img" src="/static/img/logo-wordmark.png" alt="Lawnix" width="640" height="100" loading="lazy"></a>
         <p>{E(S['tagline'])} Stainless lawn and garden tools from {E(S['legal_name'])}.</p>
         <p><a href="mailto:{S['email']}">{S['email']}</a></p>
       </div>
@@ -106,7 +106,10 @@ def footer() -> str:
     </div>
   </div>
 </footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 <script src="/static/js/lawnix.js" defer></script>
+<script src="/static/js/motion.js" defer></script>
 </body>
 </html>
 """
@@ -143,6 +146,40 @@ def lineup() -> str:
     <div class="section-head reveal"><h2>Three tools. <span class="em">One flat lawn.</span></h2>
       <p class="lede">Start with the rake that fits your yard, then add the cultivator for beds and bare spots.</p></div>
     <div class="lineup">{''.join(product_card(p, big=(i == 0)) for i, p in enumerate(C.PRODUCTS))}</div>
+  </div>
+</section>"""
+
+
+def ticker() -> str:
+    items = ["<b>304</b> stainless steel", "<b>30</b> and <b>48</b> inch plates", "<b>78</b> inch handle", "tool-free assembly",
+             "center mount, anti-flip", "ships from US warehouses", f"{E(S['warranty'])}", "<b>10</b> inch deep plate"]
+    row = "".join(f"<span>{i}</span>" for i in items)
+    return f'<div class="ticker" aria-hidden="true"><div class="ticker-track"><div class="ticker-row">{row}</div><div class="ticker-row">{row}</div></div></div>'
+
+
+def exploded() -> str:
+    art = (HERE / "templates" / "rake.svg").read_text()
+    parts = [
+        ("01", "Plate", "30 x 10 inch 304 stainless frame. The size that floats over grass instead of digging in."),
+        ("02", "Bars", "Three parallel bars, spot welded. They cut the sand into an even layer on every pass."),
+        ("03", "Center mount", "Handle meets plate in the middle so it tracks straight and never rolls over on the pull."),
+        ("04", "Lower handle", "Satin stainless tube. Threads into the mount by hand, no tools."),
+        ("05", "Upper handle", "Second section brings the reach to 78 inches, or stop at 50 for tight spots."),
+        ("06", "Grip", "Non-slip lime grip. Dry hands or wet, it stays put."),
+    ]
+    labels = "".join(f'<div class="exploded-label{" on" if i == 0 else ""}"><span class="num">{n}</span><h3>{E(t)}</h3><p>{E(d)}</p></div>' for i, (n, t, d) in enumerate(parts))
+    return f"""<section class="exploded" id="engineered" aria-labelledby="eng-h">
+  <div class="wrap">
+    <div class="exploded-copy">
+      <h2 id="eng-h">Six parts. <span class="em">No weak one.</span></h2>
+      <p class="lede">Scroll to assemble the LX-30. Every part is there for a reason, and none of them is painted steel.</p>
+      <div class="exploded-labels">{labels}</div>
+      <div class="exploded-readout">Assembly <b>0%</b></div>
+    </div>
+    <div>
+      <div class="exploded-art">{art}</div>
+      <p class="exploded-note">Technical drawing, not to scale</p>
+    </div>
   </div>
 </section>"""
 
@@ -197,11 +234,16 @@ def compare() -> str:
       <span class="cta">View the {E(p['sku'])} <i class="ph ph-arrow-right" aria-hidden="true"></i></span>
     </a>"""
 
+    bars = f"""<div class="wbars reveal">
+      <div class="wbar"><span class="name">{E(a['sku'])}</span><div class="wbar-track"><div class="wbar-fill" data-pct="62.5"></div></div><span class="val"><span data-count="30">0</span><small>in</small></span></div>
+      <div class="wbar"><span class="name">{E(b['sku'])}</span><div class="wbar-track"><div class="wbar-fill" data-pct="100"></div></div><span class="val"><span data-count="48">0</span><small>in</small></span></div>
+    </div>"""
     return f"""<section class="section" id="sizes">
   <div class="wrap">
     <div class="section-head reveal"><h2>Pick your <span class="em">width</span></h2>
       <p class="lede">Same stainless plate, same 78-inch handle. The only question is how much lawn you cover per pass.</p></div>
-    <div class="compare">{col(a, 30)}{col(b, 48)}</div>
+    {bars}
+    <div class="compare" style="margin-top:28px">{col(a, 30)}{col(b, 48)}</div>
   </div>
 </section>"""
 
@@ -242,16 +284,34 @@ def home() -> None:
       <p class="lede reveal in" data-delay="1">Stainless steel leveling rakes and garden tools for homeowners who want a lawn that looks professionally cut.</p>
       <div class="hero-actions reveal in" data-delay="2">
         <a class="btn btn-primary" href="/shop/">Shop the rakes</a>
-        <a class="btn btn-ghost" href="#how">How leveling works</a>
+        <a class="btn btn-ghost" href="#engineered">See it assemble</a>
+      </div>
+      <div class="hero-chips reveal in" data-delay="3">
+        <div class="chip"><b data-count="304">0</b><span>stainless</span></div>
+        <div class="chip"><b data-count="30">0</b><span>inch plate</span></div>
+        <div class="chip"><b data-count="78">0</b><span>inch handle</span></div>
+        <div class="chip"><b data-count="5.2">0</b><span>pounds</span></div>
       </div>
     </div>
     <div class="hero-media reveal in" data-delay="1">
       <img src="/static/img/hero.jpg" alt="Lawnix LX-30 leveling rake spreading sand across a lawn" width="1200" height="1500" fetchpriority="high">
+      <div class="hero-scan"></div>
+      <svg class="hero-bp" viewBox="0 0 400 500" preserveAspectRatio="none" aria-hidden="true">
+        <path class="bp-corner" d="M14 44 V14 H44 M356 14 H386 V44 M386 456 V486 H356 M44 486 H14 V456"/>
+        <path class="bp-line" d="M60 470 H340 M60 462 V478 M340 462 V478"/>
+        <path class="bp-line" d="M372 120 V440 M364 120 H380 M364 440 H380"/>
+        <path class="bp-line" d="M300 60 H250 L236 92"/>
+        <text class="bp-tag accent" x="200" y="492" text-anchor="middle">30 in plate</text>
+        <text class="bp-tag" x="372" y="110" text-anchor="middle">78 in</text>
+        <text class="bp-tag accent" x="300" y="52" text-anchor="end">non-slip grip</text>
+      </svg>
       <a class="hero-price" href="{product_url(p)}"><strong>{money(p['price'])}</strong><span>{E(p['short'])}</span></a>
     </div>
   </div>
 </section>
+{ticker()}
 {lineup()}
+{exploded()}
 {why_band()}
 {build_bento()}
 {steps()}
@@ -340,7 +400,7 @@ def about() -> None:
   <div class="prose"><h1>Tools we would <span class="em">use ourselves</span></h1><p class="lede">{E(C.ABOUT['intro'])}</p></div>
   <div class="about-points">{pts}</div>
   <div class="prose" style="margin-top:56px"><h2>What comes next</h2><p>{E(C.ABOUT['roadmap'])}</p></div>
-  <div class="lockup reveal"><img src="/static/img/lawnix-logo-lockup.png" alt="Lawnix logo: Power. Precision. Performance." loading="lazy" width="1536" height="1024"></div>
+  <div class="reveal"><img class="logo-lockup" src="/static/img/logo-lockup.png" alt="Lawnix logo: Power. Precision. Performance." loading="lazy" width="900" height="464"></div>
 </div></section>
 {signup()}"""
     page("/about/", "About Lawnix | Stainless Lawn Tools", "Lawnix Industry Co makes stainless steel lawn leveling rakes and garden tools for people who do the work themselves.", body)
