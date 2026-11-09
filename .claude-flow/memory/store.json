@@ -233,6 +233,69 @@
       "lastAccessed": "2026-11-09T05:40:33.106Z",
       "accessCount": 0,
       "expiresAt": "2026-12-09T05:40:33.106Z"
+    },
+    "cmd-1794203126676": {
+      "key": "cmd-1794203126676",
+      "value": "{\"command\":\"sed -i '' 's#\\\"domain\\\": \\\"https://www.lawnixindustry.com\\\"#\\\"domain\\\": \\\"https://lawnixindustry.com\\\"#' site/content.py && sed -i '' 's#    (OUT / \\\"_redirects\\\").write_text(\\\"https://lawnixindustry.com/\\\\* https://www.lawnixindustry.com/:splat 301\\\\\\\\n\\\")#    (OUT / \\\"CNAME\\\").write_text(\\\"lawnixindustry.com\\\\\\\\n\\\")#' site/build.py && grep -n 'CNAME' site/build.py && python3 site/build.py | head -1 && cat docs/CNAME && rm -rf tools && sed -i '' '/^tools\\\\/$/d' .gitignore && git add -A && git -c user.name=\\\"Manish Kumar\\\" -c user.email=\\\"manish4dm@gmail.com\\\" commit -q -m \\\"Apex canonical and CNAME for GitHub Pages\\n\\nCo-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>\\\" && git push -q origin main && echo pushed && gh repo edit manish4dm-bot/lawnix-site --visibility public --accept-visibility-change-consequences && gh api -X POST repos/manish4dm-bot/lawnix-site/pages -f 'source[branch]=main' -f 'source[path]=/docs' -q .html_url; sleep 4; gh api -X PUT repos/manish4dm-bot/lawnix-site/pages -f cname=lawnixindustry.com -F https_enforced=false >/dev/null; gh api repos/manish4dm-bot/lawnix-site/pages -q '\\\"url=\\\\(.html_url) cname=\\\\(.cname) status=\\\\(.status) protected=\\\\(.protected_domain_state)\\\"'\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-11-09T05:45:26.676Z",
+      "lastAccessed": "2026-11-09T05:45:26.676Z",
+      "accessCount": 0,
+      "expiresAt": "2026-12-09T05:45:26.676Z"
+    },
+    "cmd-1794203193665": {
+      "key": "cmd-1794203193665",
+      "value": "{\"command\":\"gh api repos/manish4dm-bot/lawnix-site/pages/builds/latest -q '\\\"build=\\\\(.status) err=\\\\(.error.message)\\\"'; gh api repos/manish4dm-bot/lawnix-site/pages -q '\\\"status=\\\\(.status) url=\\\\(.html_url)\\\"'; curl -s -o /dev/null -w \\\"github.io http=%{http_code}\\\\n\\\" https://manish4dm-bot.github.io/lawnix-site/\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-11-09T05:46:33.665Z",
+      "lastAccessed": "2026-11-09T05:46:33.665Z",
+      "accessCount": 0,
+      "expiresAt": "2026-12-09T05:46:33.665Z"
+    },
+    "cmd-1794203324004": {
+      "key": "cmd-1794203324004",
+      "value": "{\"command\":\"curl -s \\\"https://dns.google/resolve?name=lawnixindustry.com&type=NS\\\" | python3 -c \\\"import sys,json; d=json.load(sys.stdin); print([a['data'] for a in d.get('Answer',[])])\\\"; curl -s \\\"https://dns.google/resolve?name=lawnixindustry.com&type=MX\\\" | python3 -c \\\"import sys,json; d=json.load(sys.stdin); print([a['data'] for a in d.get('Answer',[])])\\\"; curl -s \\\"https://dns.google/resolve?name=lawnixindustry.com&type=A\\\" | python3 -c \\\"import sys,json; d=json.load(sys.stdin); print([a['data'] for a in d.get('Answer',[])])\\\"; curl -s \\\"https://dns.google/resolve?name=ns1.serverhostgroup.com&type=A\\\" | python3 -c \\\"import sys,json; d=json.load(sys.stdin); print([a['data'] for a in d.get('Answer',[])])\\\"\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-11-09T05:48:44.004Z",
+      "lastAccessed": "2026-11-09T05:48:44.004Z",
+      "accessCount": 0,
+      "expiresAt": "2026-12-09T05:48:44.004Z"
+    },
+    "cmd-1794203402795": {
+      "key": "cmd-1794203402795",
+      "value": "{\"command\":\"curl -sI -m 15 -L https://serverhostgroup.com/ | grep -i \\\"^location\\\\|^HTTP\\\" | head -6; echo ---; curl -s -m 15 -L https://serverhostgroup.com/ | grep -oiE 'href=\\\"[^\\\"]*(client|login|cpanel|portal|billing|whmcs)[^\\\"]*\\\"' | sort -u | head -10; echo ---; curl -skI -m 10 https://40.160.16.24:2083/ | head -3\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-11-09T05:50:02.795Z",
+      "lastAccessed": "2026-11-09T05:50:02.795Z",
+      "accessCount": 0,
+      "expiresAt": "2026-12-09T05:50:02.795Z"
+    },
+    "cmd-1794203430961": {
+      "key": "cmd-1794203430961",
+      "value": "{\"command\":\"echo | openssl s_client -connect 40.160.16.24:2083 2>/dev/null | openssl x509 -noout -subject -ext subjectAltName 2>/dev/null | head -4; curl -s \\\"https://dns.google/resolve?name=24.16.160.40.in-addr.arpa&type=PTR\\\" | python3 -c \\\"import sys,json; d=json.load(sys.stdin); print('ptr', [a['data'] for a in d.get('Answer',[])])\\\"\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-11-09T05:50:30.961Z",
+      "lastAccessed": "2026-11-09T05:50:30.961Z",
+      "accessCount": 0,
+      "expiresAt": "2026-12-09T05:50:30.961Z"
+    },
+    "cmd-1794203617285": {
+      "key": "cmd-1794203617285",
+      "value": "{\"command\":\"cat > .cpanel.yml <<'EOF'\\n---\\ndeployment:\\n  tasks:\\n    - export DEPLOYPATH=$HOME/public_html/\\n    - /bin/cp -R docs/. $DEPLOYPATH\\nEOF\\ngit add .cpanel.yml && git -c user.name=\\\"Manish Kumar\\\" -c user.email=\\\"manish4dm@gmail.com\\\" commit -q -m \\\"cPanel deployment: copy docs/ to public_html\\n\\nCo-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>\\\" && git push -q origin main && echo pushed\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-11-09T05:53:37.285Z",
+      "lastAccessed": "2026-11-09T05:53:37.285Z",
+      "accessCount": 0,
+      "expiresAt": "2026-12-09T05:53:37.285Z"
+    },
+    "cmd-1794203733667": {
+      "key": "cmd-1794203733667",
+      "value": "{\"command\":\"sleep 12; for u in http://lawnixindustry.com/ http://lawnixindustry.com/shop/ http://lawnixindustry.com/static/css/lawnix.css; do curl -s -o /dev/null -w \\\"%{http_code} $u\\\\n\\\" -m 15 \\\"$u\\\"; done; curl -s -m 15 http://lawnixindustry.com/ | grep -o '<title>[^<]*' | head -1\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-11-09T05:55:33.667Z",
+      "lastAccessed": "2026-11-09T05:55:33.667Z",
+      "accessCount": 0,
+      "expiresAt": "2026-12-09T05:55:33.667Z"
     }
   },
   "version": "3.0.0"

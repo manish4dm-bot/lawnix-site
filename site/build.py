@@ -432,6 +432,30 @@ def extras() -> None:
     urls = "".join(f"<url><loc>{S['domain']}{p}</loc><lastmod>{today}</lastmod></url>" for p in PAGES)
     (OUT / "sitemap.xml").write_text(f'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>')
     (OUT / ".nojekyll").write_text("")
+    (OUT / ".htaccess").write_text("""# Lawnix static site (cPanel / Apache)
+ErrorDocument 404 /404.html
+DirectoryIndex index.html
+Options -Indexes
+RewriteEngine On
+# Force HTTPS once the certificate is issued
+RewriteCond %{HTTPS} !=on
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+# www -> apex
+RewriteCond %{HTTP_HOST} ^www\\.(.+)$ [NC]
+RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/jpeg "access plus 30 days"
+  ExpiresByType image/png "access plus 30 days"
+  ExpiresByType image/svg+xml "access plus 30 days"
+  ExpiresByType text/css "access plus 7 days"
+  ExpiresByType application/javascript "access plus 7 days"
+</IfModule>
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript image/svg+xml
+</IfModule>
+""")
     # Old slugs from the May prototype
     for old, new in {"collections.html": "/shop/", "about.html": "/about/", "cart.html": "/shop/",
                      "product-lx30.html": product_url(C.PRODUCTS[0]), "product-lx48.html": product_url(C.PRODUCTS[1]),
