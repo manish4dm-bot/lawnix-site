@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://www.lawnixindustry.com/sitemap.xml
+Sitemap: https://lawnixindustry.com/sitemap.xml

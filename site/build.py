@@ -426,7 +426,7 @@ def not_found() -> None:
 
 
 def extras() -> None:
-    (OUT / "_redirects").write_text("https://lawnixindustry.com/* https://www.lawnixindustry.com/:splat 301\n")
+    (OUT / "CNAME").write_text("lawnixindustry.com\n")
     (OUT / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {S['domain']}/sitemap.xml\n")
     today = date.today().isoformat()
     urls = "".join(f"<url><loc>{S['domain']}{p}</loc><lastmod>{today}</lastmod></url>" for p in PAGES)
