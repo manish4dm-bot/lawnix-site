@@ -1,0 +1,14 @@
+{
+  "entries": {
+    "cmd-1794207939062": {
+      "key": "cmd-1794207939062",
+      "value": "{\"command\":\"mkdir -p /Users/manishkumar/lawnix-store/brand/fonts && cd /Users/manishkumar/lawnix-store/brand/fonts && for f in BarlowCondensed-Black.ttf BarlowCondensed-BlackItalic.ttf BarlowCondensed-ExtraBold.ttf BarlowCondensed-SemiBold.ttf; do curl -sfL -o $f \\\"https://raw.githubusercontent.com/google/fonts/main/ofl/barlowcondensed/$f\\\" && echo \\\"ok $f\\\"; done; curl -sfL -o Barlow-Medium.ttf \\\"https://raw.githubusercontent.com/google/fonts/main/ofl/barlow/Barlow-Medium.ttf\\\" && echo ok Barlow-Medium; ls -la; ~/.venvs/onetake/bin/python -c \\\"import fontTools; print('fontTools', fontTools.version)\\\"\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-11-09T07:05:39.062Z",
+      "lastAccessed": "2026-11-09T07:05:39.062Z",
+      "accessCount": 0,
+      "expiresAt": "2026-12-09T07:05:39.062Z"
+    }
+  },
+  "version": "3.0.0"
+}
