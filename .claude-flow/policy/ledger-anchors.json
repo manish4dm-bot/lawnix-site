@@ -306,6 +306,24 @@
       "ts": 1794201946583,
       "event": "append",
       "hash": "daa03209a116e011e3fb7d45e36968886a658580b7102fa1d441dfedf0d3a0c4"
+    },
+    {
+      "seq": 34,
+      "length": 35,
+      "headHash": "sha256:0509aa6c2162894c77d11d5a17770a82e4beec8d0e413bac3c99e081faeab944",
+      "prevAnchorHash": "daa03209a116e011e3fb7d45e36968886a658580b7102fa1d441dfedf0d3a0c4",
+      "ts": 1794201956071,
+      "event": "append",
+      "hash": "4e9cce77a87fe95b9b34ca4533c0ea928a6055ef12fe9b9fd5135290e6c609b4"
+    },
+    {
+      "seq": 35,
+      "length": 36,
+      "headHash": "sha256:a7e1be4af56dad4d832e8281776a45b3a2d571287024d721d4ce75faefaa7130",
+      "prevAnchorHash": "4e9cce77a87fe95b9b34ca4533c0ea928a6055ef12fe9b9fd5135290e6c609b4",
+      "ts": 1794202001470,
+      "event": "append",
+      "hash": "4d0a575b626bd8f09ffcd6abcd3af4d9675d399a2157d8844c125da43393af1b"
     }
   ]
 }
