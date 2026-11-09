@@ -14,13 +14,13 @@ SITE = {
     # Checkout. Stripe Payment Links go here once created. Empty = button
     # falls back to the contact page.
     "stripe_links": {
-        "lx30": "",
+        "lx30": "https://buy.stripe.com/5kQ28qfzv5k4fbs0aH93y01",
         "lx48": "",
         "rc01": "",
     },
     # Amazon ASINs. Empty = Amazon button hidden.
     "amazon_asins": {
-        "lx30": "",
+        "lx30": "https://buy.stripe.com/5kQ28qfzv5k4fbs0aH93y01",
         "lx48": "",
         "rc01": "",
     },
