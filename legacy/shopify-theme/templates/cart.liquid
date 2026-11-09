@@ -1,0 +1,138 @@
+<div class="cart-page" style="padding-top: calc(var(--offset) + 60px); padding-bottom: 110px; min-height: 80vh;">
+  <div style="max-width: 1100px; margin: 0 auto; padding: 0 5%;">
+
+    <div class="section-eyebrow">Your Cart</div>
+    <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(42px,6vw,72px);font-weight:900;text-transform:uppercase;line-height:0.92;margin-bottom:60px;">
+      {% if cart.item_count > 0 %}
+        {{ cart.item_count }} Item{% if cart.item_count > 1 %}s{% endif %} in Your <em style="color:var(--green);">Cart</em>
+      {% else %}
+        Your Cart is <em style="color:var(--green);">Empty</em>
+      {% endif %}
+    </h1>
+
+    {% if cart.item_count > 0 %}
+      <form action="/cart" method="post" id="cart-form">
+        <div style="display:grid;grid-template-columns:1fr 360px;gap:60px;align-items:start;">
+
+          <!-- LINE ITEMS -->
+          <div class="cart-items">
+            {% for item in cart.items %}
+              <div class="cart-item" data-key="{{ item.key }}">
+                <a href="{{ item.url }}" class="cart-item-img">
+                  {% if item.image %}
+                    {{ item.image | img_url: '160x160', crop: 'center' | img_tag: item.title }}
+                  {% else %}
+                    <span style="font-size:11px;color:#333;text-transform:uppercase;letter-spacing:2px;">[No Image]</span>
+                  {% endif %}
+                </a>
+
+                <div class="cart-item-info">
+                  <p class="cart-item-vendor">{{ item.vendor }}</p>
+                  <a href="{{ item.url }}" class="cart-item-title">{{ item.title }}</a>
+                  {% unless item.variant.title == 'Default Title' %}
+                    <p class="cart-item-variant">{{ item.variant.title }}</p>
+                  {% endunless %}
+
+                  <div class="cart-item-bottom">
+                    <div class="qty-wrap" style="margin-bottom:0;">
+                      <button type="button" data-action="minus" data-key="{{ item.key }}">−</button>
+                      <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" max="99" data-key="{{ item.key }}">
+                      <button type="button" data-action="plus" data-key="{{ item.key }}">+</button>
+                    </div>
+                    <button type="button" class="cart-remove-btn" data-key="{{ item.key }}" aria-label="Remove">Remove</button>
+                  </div>
+                </div>
+
+                <div class="cart-item-price">
+                  {{ item.line_price | money }}
+                  {% if item.original_line_price != item.line_price %}
+                    <s style="font-size:14px;color:#444;display:block;margin-top:4px;">{{ item.original_line_price | money }}</s>
+                  {% endif %}
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+
+          <!-- ORDER SUMMARY -->
+          <div class="cart-summary">
+            <div class="cart-summary-title">Order Summary</div>
+
+            <div class="cart-summary-row">
+              <span>Subtotal</span>
+              <span>{{ cart.total_price | money }}</span>
+            </div>
+            <div class="cart-summary-row">
+              <span>Shipping</span>
+              <span style="color:var(--green);font-weight:700;">FREE</span>
+            </div>
+            {% if cart.total_discount > 0 %}
+              <div class="cart-summary-row" style="color:var(--green);">
+                <span>Discount</span>
+                <span>−{{ cart.total_discount | money }}</span>
+              </div>
+            {% endif %}
+            <div class="cart-summary-divider"></div>
+            <div class="cart-summary-row cart-summary-total">
+              <span>Total</span>
+              <span>{{ cart.total_price | money }}</span>
+            </div>
+
+            <div class="cart-trust">
+              <span>🔒 Secure checkout</span>
+              <span>↩️ 30-day returns</span>
+              <span>🛡️ 5-yr warranty</span>
+            </div>
+
+            <button type="submit" name="checkout" class="btn-cart" style="font-size:20px;padding:18px;">
+              ⚡ Checkout
+            </button>
+            <a href="/collections/all" class="btn-buynow" style="display:block;text-align:center;text-decoration:none;font-size:16px;padding:15px;">
+              Continue Shopping
+            </a>
+          </div>
+
+        </div>
+      </form>
+
+    {% else %}
+      <div style="text-align:center;padding:80px 0;">
+        <div style="font-size:80px;margin-bottom:24px;">🌿</div>
+        <p style="font-size:18px;color:#666;margin-bottom:40px;">Looks like your cart needs some Lawnix tools.</p>
+        <a href="/collections/all" class="btn-primary">⚡ Shop All Products</a>
+      </div>
+    {% endif %}
+
+  </div>
+</div>
+
+<script>
+  // Cart page quantity + remove (AJAX)
+  document.querySelectorAll('.qty-wrap button').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const key   = btn.dataset.key;
+      const input = document.querySelector(`input[data-key="${key}"]`);
+      if (!input) return;
+      const delta = btn.dataset.action === 'minus' ? -1 : 1;
+      const newQty = Math.max(0, parseInt(input.value || 1) + delta);
+      input.value = newQty;
+      await updateCartItem(key, newQty);
+    });
+  });
+
+  document.querySelectorAll('.cart-remove-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      await updateCartItem(btn.dataset.key, 0);
+    });
+  });
+
+  async function updateCartItem(key, qty) {
+    await fetch('/cart/change.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: key, quantity: qty })
+    });
+    window.location.reload();
+  }
+</script>
+
+{% section 'cta-banner' %}

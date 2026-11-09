@@ -1,0 +1,48 @@
+{% comment %}
+  Usage: {% render 'product-card', product: product %}
+{% endcomment %}
+
+{%- assign featured_image = product.featured_image -%}
+{%- assign compare_price = product.compare_at_price -%}
+{%- assign price = product.price -%}
+
+<div class="p-card">
+  {% if product.tags contains 'new' %}
+    <span class="p-card-badge">New Launch</span>
+  {% elsif compare_price > price %}
+    <span class="p-card-badge sale">Sale</span>
+  {% elsif product.tags contains 'best-seller' %}
+    <span class="p-card-badge best">Best Seller</span>
+  {% endif %}
+
+  <a href="{{ product.url }}" class="p-card-img">
+    {% if featured_image %}
+      {{ featured_image | img_url: '500x500', crop: 'center' | img_tag: product.title }}
+    {% else %}
+      <span style="font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:2px;color:#2a2a2a;text-transform:uppercase;">[Product Image]</span>
+    {% endif %}
+    <button class="quick-add" data-variant-id="{{ product.first_available_variant.id }}">⚡ Quick Add</button>
+  </a>
+
+  <div class="p-card-body">
+    <div class="p-card-cat">
+      {{ product.type | default: 'Lawn Tool' }}
+    </div>
+    <a href="{{ product.url }}" class="p-card-name">{{ product.title }}</a>
+    <div class="p-card-stars">
+      ★★★★★ <span>({{ product.metafields.reviews.rating_count | default: '0' }})</span>
+    </div>
+    <div class="p-card-price">
+      <span class="p-price-now">{{ price | money }}</span>
+      {% if compare_price > price %}
+        <span class="p-price-was">{{ compare_price | money }}</span>
+        <span class="p-price-save">−{{ compare_price | minus: price | times: 100 | divided_by: compare_price }}%</span>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="p-card-footer">
+    <button class="p-btn-cart" data-variant-id="{{ product.first_available_variant.id }}">Add to Cart</button>
+    <button class="p-btn-wish" aria-label="Wishlist">♡</button>
+  </div>
+</div>

@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lawnix™ — Grass & Soil Backgrounds Preview</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;800;900&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+/* ══════════════════════════════
+   TOKENS
+══════════════════════════════ */
+:root {
+  --green:        #78BE20;
+  --green-dark:   #5a9018;
+  --green-light:  #9fd44a;
+  --green-xlight: #c4e87a;
+  --black:  #030c02;
+  --dark:   #060f04;
+  --dark2:  #0a1607;
+  --dark3:  #0f1e0b;
+  --bark:   #050a03;
+  --soil:   #1c0f06;
+  --soil2:  #2a1508;
+  --white:  #e2f0d4;
+  --gray:   #6b8f58;
+  --muted:  #3d5a30;
+
+  /* ── GRASS BLADE PATTERN (dense tall blades, repeating 100px wide) ── */
+  --grass-tall: url("data:image/svg+xml,%3Csvg width='100' height='90' viewBox='0 0 100 90' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8,90 Q5,65 9,42 Q11,22 6,4' fill='none' stroke='%2378BE20' stroke-width='2.2' stroke-linecap='round' opacity='0.55'/%3E%3Cpath d='M8,90 Q11,70 7,48 Q5,30 9,14' fill='none' stroke='%235a9018' stroke-width='1.4' stroke-linecap='round' opacity='0.35'/%3E%3Cpath d='M22,90 Q18,60 24,35 Q27,14 20,2' fill='none' stroke='%2378BE20' stroke-width='2.6' stroke-linecap='round' opacity='0.65'/%3E%3Cpath d='M35,90 Q38,68 33,50 Q30,32 36,18' fill='none' stroke='%239fd44a' stroke-width='1.8' stroke-linecap='round' opacity='0.4'/%3E%3Cpath d='M48,90 Q44,62 50,40 Q53,20 47,6' fill='none' stroke='%2378BE20' stroke-width='2.4' stroke-linecap='round' opacity='0.6'/%3E%3Cpath d='M58,90 Q61,70 56,52 Q54,36 59,22' fill='none' stroke='%235a9018' stroke-width='1.6' stroke-linecap='round' opacity='0.38'/%3E%3Cpath d='M70,90 Q66,58 72,36 Q75,16 68,3' fill='none' stroke='%2378BE20' stroke-width='2.8' stroke-linecap='round' opacity='0.62'/%3E%3Cpath d='M80,90 Q83,66 78,46 Q76,28 82,12' fill='none' stroke='%239fd44a' stroke-width='1.6' stroke-linecap='round' opacity='0.35'/%3E%3Cpath d='M92,90 Q88,60 94,38 Q97,18 91,5' fill='none' stroke='%2378BE20' stroke-width='2.2' stroke-linecap='round' opacity='0.55'/%3E%3C/svg%3E");
+
+  /* ── SHORT GRASS TUFT PATTERN (bottom strip accent, 80px wide) ── */
+  --grass-short: url("data:image/svg+xml,%3Csvg width='80' height='44' viewBox='0 0 80 44' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4,44 Q2,30 5,18 Q7,8 3,0' fill='none' stroke='%2378BE20' stroke-width='2' stroke-linecap='round' opacity='0.7'/%3E%3Cpath d='M12,44 Q14,28 10,16 Q8,6 13,0' fill='none' stroke='%235a9018' stroke-width='1.5' stroke-linecap='round' opacity='0.5'/%3E%3Cpath d='M22,44 Q20,26 24,14 Q26,4 21,0' fill='none' stroke='%239fd44a' stroke-width='2.2' stroke-linecap='round' opacity='0.65'/%3E%3Cpath d='M32,44 Q34,30 30,18 Q28,8 33,2' fill='none' stroke='%2378BE20' stroke-width='1.8' stroke-linecap='round' opacity='0.55'/%3E%3Cpath d='M42,44 Q40,24 44,12 Q47,2 41,0' fill='none' stroke='%2378BE20' stroke-width='2.4' stroke-linecap='round' opacity='0.7'/%3E%3Cpath d='M52,44 Q54,28 50,16 Q48,6 53,0' fill='none' stroke='%235a9018' stroke-width='1.6' stroke-linecap='round' opacity='0.48'/%3E%3Cpath d='M62,44 Q60,26 65,14 Q67,4 62,0' fill='none' stroke='%239fd44a' stroke-width='2' stroke-linecap='round' opacity='0.6'/%3E%3Cpath d='M72,44 Q74,30 70,18 Q68,8 73,2' fill='none' stroke='%2378BE20' stroke-width='1.8' stroke-linecap='round' opacity='0.55'/%3E%3C/svg%3E");
+
+  /* ── SOIL PARTICLE PATTERN (speckled earth texture) ── */
+  --soil-tex: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='12' cy='18' r='1.8' fill='%23704a2e' opacity='0.55'/%3E%3Ccircle cx='38' cy='8' r='1.1' fill='%238a5c38' opacity='0.4'/%3E%3Ccircle cx='65' cy='22' r='2' fill='%23563d2a' opacity='0.5'/%3E%3Ccircle cx='90' cy='12' r='1.3' fill='%23704a2e' opacity='0.45'/%3E%3Ccircle cx='108' cy='30' r='1.6' fill='%238a5c38' opacity='0.38'/%3E%3Ccircle cx='25' cy='48' r='1.4' fill='%23563d2a' opacity='0.42'/%3E%3Ccircle cx='54' cy='56' r='2.2' fill='%23704a2e' opacity='0.52'/%3E%3Ccircle cx='80' cy='44' r='1' fill='%238a5c38' opacity='0.35'/%3E%3Ccircle cx='100' cy='60' r='1.7' fill='%23563d2a' opacity='0.48'/%3E%3Ccircle cx='8' cy='80' r='1.5' fill='%23704a2e' opacity='0.5'/%3E%3Ccircle cx='34' cy='90' r='1.2' fill='%238a5c38' opacity='0.38'/%3E%3Ccircle cx='60' cy='75' r='2' fill='%23563d2a' opacity='0.45'/%3E%3Ccircle cx='85' cy='88' r='1.4' fill='%23704a2e' opacity='0.42'/%3E%3Ccircle cx='112' cy='78' r='1.8' fill='%238a5c38' opacity='0.48'/%3E%3Ccircle cx='18' cy='108' r='1.6' fill='%23563d2a' opacity='0.4'/%3E%3Ccircle cx='48' cy='115' r='1.3' fill='%23704a2e' opacity='0.5'/%3E%3Ccircle cx='76' cy='104' r='2.1' fill='%238a5c38' opacity='0.44'/%3E%3Ccircle cx='100' cy='110' r='1' fill='%23563d2a' opacity='0.36'/%3E%3Crect x='42' y='35' width='4' height='1.5' rx='0.8' fill='%23704a2e' opacity='0.3' transform='rotate(-25 44 36)'/%3E%3Crect x='72' y='68' width='5' height='1.5' rx='0.8' fill='%23563d2a' opacity='0.28' transform='rotate(15 74 69)'/%3E%3Crect x='15' y='65' width='3.5' height='1.2' rx='0.6' fill='%23704a2e' opacity='0.32' transform='rotate(-40 17 66)'/%3E%3Crect x='95' y='42' width='4.5' height='1.3' rx='0.7' fill='%238a5c38' opacity='0.25' transform='rotate(30 97 43)'/%3E%3C/svg%3E");
+
+  /* ── LEAF PATTERN (existing) ── */
+  --leaf-bg: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40 6 Q57 26 40 74 Q23 26 40 6Z' fill='none' stroke='%2378BE20' stroke-width='1.2' stroke-opacity='0.045'/%3E%3Cline x1='40' y1='6' x2='40' y2='74' stroke='%2378BE20' stroke-width='0.6' stroke-opacity='0.025'/%3E%3C/svg%3E");
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Barlow', sans-serif; background: var(--black); color: var(--white); overflow-x: hidden; }
+
+h2 { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; text-transform: uppercase; font-size: clamp(36px, 5vw, 64px); line-height: 0.95; margin-bottom: 16px; }
+.eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--green); margin-bottom: 18px; }
+p { color: var(--gray); line-height: 1.75; }
+
+/* ══════════════════════════════
+   SECTION LABEL
+══════════════════════════════ */
+.section-label {
+  position: absolute; top: 16px; left: 50%; transform: translateX(-50%);
+  background: rgba(120,190,32,0.15); border: 1px solid rgba(120,190,32,0.4);
+  color: var(--green); font-size: 10px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; padding: 5px 18px; border-radius: 100px; white-space: nowrap;
+  z-index: 20;
+}
+
+/* ══════════════════════════════
+   1. HERO — Tall grass + glowing ground
+══════════════════════════════ */
+.hero {
+  min-height: 100vh;
+  padding: 100px 6% 120px;
+  position: relative;
+  overflow: hidden;
+  display: flex; align-items: center;
+  background:
+    radial-gradient(ellipse 90% 60% at 50% -5%, rgba(20,60,5,0.85) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 85% 60%, rgba(78,150,20,0.09) 0%, transparent 55%),
+    var(--black);
+}
+
+/* Leaf pattern layer */
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background-image: var(--leaf-bg); background-size: 80px 80px;
+  opacity: 0.7; pointer-events: none;
+}
+
+/* Soil speckle layer */
+.hero::after {
+  content: ''; position: absolute; inset: 0;
+  background-image: var(--soil-tex); background-size: 120px 120px;
+  opacity: 0.18; pointer-events: none;
+}
+
+/* Tall grass blades rising from bottom */
+.hero-ground {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 140px; pointer-events: none; z-index: 3;
+}
+
+/* Soil ground band */
+.hero-ground::before {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 28px;
+  background: linear-gradient(180deg, transparent 0%, rgba(28,15,6,0.7) 40%, rgba(18,8,2,0.95) 100%);
+}
+
+/* Grass blades */
+.hero-ground::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 140px;
+  background-image: var(--grass-tall);
+  background-repeat: repeat-x;
+  background-position: bottom center;
+  background-size: 100px 140px;
+  opacity: 0.55;
+}
+
+/* Ground glow — green light emanating from the grass line */
+.hero-ground-glow {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 80px;
+  background: radial-gradient(ellipse 80% 100% at 50% 100%, rgba(78,150,20,0.22) 0%, transparent 70%);
+  pointer-events: none; z-index: 4;
+}
+
+/* Organic wave divider */
+.hero-wave {
+  position: absolute; bottom: -2px; left: 0; right: 0; z-index: 5; pointer-events: none;
+}
+.hero-wave svg { display: block; width: 100%; height: 70px; }
+
+.hero-content { position: relative; z-index: 6; max-width: 600px; }
+.hero h1 { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; text-transform: uppercase; line-height: 0.88; margin-bottom: 28px; }
+.hero h1 .r1 { display: block; font-size: clamp(52px, 8vw, 100px); color: var(--white); }
+.hero h1 .r2 { display: block; font-size: clamp(52px, 8vw, 100px); color: var(--green); }
+.hero h1 .r3 { display: block; font-size: clamp(40px, 6vw, 76px); color: rgba(226,240,212,0.55); }
+.hero-sub { font-size: 16px; color: var(--gray); line-height: 1.8; max-width: 440px; margin-bottom: 40px; }
+.btn { display: inline-flex; align-items: center; gap: 10px; padding: 16px 36px; border-radius: 6px; font-family: 'Barlow Condensed', sans-serif; font-size: 15px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; text-decoration: none; }
+.btn-primary { background: var(--green); color: var(--bark); }
+
+/* ══════════════════════════════
+   2. GROUND STRIP — between sections
+══════════════════════════════ */
+.ground-strip {
+  height: 64px; position: relative; overflow: hidden;
+  background: linear-gradient(180deg,
+    var(--dark) 0%,
+    rgba(28,15,6,0.6) 45%,
+    rgba(22,10,4,0.85) 100%
+  );
+}
+.ground-strip::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: var(--soil-tex); background-size: 100px 100px;
+  opacity: 0.45;
+}
+.ground-strip::after {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 100%;
+  background-image: var(--grass-short);
+  background-repeat: repeat-x;
+  background-position: top center;
+  background-size: 80px 44px;
+  opacity: 0.5;
+}
+
+/* ══════════════════════════════
+   3. FEATURES — Soil texture beneath cards
+══════════════════════════════ */
+.features-section {
+  padding: 110px 5%;
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, var(--dark) 0%, var(--dark2) 100%);
+}
+
+/* Soil texture overlay */
+.features-section::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: var(--soil-tex); background-size: 120px 120px;
+  opacity: 0.12; pointer-events: none;
+}
+
+/* Leaf pattern very faint */
+.features-section::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: var(--leaf-bg); background-size: 80px 80px;
+  opacity: 0.4; pointer-events: none;
+}
+
+/* Grass tufts decorating corners */
+.features-grass-l, .features-grass-r {
+  position: absolute; bottom: 0; pointer-events: none;
+  width: 220px; height: 90px; z-index: 2;
+}
+.features-grass-l { left: 0; }
+.features-grass-r { right: 0; transform: scaleX(-1); }
+.features-grass-l::after, .features-grass-r::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: var(--grass-short);
+  background-repeat: repeat-x;
+  background-position: bottom left;
+  background-size: 80px 90px;
+  opacity: 0.4;
+}
+
+.section-heading { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(36px, 5vw, 64px); font-weight: 900; text-transform: uppercase; line-height: 0.95; margin-bottom: 60px; }
+.section-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--green); margin-bottom: 18px; }
+
+.features-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; position: relative; z-index: 3; }
+.feat-card {
+  background: rgba(10,22,7,0.85); padding: 48px 36px;
+  border: 1px solid rgba(78,150,20,0.1); position: relative; overflow: hidden;
+}
+.feat-card::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: var(--soil-tex); background-size: 100px 100px;
+  opacity: 0.08;
+}
+.feat-icon { width: 50px; height: 50px; background: rgba(120,190,32,0.08); border: 1px solid rgba(120,190,32,0.2); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 22px; position: relative; z-index: 1; }
+.feat-title { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; color: var(--white); position: relative; z-index: 1; }
+.feat-desc { font-size: 14px; line-height: 1.75; color: var(--gray); position: relative; z-index: 1; }
+
+/* ══════════════════════════════
+   4. REVIEWS — Dark soil night
+══════════════════════════════ */
+.reviews-section {
+  padding: 110px 5%;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 100% 60% at 50% 0%, rgba(15,40,5,0.8) 0%, transparent 60%),
+    linear-gradient(180deg, var(--dark3) 0%, var(--black) 100%);
+}
+
+/* Soil base texture */
+.reviews-section::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: var(--soil-tex); background-size: 120px 120px;
+  opacity: 0.15; pointer-events: none;
+}
+
+/* Grass blades top edge */
+.reviews-section::after {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 110px;
+  background-image: var(--grass-short);
+  background-repeat: repeat-x;
+  background-position: top center;
+  background-size: 80px 110px;
+  opacity: 0.2; pointer-events: none;
+  transform: rotate(180deg);
+}
+
+.reviews-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; position: relative; z-index: 2; }
+.review-card {
+  background: rgba(6,15,4,0.7); border: 1px solid rgba(78,150,20,0.1);
+  padding: 36px 30px; border-radius: 4px; position: relative; overflow: hidden;
+}
+.review-card::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: var(--soil-tex); background-size: 100px 100px;
+  opacity: 0.06;
+}
+.stars { color: var(--green); font-size: 16px; margin-bottom: 16px; }
+.review-text { font-size: 14.5px; color: var(--gray); line-height: 1.75; margin-bottom: 22px; position: relative; z-index: 1; }
+.reviewer { font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--white); position: relative; z-index: 1; }
+.reviewer-loc { font-size: 12px; color: var(--muted); }
+
+/* ══════════════════════════════
+   5. CTA BANNER — Rich earth tones
+══════════════════════════════ */
+.cta-banner {
+  padding: 120px 5%;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 80% 80% at 50% 50%, rgba(30,70,8,0.7) 0%, transparent 65%),
+    linear-gradient(180deg, var(--dark2) 0%, rgba(8,18,4,0.98) 100%);
+}
+
+/* Soil floor */
+.cta-banner::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: var(--soil-tex); background-size: 100px 100px;
+  opacity: 0.2; pointer-events: none;
+}
+
+/* Dense grass blades at bottom */
+.cta-banner::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 100px;
+  background-image: var(--grass-tall);
+  background-repeat: repeat-x;
+  background-position: bottom center;
+  background-size: 100px 100px;
+  opacity: 0.35; pointer-events: none;
+}
+
+/* Soil ground glow */
+.cta-ground-glow {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 60px;
+  background: radial-gradient(ellipse 70% 100% at 50% 100%, rgba(78,150,20,0.18) 0%, transparent 70%);
+  pointer-events: none; z-index: 2;
+}
+
+.cta-banner-inner { position: relative; z-index: 3; max-width: 680px; margin: 0 auto; }
+.cta-heading { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(40px, 6vw, 72px); font-weight: 900; text-transform: uppercase; line-height: 0.92; margin-bottom: 20px; }
+.cta-sub { font-size: 16px; color: var(--gray); line-height: 1.8; max-width: 500px; margin: 0 auto 44px; }
+
+/* ══════════════════════════════
+   ANIMATIONS
+══════════════════════════════ */
+@keyframes grassSway {
+  0%,100% { transform: scaleX(1) skewX(0deg); }
+  33%      { transform: scaleX(1.01) skewX(1.2deg) translateX(2px); }
+  66%      { transform: scaleX(0.99) skewX(-0.8deg) translateX(-2px); }
+}
+@keyframes soilPulse {
+  0%,100% { opacity: 0.12; }
+  50%      { opacity: 0.2; }
+}
+@keyframes groundGlow {
+  0%,100% { opacity: 0.6; }
+  50%      { opacity: 1; }
+}
+
+.hero-ground::after { animation: grassSway 6s ease-in-out infinite; transform-origin: bottom center; }
+.features-section::before { animation: soilPulse 8s ease-in-out infinite; }
+.hero-ground-glow { animation: groundGlow 4s ease-in-out infinite; }
+
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════
+     SECTION 1: HERO
+════════════════════════════════════ -->
+<section class="hero">
+  <span class="section-label">✦ HERO — Grass Blades + Soil Speckle + Ground Glow</span>
+
+  <div class="hero-ground">
+    <div class="hero-ground-glow"></div>
+  </div>
+
+  <div class="hero-wave" aria-hidden="true">
+    <svg viewBox="0 0 1440 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,70 L0,48 Q18,8 36,32 Q54,56 72,28 Q90,0 108,22 Q126,44 144,34 Q162,24 180,42 Q198,60 216,38 Q234,16 252,28 Q270,40 288,54 Q306,68 324,44 Q342,20 360,34 Q378,48 396,30 Q414,12 432,26 Q450,40 468,52 Q486,64 504,42 Q522,20 540,34 Q558,48 576,32 Q594,16 612,28 Q630,40 648,56 Q666,72 684,48 Q702,24 720,38 Q738,52 756,34 Q774,16 792,30 Q810,44 828,58 Q846,72 864,50 Q882,28 900,40 Q918,52 936,36 Q954,20 972,32 Q990,44 1008,60 Q1026,76 1044,52 Q1062,28 1080,42 Q1098,56 1116,38 Q1134,20 1152,34 Q1170,48 1188,62 Q1206,76 1224,54 Q1242,32 1260,44 Q1278,56 1296,40 Q1314,24 1332,36 Q1350,48 1368,58 Q1386,68 1404,52 Q1422,36 1440,48 L1440,70 Z" fill="#060f04"/>
+    </svg>
+  </div>
+
+  <div class="hero-content">
+    <div class="eyebrow">✦ New Brand Launch — Limited Stock</div>
+    <h1>
+      <span class="r1">Pro-Grade</span>
+      <span class="r2">Leveling</span>
+      <span class="r3">Rake™</span>
+    </h1>
+    <p class="hero-sub">Built for those who take their lawn seriously. Military-grade stainless steel, precision-calibrated tines, and an ergonomic handle that makes the job effortless.</p>
+    <a href="#" class="btn btn-primary">⚡ Shop Now — $59.99</a>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════
+     GROUND STRIP DIVIDER
+════════════════════════════════════ -->
+<div class="ground-strip">
+  <span class="section-label">✦ GROUND STRIP — Soil + Upward Grass Tufts</span>
+</div>
+
+<!-- ════════════════════════════════════
+     SECTION 2: FEATURES
+════════════════════════════════════ -->
+<section class="features-section">
+  <span class="section-label">✦ FEATURES — Soil Speckle + Leaf Pattern + Corner Grass Tufts</span>
+  <div class="features-grass-l"></div>
+  <div class="features-grass-r"></div>
+
+  <div class="section-eyebrow">Why Choose Lawnix</div>
+  <h2 class="section-heading">Built Different.<br>Built Better.</h2>
+
+  <div class="features-grid">
+    <div class="feat-card">
+      <div class="feat-icon">⚡</div>
+      <div class="feat-title">Military-Grade Steel</div>
+      <p class="feat-desc">304 stainless steel resists rust, bending, and corrosion in any outdoor condition. Forged to outlast every competitor.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🎯</div>
+      <div class="feat-title">Precision Leveling</div>
+      <p class="feat-desc">30 calibrated tines engineered for uniform soil distribution. Achieve a perfectly level lawn in a single pass.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">💪</div>
+      <div class="feat-title">Ergonomic Handle</div>
+      <p class="feat-desc">64" adjustable steel handle with cushioned non-slip grip. Engineered to reduce fatigue during extended use.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🌿</div>
+      <div class="feat-title">All-Surface Ready</div>
+      <p class="feat-desc">Perfect for topdressing, spreading sand, leveling soil, and dethatching. One tool for every lawn care scenario.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🔧</div>
+      <div class="feat-title">2-Minute Assembly</div>
+      <p class="feat-desc">Tool-free setup in under two minutes. Collapsible for flat storage in garage or shed.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🛡️</div>
+      <div class="feat-title">5-Year Warranty</div>
+      <p class="feat-desc">Every Lawnix product is backed by a full 5-year warranty. If it breaks, we replace it — no questions asked.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════
+     SECTION 3: REVIEWS
+════════════════════════════════════ -->
+<section class="reviews-section">
+  <span class="section-label">✦ REVIEWS — Soil Texture + Inverted Grass Edge</span>
+  <div style="position:relative;z-index:2;text-align:center;margin-bottom:60px;">
+    <div class="section-eyebrow">Customer Reviews</div>
+    <h2>Real Lawns.<br>Real Results.</h2>
+  </div>
+
+  <div class="reviews-grid" style="position:relative;z-index:2;">
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"This rake transformed my backyard. Spread 2 tons of sand in a single afternoon — it's an absolute beast."</p>
+      <div class="reviewer">James M. <span class="reviewer-loc">— Austin, TX</span></div>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"I've tried 4 leveling rakes over the years. This one is in a completely different league — the tines don't flex."</p>
+      <div class="reviewer">Sarah R. <span class="reviewer-loc">— Denver, CO</span></div>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"Professional landscaper — bought 6 for my crew. Incredibly durable, efficient, and the warranty sealed the deal."</p>
+      <div class="reviewer">Derek K. <span class="reviewer-loc">— Tampa, FL</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════
+     SECTION 4: CTA BANNER
+════════════════════════════════════ -->
+<section class="cta-banner">
+  <span class="section-label">✦ CTA — Soil Floor + Dense Grass + Ground Glow</span>
+  <div class="cta-ground-glow"></div>
+  <div class="cta-banner-inner">
+    <div class="eyebrow">Ready to level up?</div>
+    <h2 class="cta-heading">Ready to Level Up<br>Your Lawn?</h2>
+    <p class="cta-sub">Join thousands of professionals and homeowners who trust Lawnix to get the job done right, every time.</p>
+    <a href="#" class="btn btn-primary">⚡ Shop the LX-30 Now</a>
+  </div>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+<div style="padding-top: calc(var(--offset) + 60px); padding-bottom: 110px; min-height: 70vh;">
+
+  <!-- PAGE HERO -->
+  <div style="padding: 70px 5% 60px; background: linear-gradient(135deg,#0a1200 0%,#090909 70%); border-bottom: 1px solid #1a1a1a; position:relative; overflow:hidden;">
+    <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(120,190,32,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(120,190,32,0.04) 1px,transparent 1px);background-size:64px 64px;pointer-events:none;"></div>
+    <div style="position:relative;z-index:1;max-width:760px;">
+      <div class="breadcrumb" style="margin-bottom:16px;">
+        <a href="{{ routes.root_url }}">Home</a> &nbsp;/&nbsp; {{ page.title }}
+      </div>
+      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(40px,6vw,76px);font-weight:900;text-transform:uppercase;line-height:0.92;">
+        {{ page.title }}
+      </h1>
+    </div>
+  </div>
+
+  <!-- PAGE CONTENT -->
+  <div style="max-width:860px;margin:0 auto;padding:80px 5%;">
+    <div class="page-content rte">
+      {{ page.content }}
+    </div>
+  </div>
+
+</div>
+
+{% section 'cta-banner' %}

@@ -1,0 +1,109 @@
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+
+  <div class="hero-content">
+    <div class="launch-badge">
+      <div class="pulse-dot"></div>
+      <span>{{ section.settings.badge_text }}</span>
+    </div>
+
+    <h1>
+      <span class="row1">{{ section.settings.heading_line1 }}</span>
+      <span class="row2">{{ section.settings.heading_line2 }}</span>
+      <span class="row3">{{ section.settings.heading_line3 }}</span>
+    </h1>
+
+    <p class="hero-sub">{{ section.settings.subheading }}</p>
+
+    <div class="hero-actions">
+      <a href="{{ section.settings.primary_btn_url }}" class="btn-primary">
+        ⚡ {{ section.settings.primary_btn_label }}
+      </a>
+      <a href="{{ section.settings.secondary_btn_url }}" class="btn-ghost">
+        {{ section.settings.secondary_btn_label }}
+      </a>
+    </div>
+
+    <div class="hero-stats">
+      {% for block in section.blocks %}
+        {% if block.type == 'stat' %}
+          <div {{ block.shopify_attributes }}>
+            <div class="stat-number">{{ block.settings.value }}</div>
+            <div class="stat-label">{{ block.settings.label }}</div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Organic grass-wave divider -->
+  <div class="hero-grass" aria-hidden="true">
+    <svg viewBox="0 0 1440 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,70 L0,48 Q18,8 36,32 Q54,56 72,28 Q90,0 108,22 Q126,44 144,34 Q162,24 180,42 Q198,60 216,38 Q234,16 252,28 Q270,40 288,54 Q306,68 324,44 Q342,20 360,34 Q378,48 396,30 Q414,12 432,26 Q450,40 468,52 Q486,64 504,42 Q522,20 540,34 Q558,48 576,32 Q594,16 612,28 Q630,40 648,56 Q666,72 684,48 Q702,24 720,38 Q738,52 756,34 Q774,16 792,30 Q810,44 828,58 Q846,72 864,50 Q882,28 900,40 Q918,52 936,36 Q954,20 972,32 Q990,44 1008,60 Q1026,76 1044,52 Q1062,28 1080,42 Q1098,56 1116,38 Q1134,20 1152,34 Q1170,48 1188,62 Q1206,76 1224,54 Q1242,32 1260,44 Q1278,56 1296,40 Q1314,24 1332,36 Q1350,48 1368,58 Q1386,68 1404,52 Q1422,36 1440,48 L1440,70 Z" fill="#060f04"/>
+    </svg>
+  </div>
+
+  <div class="hero-visual">
+    <div class="product-hero-card">
+      {% if section.settings.product_image %}
+        {{ section.settings.product_image | img_url: '600x' | img_tag: section.settings.product_name, 'hero-product-img' }}
+      {% else %}
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:3px;color:#2a2a2a;text-align:center;text-transform:uppercase;">
+          [Product Image]<br>{{ section.settings.product_name }}
+        </div>
+      {% endif %}
+      <div class="hero-price-float">
+        <div class="name">{{ section.settings.product_name }}</div>
+        <div class="price">
+          {{ section.settings.product_price }}
+          {% if section.settings.product_compare_price != blank %}
+            <s style="font-size:14px;color:#444;text-decoration:line-through;margin-left:6px;">{{ section.settings.product_compare_price }}</s>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    { "type": "text", "id": "badge_text", "label": "Badge Text", "default": "New Brand Launch — Limited Stock" },
+    { "type": "text", "id": "heading_line1", "label": "Heading Line 1", "default": "Pro-Grade" },
+    { "type": "text", "id": "heading_line2", "label": "Heading Line 2", "default": "Leveling" },
+    { "type": "text", "id": "heading_line3", "label": "Heading Line 3", "default": "Rake™" },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Built for those who take their lawn seriously. Military-grade stainless steel, precision-calibrated tines, and an ergonomic handle that makes the job effortless." },
+    { "type": "text", "id": "primary_btn_label", "label": "Primary Button Label", "default": "Shop Now — $59.99" },
+    { "type": "url", "id": "primary_btn_url", "label": "Primary Button URL" },
+    { "type": "text", "id": "secondary_btn_label", "label": "Secondary Button Label", "default": "See Features" },
+    { "type": "url", "id": "secondary_btn_url", "label": "Secondary Button URL" },
+    { "type": "image_picker", "id": "product_image", "label": "Product Image" },
+    { "type": "text", "id": "product_name", "label": "Product Name", "default": "LX-30 Pro Leveling Rake" },
+    { "type": "text", "id": "product_price", "label": "Product Price", "default": "$59.99" },
+    { "type": "text", "id": "product_compare_price", "label": "Compare Price (optional)", "default": "$79.99" }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        { "type": "text", "id": "value", "label": "Value", "default": "304" },
+        { "type": "text", "id": "label", "label": "Label", "default": "Stainless Steel" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero",
+      "blocks": [
+        { "type": "stat", "settings": { "value": "304", "label": "Stainless Steel" } },
+        { "type": "stat", "settings": { "value": "30\"", "label": "Rake Width" } },
+        { "type": "stat", "settings": { "value": "5yr", "label": "Warranty" } },
+        { "type": "stat", "settings": { "value": "4.9★", "label": "Avg Rating" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

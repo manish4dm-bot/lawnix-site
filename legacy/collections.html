@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Products | LAWNIX™</title>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --green: #78BE20; --green-dark: #5a9018; --green-light: #9fd44a;
+            --black: #090909; --dark: #101010; --dark2: #181818; --dark3: #222;
+            --white: #fff; --gray: #888; --gold: #F5A623;
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Barlow', sans-serif; background: var(--black); color: var(--white); overflow-x: hidden; }
+
+        /* ANNOUNCEMENT */
+        .ann { background: var(--green); color: var(--black); text-align: center; padding: 11px 20px; font-size: 13px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; position: fixed; top: 0; width: 100%; z-index: 1001; }
+
+        /* NAV */
+        nav { position: fixed; top: 38px; width: 100%; z-index: 1000; height: 68px; display: flex; align-items: center; justify-content: space-between; padding: 0 5%; background: rgba(9,9,9,0.97); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(120,190,32,0.15); }
+        .nav-logo { font-family: 'Barlow Condensed', sans-serif; font-size: 26px; font-weight: 900; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; color: var(--white); }
+        .nav-logo em { color: var(--green); font-style: normal; }
+        .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+        .nav-links > li > a { color: #bbb; text-decoration: none; font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; transition: color 0.3s; }
+        .nav-links > li > a:hover, .nav-links > li > a.active { color: var(--green); }
+        .nav-shop-btn { background: var(--green); color: var(--black) !important; padding: 9px 22px; border-radius: 3px; font-weight: 800 !important; }
+        .nav-shop-btn:hover { background: var(--green-light) !important; }
+        .nav-right { display: flex; align-items: center; gap: 18px; }
+        .nav-icon { background: none; border: none; cursor: pointer; display: flex; }
+        .nav-icon svg { width: 21px; height: 21px; stroke: #aaa; fill: none; stroke-width: 1.8; transition: stroke 0.3s; }
+        .nav-icon:hover svg { stroke: var(--green); }
+
+        /* DROPDOWN */
+        .nav-item { position: relative; }
+        .nav-dropdown { position: absolute; top: calc(100% + 10px); left: 50%; transform: translateX(-50%); background: #111; border: 1px solid rgba(120,190,32,0.25); border-radius: 8px; min-width: 240px; padding: 12px 0; opacity: 0; visibility: hidden; transition: all 0.25s; box-shadow: 0 20px 60px rgba(0,0,0,0.6); z-index: 200; }
+        .nav-item:hover .nav-dropdown { opacity: 1; visibility: visible; top: calc(100% + 6px); }
+        .dropdown-group-label { font-size: 10px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--green); padding: 8px 20px 4px; }
+        .dropdown-link { display: block; padding: 9px 20px; color: #bbb; text-decoration: none; font-size: 13px; font-weight: 600; transition: all 0.2s; }
+        .dropdown-link:hover { color: var(--green); background: rgba(120,190,32,0.05); }
+        .dropdown-link.active { color: var(--green); }
+        .dropdown-divider { height: 1px; background: #1e1e1e; margin: 8px 0; }
+
+        /* COLLECTION HERO */
+        .col-hero { margin-top: 106px; background: linear-gradient(135deg, #0a1200 0%, var(--black) 60%); padding: 80px 5%; position: relative; overflow: hidden; border-bottom: 1px solid #1a1a1a; }
+        .col-hero::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(120,190,32,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(120,190,32,0.04) 1px, transparent 1px); background-size: 64px 64px; }
+        .col-hero-inner { position: relative; z-index: 1; }
+        .breadcrumb { font-size: 12px; color: #555; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 20px; }
+        .breadcrumb a { color: var(--green); text-decoration: none; }
+        .breadcrumb a:hover { opacity: 0.75; }
+        .col-hero h1 { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(42px, 7vw, 86px); font-weight: 900; text-transform: uppercase; line-height: 0.92; margin-bottom: 16px; }
+        .col-hero h1 em { color: var(--green); font-style: normal; }
+        .col-hero p { font-size: 16px; color: #777; max-width: 480px; line-height: 1.7; }
+
+        /* TOOLBAR */
+        .toolbar { padding: 20px 5%; background: var(--dark); border-bottom: 1px solid #1a1a1a; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; position: sticky; top: 106px; z-index: 100; }
+        .filter-group { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+        .filter-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #555; margin-right: 4px; }
+        .filter-btn { padding: 7px 16px; background: transparent; border: 1px solid #2a2a2a; border-radius: 3px; color: #999; font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.22s; letter-spacing: 0.5px; font-family: 'Barlow', sans-serif; }
+        .filter-btn:hover, .filter-btn.active { border-color: var(--green); color: var(--green); background: rgba(120,190,32,0.06); }
+        .sort-wrap { display: flex; align-items: center; gap: 12px; }
+        .sort-select { background: var(--dark2); border: 1px solid #2a2a2a; color: #bbb; padding: 8px 14px; border-radius: 3px; font-size: 12px; font-family: 'Barlow', sans-serif; cursor: pointer; outline: none; }
+        .product-count { font-size: 12px; color: #555; letter-spacing: 1px; }
+
+        /* LAYOUT */
+        .collection-layout { display: flex; gap: 0; min-height: 80vh; }
+
+        /* SIDEBAR */
+        .sidebar { width: 260px; flex-shrink: 0; background: var(--dark); border-right: 1px solid #1a1a1a; padding: 36px 28px; }
+        .sidebar-section { margin-bottom: 36px; }
+        .sidebar-title { font-family: 'Barlow Condensed', sans-serif; font-size: 15px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px; color: var(--white); display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+        .sidebar-title span { color: #444; font-size: 12px; }
+        .sidebar-divider { height: 1px; background: #1e1e1e; margin-bottom: 20px; }
+        .check-item { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; cursor: pointer; }
+        .check-box { width: 16px; height: 16px; border: 2px solid #333; border-radius: 2px; flex-shrink: 0; transition: all 0.2s; display: flex; align-items: center; justify-content: center; }
+        .check-item:hover .check-box, .check-item.checked .check-box { border-color: var(--green); background: var(--green); }
+        .check-item.checked .check-box::after { content: '✓'; font-size: 10px; color: var(--black); font-weight: 900; }
+        .check-label { font-size: 14px; color: #888; transition: color 0.2s; }
+        .check-item:hover .check-label, .check-item.checked .check-label { color: var(--white); }
+        .check-count { font-size: 11px; color: #444; margin-left: auto; }
+        .price-range { margin-top: 8px; }
+        .range-input { width: 100%; accent-color: var(--green); cursor: pointer; }
+        .range-labels { display: flex; justify-content: space-between; margin-top: 8px; font-size: 12px; color: #555; }
+        .clear-btn { background: none; border: none; color: var(--green); font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; margin-top: 20px; font-family: 'Barlow', sans-serif; }
+        .clear-btn:hover { text-decoration: underline; }
+
+        /* PRODUCT GRID */
+        .products-area { flex: 1; padding: 36px; }
+        .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 48px; }
+
+        /* PRODUCT CARD */
+        .p-card { background: var(--dark2); border: 1px solid #1e1e1e; border-radius: 10px; overflow: hidden; transition: all 0.3s; position: relative; text-decoration: none; display: block; color: inherit; }
+        .p-card:hover { border-color: rgba(120,190,32,0.25); transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.5); }
+        .p-card.coming-soon { opacity: 0.55; pointer-events: none; cursor: default; }
+        .p-card-badge { position: absolute; top: 14px; left: 14px; padding: 4px 12px; border-radius: 3px; font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; z-index: 1; }
+        .badge-new { background: var(--green); color: var(--black); }
+        .badge-sale { background: #e74c3c; color: white; }
+        .badge-best { background: #f39c12; color: var(--black); }
+        .badge-soon { background: #333; color: #777; }
+        .p-card-img { width: 100%; aspect-ratio: 1; background: linear-gradient(145deg, #181818, #111); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+        .p-card-img svg { width: 75%; height: 75%; }
+        .p-card-img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.3)); }
+        .quick-view { position: absolute; bottom: 0; left: 0; right: 0; background: var(--green); color: var(--black); padding: 11px; font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; border: none; cursor: pointer; transform: translateY(100%); transition: transform 0.3s; z-index: 2; text-align: center; text-decoration: none; display: block; }
+        .p-card:hover .quick-view { transform: translateY(0); }
+        .p-card-body { padding: 18px 20px 6px; }
+        .p-card-cat { font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--green); margin-bottom: 5px; }
+        .p-card-name { font-family: 'Barlow Condensed', sans-serif; font-size: 19px; font-weight: 800; text-transform: uppercase; line-height: 1.1; margin-bottom: 8px; }
+        .p-card-stars { color: var(--gold); font-size: 12px; letter-spacing: 1px; margin-bottom: 10px; }
+        .p-card-stars span { color: #555; font-size: 11px; margin-left: 4px; }
+        .p-card-price { display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px; }
+        .p-price-now { font-family: 'Barlow Condensed', sans-serif; font-size: 26px; font-weight: 900; }
+        .p-price-was { font-size: 14px; color: #444; text-decoration: line-through; }
+        .p-price-save { font-size: 11px; font-weight: 700; color: var(--green); background: rgba(120,190,32,0.1); padding: 2px 8px; border-radius: 2px; }
+        .p-card-footer { padding: 10px 20px 18px; display: flex; gap: 8px; }
+        .p-btn-cart { flex: 1; background: var(--green); color: var(--black); border: none; border-radius: 3px; padding: 11px; font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: all 0.25s; text-align: center; text-decoration: none; display: block; }
+        .p-btn-cart:hover { background: var(--green-light); transform: translateY(-1px); }
+        .p-btn-wish { width: 42px; height: 42px; background: transparent; border: 1px solid #2a2a2a; border-radius: 3px; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #555; transition: all 0.25s; font-size: 16px; flex-shrink: 0; }
+        .p-btn-wish:hover { border-color: var(--green); color: var(--green); }
+        .coming-soon-label { font-size: 13px; color: #555; font-weight: 600; padding: 10px 20px 18px; letter-spacing: 1px; }
+
+        /* FOOTER */
+        footer { background: #060606; border-top: 1px solid #181818; padding: 80px 5% 36px; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
+        .footer-logo { font-family: 'Barlow Condensed', sans-serif; font-size: 30px; font-weight: 900; letter-spacing: 3px; margin-bottom: 8px; }
+        .footer-logo em { color: var(--green); font-style: normal; }
+        .footer-tagline { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: rgba(120,190,32,0.6); margin-bottom: 16px; }
+        .footer-brand p { font-size: 14px; color: #444; line-height: 1.75; margin-bottom: 24px; max-width: 280px; }
+        .socials { display: flex; gap: 10px; }
+        .social-btn { width: 36px; height: 36px; background: #181818; border: 1px solid #222; border-radius: 4px; display: flex; align-items: center; justify-content: center; text-decoration: none; color: #666; font-size: 13px; font-weight: 700; transition: all 0.25s; }
+        .social-btn:hover { background: var(--green); color: var(--black); border-color: var(--green); }
+        .footer-col h5 { font-family: 'Barlow Condensed', sans-serif; font-size: 15px; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 20px; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col ul li a { color: #444; text-decoration: none; font-size: 14px; transition: color 0.25s; }
+        .footer-col ul li a:hover { color: var(--green); }
+        .footer-bottom { border-top: 1px solid #181818; padding-top: 28px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+        .footer-bottom p { font-size: 13px; color: #383838; }
+        .footer-bottom em { color: var(--green); font-style: normal; }
+        .payments { display: flex; gap: 8px; }
+        .pay-badge { background: #181818; border: 1px solid #222; border-radius: 3px; padding: 5px 12px; font-size: 10px; font-weight: 800; letter-spacing: 1px; color: #444; }
+
+        @media(max-width: 900px) {
+            .nav-links { display: none; }
+            .sidebar { display: none; }
+            .products-grid { grid-template-columns: 1fr 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .footer-bottom { flex-direction: column; gap: 16px; }
+        }
+        @media(max-width: 540px) {
+            .products-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="ann">⚡ Launch Offer — Free Shipping on Every Order &nbsp;·&nbsp; 30-Day Money Back Guarantee</div>
+
+<nav id="main-nav">
+    <a href="index.html" class="nav-logo">LAWN<em>IX</em>™</a>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li class="nav-item has-dropdown">
+            <a href="collections.html" style="color:var(--green);">Shop <span style="font-size:10px;">▾</span></a>
+            <div class="nav-dropdown">
+                <a href="collections.html" class="dropdown-link" style="font-weight:700;">🛍️ Shop All Products</a>
+                <div class="dropdown-divider"></div>
+                <div class="dropdown-group-label">Lawn Leveler</div>
+                <a href="product-lx30.html" class="dropdown-link">30" Leveling Rake</a>
+                <a href="product-lx48.html" class="dropdown-link">48" Leveling Rake</a>
+                <div class="dropdown-divider"></div>
+                <div class="dropdown-group-label">Cultivator</div>
+                <a href="product-cultivator.html" class="dropdown-link">Rotary Cultivator &amp; Hand Tiller</a>
+            </div>
+        </li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="track-order.html">Track Order</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="collections.html" class="nav-shop-btn">Shop Now</a></li>
+    </ul>
+    <div class="nav-right">
+        <button class="nav-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
+        <button class="nav-icon"><svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></button>
+    </div>
+</nav>
+
+<!-- COLLECTION HERO -->
+<div class="col-hero">
+    <div class="col-hero-inner">
+        <div class="breadcrumb"><a href="index.html">Home</a> &nbsp;/&nbsp; All Products</div>
+        <h1>Professional<br><em>Lawn Tools</em></h1>
+        <p>Built for those who demand the best. Every Lawnix tool is engineered to professional grade — no compromises, no shortcuts.</p>
+    </div>
+</div>
+
+<!-- TOOLBAR -->
+<div class="toolbar">
+    <div class="filter-group">
+        <span class="filter-label">Filter:</span>
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="lawn-leveler">Lawn Leveler</button>
+        <button class="filter-btn" data-filter="cultivator">Cultivator</button>
+    </div>
+    <div class="sort-wrap">
+        <span class="product-count" id="prod-count">6 products</span>
+        <select class="sort-select" id="sort-select">
+            <option>Sort: Featured</option>
+            <option>Price: Low to High</option>
+            <option>Price: High to Low</option>
+            <option>Best Selling</option>
+            <option>Newest</option>
+        </select>
+    </div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="collection-layout">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <div class="sidebar-section">
+            <div class="sidebar-title">Category <span>−</span></div>
+            <div class="sidebar-divider"></div>
+            <div class="check-item" onclick="this.classList.toggle('checked')"><div class="check-box"></div><span class="check-label">Lawn Leveler</span><span class="check-count">2</span></div>
+            <div class="check-item" onclick="this.classList.toggle('checked')"><div class="check-box"></div><span class="check-label">Cultivator</span><span class="check-count">1</span></div>
+            <div class="check-item" onclick="this.classList.toggle('checked')"><div class="check-box"></div><span class="check-label">Coming Soon</span><span class="check-count">3</span></div>
+        </div>
+
+        <div class="sidebar-section">
+            <div class="sidebar-title">Size <span>−</span></div>
+            <div class="sidebar-divider"></div>
+            <div class="check-item" onclick="this.classList.toggle('checked')"><div class="check-box"></div><span class="check-label">30" × 10"</span></div>
+            <div class="check-item" onclick="this.classList.toggle('checked')"><div class="check-box"></div><span class="check-label">48" × 10"</span></div>
+            <div class="check-item" onclick="this.classList.toggle('checked')"><div class="check-box"></div><span class="check-label">7" Working Width</span></div>
+        </div>
+
+        <div class="sidebar-section">
+            <div class="sidebar-title">Material <span>−</span></div>
+            <div class="sidebar-divider"></div>
+            <div class="check-item checked" onclick="this.classList.toggle('checked')"><div class="check-box"></div><span class="check-label">304 Stainless Steel</span></div>
+            <div class="check-item" onclick="this.classList.toggle('checked')"><div class="check-box"></div><span class="check-label">Premium Steel</span></div>
+        </div>
+
+        <div class="sidebar-section">
+            <div class="sidebar-title">Price Range <span>−</span></div>
+            <div class="sidebar-divider"></div>
+            <div class="price-range">
+                <input type="range" class="range-input" min="0" max="100" value="100" oninput="updateRange(this)">
+                <div class="range-labels"><span>$0</span><span id="range-val">$100</span></div>
+            </div>
+        </div>
+
+        <button class="clear-btn" onclick="clearFilters()">Clear All Filters</button>
+    </div>
+
+    <!-- PRODUCTS AREA -->
+    <div class="products-area">
+        <div class="products-grid" id="products-grid">
+
+            <!-- Card 1: LX-30 -->
+            <a href="product-lx30.html" class="p-card" data-category="lawn-leveler" data-price="54.99">
+                <div class="p-card-badge badge-new">New Launch</div>
+                <div class="p-card-img">
+                    <svg viewBox="0 0 240 240" fill="none">
+                        <defs>
+                            <linearGradient id="cpg1" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#888"/><stop offset="50%" stop-color="#e0e0e0"/><stop offset="100%" stop-color="#777"/></linearGradient>
+                            <linearGradient id="cgg1" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3d6a0d"/><stop offset="50%" stop-color="#78BE20"/><stop offset="100%" stop-color="#3d6a0d"/></linearGradient>
+                            <linearGradient id="cpll" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#d8d8d8"/><stop offset="50%" stop-color="#f0f0f0"/><stop offset="100%" stop-color="#a0a0a0"/></linearGradient>
+                        </defs>
+                        <rect x="100" y="8" width="40" height="22" rx="11" fill="url(#cgg1)"/>
+                        <rect x="113" y="30" width="14" height="130" fill="url(#cpg1)"/>
+                        <rect x="38" y="160" width="164" height="18" rx="3" fill="url(#cpll)"/>
+                        <text x="120" y="173" text-anchor="middle" fill="#78BE20" font-size="8" font-weight="bold" font-family="sans-serif" letter-spacing="2">LAWNIX™</text>
+                        <rect x="42" y="178" width="4" height="42" rx="2" fill="#999"/>
+                        <rect x="57" y="178" width="4" height="46" rx="2" fill="#999"/>
+                        <rect x="72" y="178" width="4" height="42" rx="2" fill="#999"/>
+                        <rect x="87" y="178" width="4" height="46" rx="2" fill="#999"/>
+                        <rect x="102" y="178" width="4" height="42" rx="2" fill="#999"/>
+                        <rect x="117" y="178" width="4" height="46" rx="2" fill="#999"/>
+                        <rect x="132" y="178" width="4" height="42" rx="2" fill="#999"/>
+                        <rect x="147" y="178" width="4" height="46" rx="2" fill="#999"/>
+                        <rect x="162" y="178" width="4" height="42" rx="2" fill="#999"/>
+                        <rect x="177" y="178" width="4" height="46" rx="2" fill="#999"/>
+                        <rect x="192" y="178" width="4" height="42" rx="2" fill="#999"/>
+                    </svg>
+                    <a href="product-lx30.html" class="quick-view">View Product →</a>
+                </div>
+                <div class="p-card-body">
+                    <div class="p-card-cat">Lawn Leveler</div>
+                    <div class="p-card-name">Leveling Rake LX-30</div>
+                    <div class="p-card-stars">★★★★★ <span>(127 reviews)</span></div>
+                    <div class="p-card-price">
+                        <span class="p-price-now">$54.99</span>
+                        <span class="p-price-was">$69.99</span>
+                        <span class="p-price-save">−21%</span>
+                    </div>
+                </div>
+                <div class="p-card-footer">
+                    <a href="product-lx30.html" class="p-btn-cart">Shop Now</a>
+                    <button class="p-btn-wish" onclick="event.preventDefault();toggleWish(this)">♡</button>
+                </div>
+            </a>
+
+            <!-- Card 2: LX-48 -->
+            <a href="product-lx48.html" class="p-card" data-category="lawn-leveler" data-price="74.99">
+                <div class="p-card-badge badge-best">Best Seller</div>
+                <div class="p-card-img">
+                    <svg viewBox="0 0 240 240" fill="none">
+                        <defs>
+                            <linearGradient id="cpg2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#888"/><stop offset="50%" stop-color="#e0e0e0"/><stop offset="100%" stop-color="#777"/></linearGradient>
+                            <linearGradient id="cgg2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3d6a0d"/><stop offset="50%" stop-color="#78BE20"/><stop offset="100%" stop-color="#3d6a0d"/></linearGradient>
+                            <linearGradient id="cpl2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#d8d8d8"/><stop offset="50%" stop-color="#f0f0f0"/><stop offset="100%" stop-color="#a0a0a0"/></linearGradient>
+                        </defs>
+                        <rect x="100" y="8" width="40" height="22" rx="11" fill="url(#cgg2)"/>
+                        <rect x="113" y="30" width="14" height="130" fill="url(#cpg2)"/>
+                        <!-- wider plate -->
+                        <rect x="6" y="160" width="228" height="18" rx="3" fill="url(#cpl2)"/>
+                        <text x="120" y="173" text-anchor="middle" fill="#78BE20" font-size="8" font-weight="bold" font-family="sans-serif" letter-spacing="2">LAWNIX™  LX-48</text>
+                        <rect x="10" y="178" width="4" height="42" rx="2" fill="#999"/>
+                        <rect x="24" y="178" width="4" height="46" rx="2" fill="#999"/>
+                        <rect x="38" y="178" width="4" height="42" rx="2" fill="#999"/>
+                        <rect x="52" y="178" width="4" height="46" rx="2" fill="#999"/>
+                        <rect x="66" y="178" width="4" height="42" rx="2" fill="#999"/>
+                        <rect x="80" y="178" width="4" height="46" rx="2" fill="#999"/>
+                        <rect x="94" y="178" width="4" height="42" rx="2" fill="#999"/>
+                        <rect x="108" y="178" width="4" height="46" rx="2" fill="#999"/>
+                        <rect x="126" y="178" width="4" height="46" rx="2" fill="#999"/>
+                        <rect x="140" y="178" width="4" height="42" rx="2" fill="#999"/>
+                        <rect x="154" y="178" width="4" height="46" rx="2" fill="#999"/>
+                        <rect x="168" y="178" width="4" height="42" rx="2" fill="#999"/>
+                        <rect x="182" y="178" width="4" height="46" rx="2" fill="#999"/>
+                        <rect x="196" y="178" width="4" height="42" rx="2" fill="#999"/>
+                        <rect x="210" y="178" width="4" height="46" rx="2" fill="#999"/>
+                        <rect x="224" y="178" width="4" height="42" rx="2" fill="#999"/>
+                    </svg>
+                    <a href="product-lx48.html" class="quick-view">View Product →</a>
+                </div>
+                <div class="p-card-body">
+                    <div class="p-card-cat">Lawn Leveler</div>
+                    <div class="p-card-name">Leveling Rake LX-48</div>
+                    <div class="p-card-stars">★★★★★ <span>(89 reviews)</span></div>
+                    <div class="p-card-price">
+                        <span class="p-price-now">$74.99</span>
+                        <span class="p-price-was">$94.99</span>
+                        <span class="p-price-save">−21%</span>
+                    </div>
+                </div>
+                <div class="p-card-footer">
+                    <a href="product-lx48.html" class="p-btn-cart">Shop Now</a>
+                    <button class="p-btn-wish" onclick="event.preventDefault();toggleWish(this)">♡</button>
+                </div>
+            </a>
+
+            <!-- Card 3: Cultivator -->
+            <a href="product-cultivator.html" class="p-card" data-category="cultivator" data-price="39.99">
+                <div class="p-card-badge badge-sale">−25%</div>
+                <div class="p-card-img">
+                    <svg viewBox="0 0 240 240" fill="none">
+                        <defs>
+                            <linearGradient id="cpg3" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#777"/><stop offset="50%" stop-color="#d8d8d8"/><stop offset="100%" stop-color="#666"/></linearGradient>
+                            <linearGradient id="cgg3" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3d6a0d"/><stop offset="50%" stop-color="#78BE20"/><stop offset="100%" stop-color="#3d6a0d"/></linearGradient>
+                        </defs>
+                        <!-- T-handle -->
+                        <rect x="40" y="22" width="58" height="16" rx="8" fill="url(#cgg3)"/>
+                        <rect x="142" y="22" width="58" height="16" rx="8" fill="url(#cgg3)"/>
+                        <rect x="96" y="20" width="48" height="10" rx="5" fill="#aaa"/>
+                        <!-- pole -->
+                        <rect x="113" y="30" width="14" height="124" fill="url(#cpg3)"/>
+                        <!-- 2-in-1 badge -->
+                        <rect x="88" y="84" width="64" height="18" rx="3" fill="rgba(120,190,32,0.15)" stroke="rgba(120,190,32,0.35)" stroke-width="1"/>
+                        <text x="120" y="97" text-anchor="middle" fill="#78BE20" font-size="8" font-weight="bold" font-family="sans-serif" letter-spacing="2">2-IN-1</text>
+                        <!-- fork arms -->
+                        <path d="M116 154 L88 178" stroke="#aaa" stroke-width="5" stroke-linecap="round"/>
+                        <path d="M124 154 L152 178" stroke="#aaa" stroke-width="5" stroke-linecap="round"/>
+                        <!-- wheels -->
+                        <g transform="translate(86,200)">
+                            <circle cx="0" cy="0" r="22" fill="none" stroke="#555" stroke-width="1.5"/>
+                            <circle cx="0" cy="0" r="4" fill="#78BE20"/>
+                            <polygon points="0,-22 2.5,-7 0,-3 -2.5,-7" fill="#ccc"/>
+                            <polygon points="15.5,-15.5 5,-5 2.5,-7.5 8,-13" fill="#ccc"/>
+                            <polygon points="22,0 7,-2 3,0 7,2" fill="#ccc"/>
+                            <polygon points="15.5,15.5 5,5 7.5,2.5 13,8" fill="#ccc"/>
+                            <polygon points="0,22 2.5,7 0,3 -2.5,7" fill="#ccc"/>
+                            <polygon points="-15.5,15.5 -5,5 -2.5,7.5 -8,13" fill="#ccc"/>
+                            <polygon points="-22,0 -7,2 -3,0 -7,-2" fill="#ccc"/>
+                            <polygon points="-15.5,-15.5 -5,-5 -7.5,-2.5 -13,-8" fill="#ccc"/>
+                        </g>
+                        <g transform="translate(154,200)">
+                            <circle cx="0" cy="0" r="22" fill="none" stroke="#555" stroke-width="1.5"/>
+                            <circle cx="0" cy="0" r="4" fill="#78BE20"/>
+                            <polygon points="0,-22 2.5,-7 0,-3 -2.5,-7" fill="#ccc"/>
+                            <polygon points="15.5,-15.5 5,-5 2.5,-7.5 8,-13" fill="#ccc"/>
+                            <polygon points="22,0 7,-2 3,0 7,2" fill="#ccc"/>
+                            <polygon points="15.5,15.5 5,5 7.5,2.5 13,8" fill="#ccc"/>
+                            <polygon points="0,22 2.5,7 0,3 -2.5,7" fill="#ccc"/>
+                            <polygon points="-15.5,15.5 -5,5 -2.5,7.5 -8,13" fill="#ccc"/>
+                            <polygon points="-22,0 -7,2 -3,0 -7,-2" fill="#ccc"/>
+                            <polygon points="-15.5,-15.5 -5,-5 -7.5,-2.5 -13,-8" fill="#ccc"/>
+                        </g>
+                    </svg>
+                    <a href="product-cultivator.html" class="quick-view">View Product →</a>
+                </div>
+                <div class="p-card-body">
+                    <div class="p-card-cat">Cultivator</div>
+                    <div class="p-card-name">Rotary Cultivator RC-01</div>
+                    <div class="p-card-stars">★★★★½ <span>(214 reviews)</span></div>
+                    <div class="p-card-price">
+                        <span class="p-price-now">$39.99</span>
+                        <span class="p-price-was">$52.99</span>
+                        <span class="p-price-save">−25%</span>
+                    </div>
+                </div>
+                <div class="p-card-footer">
+                    <a href="product-cultivator.html" class="p-btn-cart">Shop Now</a>
+                    <button class="p-btn-wish" onclick="event.preventDefault();toggleWish(this)">♡</button>
+                </div>
+            </a>
+
+            <!-- Card 4: Coming Soon -->
+            <div class="p-card coming-soon" data-category="coming-soon" data-price="999">
+                <div class="p-card-badge badge-soon">Coming Soon</div>
+                <div class="p-card-img" style="background:linear-gradient(145deg,#141414,#0e0e0e);">
+                    <svg viewBox="0 0 240 240" fill="none">
+                        <text x="120" y="110" text-anchor="middle" fill="#2a2a2a" font-size="48" font-weight="900" font-family="Barlow Condensed, sans-serif">?</text>
+                        <text x="120" y="140" text-anchor="middle" fill="#2a2a2a" font-size="13" font-weight="700" font-family="Barlow Condensed, sans-serif" letter-spacing="3">COMING SOON</text>
+                    </svg>
+                </div>
+                <div class="p-card-body">
+                    <div class="p-card-cat" style="color:#444;">Lawn Leveler</div>
+                    <div class="p-card-name" style="color:#333;">New Model</div>
+                    <div style="font-size:12px;color:#333;margin-bottom:10px;letter-spacing:1px;">Notify me when available</div>
+                    <div class="p-card-price"><span class="p-price-now" style="color:#333;">TBA</span></div>
+                </div>
+                <div class="coming-soon-label">Join waitlist →</div>
+            </div>
+
+            <!-- Card 5: Coming Soon -->
+            <div class="p-card coming-soon" data-category="coming-soon" data-price="999">
+                <div class="p-card-badge badge-soon">Coming Soon</div>
+                <div class="p-card-img" style="background:linear-gradient(145deg,#141414,#0e0e0e);">
+                    <svg viewBox="0 0 240 240" fill="none">
+                        <text x="120" y="110" text-anchor="middle" fill="#2a2a2a" font-size="48" font-weight="900" font-family="Barlow Condensed, sans-serif">?</text>
+                        <text x="120" y="140" text-anchor="middle" fill="#2a2a2a" font-size="13" font-weight="700" font-family="Barlow Condensed, sans-serif" letter-spacing="3">COMING SOON</text>
+                    </svg>
+                </div>
+                <div class="p-card-body">
+                    <div class="p-card-cat" style="color:#444;">Cultivator</div>
+                    <div class="p-card-name" style="color:#333;">New Model</div>
+                    <div style="font-size:12px;color:#333;margin-bottom:10px;letter-spacing:1px;">Notify me when available</div>
+                    <div class="p-card-price"><span class="p-price-now" style="color:#333;">TBA</span></div>
+                </div>
+                <div class="coming-soon-label">Join waitlist →</div>
+            </div>
+
+            <!-- Card 6: Coming Soon -->
+            <div class="p-card coming-soon" data-category="coming-soon" data-price="999">
+                <div class="p-card-badge badge-soon">Coming Soon</div>
+                <div class="p-card-img" style="background:linear-gradient(145deg,#141414,#0e0e0e);">
+                    <svg viewBox="0 0 240 240" fill="none">
+                        <text x="120" y="110" text-anchor="middle" fill="#2a2a2a" font-size="48" font-weight="900" font-family="Barlow Condensed, sans-serif">?</text>
+                        <text x="120" y="140" text-anchor="middle" fill="#2a2a2a" font-size="13" font-weight="700" font-family="Barlow Condensed, sans-serif" letter-spacing="3">COMING SOON</text>
+                    </svg>
+                </div>
+                <div class="p-card-body">
+                    <div class="p-card-cat" style="color:#444;">Accessories</div>
+                    <div class="p-card-name" style="color:#333;">New Model</div>
+                    <div style="font-size:12px;color:#333;margin-bottom:10px;letter-spacing:1px;">Notify me when available</div>
+                    <div class="p-card-price"><span class="p-price-now" style="color:#333;">TBA</span></div>
+                </div>
+                <div class="coming-soon-label">Join waitlist →</div>
+            </div>
+
+        </div><!-- /products-grid -->
+
+    </div><!-- /products-area -->
+</div><!-- /collection-layout -->
+
+<!-- NEWSLETTER BAR -->
+<div style="background:linear-gradient(135deg,#0a1200,#101010);border-top:1px solid rgba(120,190,32,0.15);padding:56px 5%;">
+    <div style="max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap;">
+        <div>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#78BE20;margin-bottom:8px;">Exclusive Offers</div>
+            <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(22px,3vw,34px);font-weight:900;text-transform:uppercase;line-height:1;margin-bottom:6px;">Get 10% Off Your First Order</h3>
+            <p style="font-size:14px;color:#666;max-width:360px;">Subscribe for exclusive deals, lawn care tips &amp; new product launches.</p>
+        </div>
+        <form onsubmit="handleNewsletter(event)" style="display:flex;gap:10px;flex-wrap:wrap;flex:1;max-width:480px;">
+            <input type="email" placeholder="Enter your email address" required
+                style="flex:1;min-width:200px;background:#1a1a1a;border:1px solid #2a2a2a;color:#fff;padding:13px 18px;border-radius:4px;font-size:14px;font-family:'Barlow',sans-serif;outline:none;">
+            <button type="submit"
+                style="background:#78BE20;color:#090909;border:none;padding:13px 28px;border-radius:4px;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:900;letter-spacing:2px;text-transform:uppercase;cursor:pointer;white-space:nowrap;transition:all 0.25s;"
+                onmouseover="this.style.background='#9fd44a'" onmouseout="this.style.background='#78BE20'">
+                Subscribe ⚡
+            </button>
+        </form>
+    </div>
+</div>
+
+<footer style="background:#060606;border-top:1px solid #181818;padding:70px 5% 30px;">
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:50px;margin-bottom:56px;max-width:1400px;margin-left:auto;margin-right:auto;">
+        <div>
+            <a href="index.html" style="font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:900;letter-spacing:3px;text-decoration:none;color:#fff;display:inline-block;margin-bottom:6px;">LAWN<em style="color:#78BE20;font-style:normal;">IX</em>™</a>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(120,190,32,0.6);margin-bottom:14px;">Power · Precision · Performance</div>
+            <p style="font-size:13px;color:#444;line-height:1.75;margin-bottom:22px;max-width:260px;">Professional-grade lawn tools built for those who take their lawn seriously. No shortcuts. No compromises.</p>
+            <div style="display:flex;gap:8px;">
+                <a href="#" style="width:34px;height:34px;background:#181818;border:1px solid #222;border-radius:4px;display:flex;align-items:center;justify-content:center;text-decoration:none;color:#666;font-size:12px;font-weight:700;transition:all 0.25s;" onmouseover="this.style.background='#78BE20';this.style.color='#090909'" onmouseout="this.style.background='#181818';this.style.color='#666'">f</a>
+                <a href="#" style="width:34px;height:34px;background:#181818;border:1px solid #222;border-radius:4px;display:flex;align-items:center;justify-content:center;text-decoration:none;color:#666;font-size:12px;font-weight:700;transition:all 0.25s;" onmouseover="this.style.background='#78BE20';this.style.color='#090909'" onmouseout="this.style.background='#181818';this.style.color='#666'">ig</a>
+                <a href="#" style="width:34px;height:34px;background:#181818;border:1px solid #222;border-radius:4px;display:flex;align-items:center;justify-content:center;text-decoration:none;color:#666;font-size:12px;font-weight:700;transition:all 0.25s;" onmouseover="this.style.background='#78BE20';this.style.color='#090909'" onmouseout="this.style.background='#181818';this.style.color='#666'">yt</a>
+                <a href="#" style="width:34px;height:34px;background:#181818;border:1px solid #222;border-radius:4px;display:flex;align-items:center;justify-content:center;text-decoration:none;color:#666;font-size:12px;font-weight:700;transition:all 0.25s;" onmouseover="this.style.background='#78BE20';this.style.color='#090909'" onmouseout="this.style.background='#181818';this.style.color='#666'">tt</a>
+            </div>
+        </div>
+        <div>
+            <h5 style="font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:18px;color:#fff;">Shop</h5>
+            <ul style="list-style:none;display:flex;flex-direction:column;gap:9px;">
+                <li><a href="collections.html" style="color:#444;text-decoration:none;font-size:13px;transition:color 0.25s;" onmouseover="this.style.color='#78BE20'" onmouseout="this.style.color='#444'">All Products</a></li>
+                <li><a href="product-lx30.html" style="color:#444;text-decoration:none;font-size:13px;transition:color 0.25s;" onmouseover="this.style.color='#78BE20'" onmouseout="this.style.color='#444'">30" Leveling Rake</a></li>
+                <li><a href="product-lx48.html" style="color:#444;text-decoration:none;font-size:13px;transition:color 0.25s;" onmouseover="this.style.color='#78BE20'" onmouseout="this.style.color='#444'">48" Leveling Rake</a></li>
+                <li><a href="product-cultivator.html" style="color:#444;text-decoration:none;font-size:13px;transition:color 0.25s;" onmouseover="this.style.color='#78BE20'" onmouseout="this.style.color='#444'">Rotary Cultivator</a></li>
+                <li><a href="collections.html" style="color:#444;text-decoration:none;font-size:13px;transition:color 0.25s;" onmouseover="this.style.color='#78BE20'" onmouseout="this.style.color='#444'">Best Sellers</a></li>
+            </ul>
+        </div>
+        <div>
+            <h5 style="font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:18px;color:#fff;">Help</h5>
+            <ul style="list-style:none;display:flex;flex-direction:column;gap:9px;">
+                <li><a href="faq.html" style="color:#444;text-decoration:none;font-size:13px;transition:color 0.25s;" onmouseover="this.style.color='#78BE20'" onmouseout="this.style.color='#444'">FAQ</a></li>
+                <li><a href="contact.html" style="color:#444;text-decoration:none;font-size:13px;transition:color 0.25s;" onmouseover="this.style.color='#78BE20'" onmouseout="this.style.color='#444'">Contact Us</a></li>
+                <li><a href="track-order.html" style="color:#444;text-decoration:none;font-size:13px;transition:color 0.25s;" onmouseover="this.style.color='#78BE20'" onmouseout="this.style.color='#444'">Track Order</a></li>
+                <li><a href="faq.html#returns" style="color:#444;text-decoration:none;font-size:13px;transition:color 0.25s;" onmouseover="this.style.color='#78BE20'" onmouseout="this.style.color='#444'">Returns &amp; Refunds</a></li>
+                <li><a href="faq.html#warranty" style="color:#444;text-decoration:none;font-size:13px;transition:color 0.25s;" onmouseover="this.style.color='#78BE20'" onmouseout="this.style.color='#444'">Warranty</a></li>
+            </ul>
+        </div>
+        <div>
+            <h5 style="font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:18px;color:#fff;">Company</h5>
+            <ul style="list-style:none;display:flex;flex-direction:column;gap:9px;">
+                <li><a href="about.html" style="color:#444;text-decoration:none;font-size:13px;transition:color 0.25s;" onmouseover="this.style.color='#78BE20'" onmouseout="this.style.color='#444'">About Us</a></li>
+                <li><a href="#" style="color:#444;text-decoration:none;font-size:13px;transition:color 0.25s;" onmouseover="this.style.color='#78BE20'" onmouseout="this.style.color='#444'">Privacy Policy</a></li>
+                <li><a href="#" style="color:#444;text-decoration:none;font-size:13px;transition:color 0.25s;" onmouseover="this.style.color='#78BE20'" onmouseout="this.style.color='#444'">Terms of Service</a></li>
+                <li><a href="#" style="color:#444;text-decoration:none;font-size:13px;transition:color 0.25s;" onmouseover="this.style.color='#78BE20'" onmouseout="this.style.color='#444'">Shipping Policy</a></li>
+                <li><a href="#" style="color:#444;text-decoration:none;font-size:13px;transition:color 0.25s;" onmouseover="this.style.color='#78BE20'" onmouseout="this.style.color='#444'">Refund Policy</a></li>
+            </ul>
+        </div>
+    </div>
+    <div style="border-top:1px solid #181818;padding-top:26px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;max-width:1400px;margin:0 auto;">
+        <p style="font-size:12px;color:#383838;">© 2026 <em style="color:#78BE20;font-style:normal;">Lawnix™</em>. All Rights Reserved. &nbsp;·&nbsp; Power. Precision. Performance.</p>
+        <div style="display:flex;gap:7px;">
+            <span style="background:#181818;border:1px solid #222;border-radius:3px;padding:4px 10px;font-size:10px;font-weight:800;letter-spacing:1px;color:#444;">VISA</span>
+            <span style="background:#181818;border:1px solid #222;border-radius:3px;padding:4px 10px;font-size:10px;font-weight:800;letter-spacing:1px;color:#444;">MC</span>
+            <span style="background:#181818;border:1px solid #222;border-radius:3px;padding:4px 10px;font-size:10px;font-weight:800;letter-spacing:1px;color:#444;">AMEX</span>
+            <span style="background:#181818;border:1px solid #222;border-radius:3px;padding:4px 10px;font-size:10px;font-weight:800;letter-spacing:1px;color:#444;">PAYPAL</span>
+            <span style="background:#181818;border:1px solid #222;border-radius:3px;padding:4px 10px;font-size:10px;font-weight:800;letter-spacing:1px;color:#444;">SHOP PAY</span>
+        </div>
+    </div>
+</footer>
+
+<script>
+function handleNewsletter(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('button');
+    const input = e.target.querySelector('input');
+    btn.textContent = '✓ Subscribed!';
+    btn.style.background = '#5a9018';
+    input.value = '';
+    setTimeout(() => { btn.textContent = 'Subscribe ⚡'; btn.style.background = '#78BE20'; }, 3000);
+}
+</script>
+
+<script>
+    // Filter buttons
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('#products-grid .p-card');
+    const countEl = document.getElementById('prod-count');
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const filter = btn.dataset.filter;
+            let visible = 0;
+            cards.forEach(card => {
+                const cat = card.dataset.category;
+                let show = false;
+                if (filter === 'all') {
+                    show = true;
+                } else if (filter === 'lawn-leveler') {
+                    show = cat === 'lawn-leveler';
+                } else if (filter === 'cultivator') {
+                    show = cat === 'cultivator';
+                }
+                card.style.display = show ? 'block' : 'none';
+                if (show && !card.classList.contains('coming-soon')) visible++;
+                else if (show) visible++;
+            });
+            countEl.textContent = visible + ' product' + (visible !== 1 ? 's' : '');
+        });
+    });
+
+    // Sort
+    document.getElementById('sort-select').addEventListener('change', function() {
+        const grid = document.getElementById('products-grid');
+        const cardArr = Array.from(grid.querySelectorAll('.p-card[style=""],.p-card:not([style]),.p-card'));
+        const visibleCards = Array.from(grid.querySelectorAll('.p-card')).filter(c => c.style.display !== 'none');
+
+        visibleCards.sort((a, b) => {
+            const pa = parseFloat(a.dataset.price) || 999;
+            const pb = parseFloat(b.dataset.price) || 999;
+            if (this.value === 'Price: Low to High') return pa - pb;
+            if (this.value === 'Price: High to Low') return pb - pa;
+            return 0;
+        });
+        visibleCards.forEach(c => grid.appendChild(c));
+    });
+
+    // Price range filter
+    function updateRange(input) {
+        document.getElementById('range-val').textContent = '$' + input.value;
+        const maxPrice = parseFloat(input.value);
+        cards.forEach(card => {
+            const price = parseFloat(card.dataset.price) || 0;
+            if (price > maxPrice && price < 999) {
+                card.style.display = 'none';
+            } else {
+                // only show if current filter matches
+                const activeFilter = document.querySelector('.filter-btn.active')?.dataset.filter || 'all';
+                const cat = card.dataset.category;
+                if (activeFilter === 'all' || activeFilter === cat) {
+                    card.style.display = 'block';
+                }
+            }
+        });
+    }
+
+    // Clear filters
+    function clearFilters() {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        document.querySelector('[data-filter="all"]').classList.add('active');
+        cards.forEach(c => c.style.display = 'block');
+        document.querySelector('.range-input').value = 100;
+        document.getElementById('range-val').textContent = '$100';
+        document.querySelectorAll('.check-item').forEach(i => i.classList.remove('checked'));
+        countEl.textContent = '6 products';
+    }
+
+    // Wishlist toggle
+    function toggleWish(btn) {
+        if (btn.textContent === '♡') {
+            btn.textContent = '♥';
+            btn.style.color = '#e74c3c';
+            btn.style.borderColor = '#e74c3c';
+        } else {
+            btn.textContent = '♡';
+            btn.style.color = '';
+            btn.style.borderColor = '';
+        }
+    }
+
+    // Sticky nav shadow
+    window.addEventListener('scroll', () => {
+        const nav = document.getElementById('main-nav');
+        if (nav) nav.style.boxShadow = window.scrollY > 40 ? '0 4px 30px rgba(0,0,0,0.6)' : 'none';
+    });
+</script>
+</body>
+</html>

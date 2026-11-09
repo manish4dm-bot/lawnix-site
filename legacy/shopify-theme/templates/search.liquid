@@ -1,0 +1,61 @@
+<div style="padding-top: calc(var(--offset) + 60px); padding-bottom: 110px; min-height: 70vh;">
+
+  <!-- SEARCH HERO -->
+  <div style="padding: 70px 5% 60px; background: linear-gradient(135deg,#0a1200 0%,#090909 70%); border-bottom: 1px solid #1a1a1a;">
+    <div class="section-eyebrow">Search</div>
+    <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(40px,6vw,72px);font-weight:900;text-transform:uppercase;line-height:0.92;margin-bottom:36px;">
+      {% if search.performed %}
+        Results for <em style="color:var(--green);font-style:normal;">"{{ search.terms }}"</em>
+      {% else %}
+        Find Your <em style="color:var(--green);font-style:normal;">Tool</em>
+      {% endif %}
+    </h1>
+
+    <form action="{{ routes.search_url }}" method="get" style="max-width:600px;">
+      <input type="hidden" name="type" value="product">
+      <div style="display:flex;">
+        <input
+          type="search"
+          name="q"
+          value="{{ search.terms | escape }}"
+          placeholder="Search for tools, rakes, accessories…"
+          class="newsletter-input"
+          style="border-radius:3px 0 0 3px;"
+          autocomplete="off"
+        >
+        <button type="submit" class="newsletter-btn" style="border-radius:0 3px 3px 0;">Search</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- RESULTS -->
+  <div style="padding: 60px 5%;">
+    {% if search.performed %}
+      {% if search.results_count == 0 %}
+        <div style="text-align:center;padding:60px 0;">
+          <div style="font-size:60px;margin-bottom:20px;">🔍</div>
+          <p style="font-size:18px;color:#666;margin-bottom:36px;">No results for <strong style="color:#fff;">"{{ search.terms }}"</strong></p>
+          <a href="/collections/all" class="btn-primary">Browse All Products</a>
+        </div>
+      {% else %}
+        <p style="font-size:13px;color:#555;letter-spacing:1px;margin-bottom:40px;text-transform:uppercase;">
+          {{ search.results_count }} result{% if search.results_count > 1 %}s{% endif %} found
+        </p>
+        <div class="products-grid" style="max-width:1200px;">
+          {% for result in search.results %}
+            {% if result.object_type == 'product' %}
+              {% render 'product-card', product: result %}
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% else %}
+      <div style="text-align:center;padding:60px 0;">
+        <p style="font-size:17px;color:#666;">Search for professional lawn care tools above.</p>
+      </div>
+    {% endif %}
+  </div>
+
+</div>
+
+{% section 'cta-banner' %}

@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rotary Cultivator & Hand Tiller RC-01 | LAWNIX™</title>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --green: #78BE20; --green-dark: #5a9018; --green-light: #9fd44a;
+            --black: #090909; --dark: #101010; --dark2: #181818; --dark3: #222;
+            --white: #fff; --gray: #888; --gold: #F5A623;
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Barlow', sans-serif; background: var(--black); color: var(--white); overflow-x: hidden; }
+
+        .announcement-bar { background: var(--green); color: var(--black); text-align: center; padding: 11px 20px; font-size: 13px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; position: fixed; top: 0; width: 100%; z-index: 1001; }
+
+        nav { position: fixed; top: 38px; width: 100%; z-index: 1000; height: 68px; display: flex; align-items: center; justify-content: space-between; padding: 0 5%; background: rgba(9,9,9,0.97); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(120,190,32,0.15); }
+        .nav-logo { font-family: 'Barlow Condensed', sans-serif; font-size: 26px; font-weight: 900; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; color: var(--white); }
+        .nav-logo em { color: var(--green); font-style: normal; }
+        .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+        .nav-links > li > a { color: #bbb; text-decoration: none; font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; transition: color 0.3s; }
+        .nav-links > li > a:hover { color: var(--green); }
+        .nav-shop-btn { background: var(--green); color: var(--black) !important; padding: 9px 22px; border-radius: 3px; font-weight: 800 !important; }
+        .nav-shop-btn:hover { background: var(--green-light) !important; }
+        .nav-right { display: flex; align-items: center; gap: 18px; }
+        .nav-icon { background: none; border: none; cursor: pointer; display: flex; }
+        .nav-icon svg { width: 21px; height: 21px; stroke: #aaa; fill: none; stroke-width: 1.8; transition: stroke 0.3s; }
+        .nav-icon:hover svg { stroke: var(--green); }
+
+        .nav-item { position: relative; }
+        .nav-dropdown { position: absolute; top: calc(100% + 10px); left: 50%; transform: translateX(-50%); background: #111; border: 1px solid rgba(120,190,32,0.25); border-radius: 8px; min-width: 240px; padding: 12px 0; opacity: 0; visibility: hidden; transition: all 0.25s; box-shadow: 0 20px 60px rgba(0,0,0,0.6); z-index: 200; }
+        .nav-item:hover .nav-dropdown { opacity: 1; visibility: visible; top: calc(100% + 6px); }
+        .dropdown-group-label { font-size: 10px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--green); padding: 8px 20px 4px; }
+        .dropdown-link { display: block; padding: 9px 20px; color: #bbb; text-decoration: none; font-size: 13px; font-weight: 600; transition: all 0.2s; }
+        .dropdown-link:hover { color: var(--green); background: rgba(120,190,32,0.05); }
+        .dropdown-link.active { color: var(--green); }
+        .dropdown-divider { height: 1px; background: #1e1e1e; margin: 8px 0; }
+
+        .page-wrap { margin-top: 106px; }
+        .breadcrumb-bar { padding: 14px 5%; background: var(--dark); border-bottom: 1px solid #1a1a1a; }
+        .breadcrumb { font-size: 12px; color: #555; letter-spacing: 1px; }
+        .breadcrumb a { color: var(--green); text-decoration: none; }
+        .breadcrumb a:hover { opacity: 0.75; }
+        .breadcrumb span { margin: 0 8px; }
+
+        .product-main { display: grid; grid-template-columns: 45% 35% 20%; gap: 0; padding: 40px 5%; max-width: 1400px; margin: 0 auto; align-items: start; }
+
+        .gallery-col { padding-right: 28px; }
+        .gallery-layout { display: flex; gap: 12px; }
+        .thumb-strip { display: flex; flex-direction: column; gap: 10px; }
+        .thumb-item { width: 72px; height: 72px; background: #1a1a1a; border: 2px solid #2a2a2a; border-radius: 6px; cursor: pointer; overflow: hidden; flex-shrink: 0; transition: border-color 0.22s; display: flex; align-items: center; justify-content: center; }
+        .thumb-item:hover, .thumb-item.active { border-color: var(--green); }
+        .thumb-item svg { width: 60px; height: 60px; }
+        .main-image-wrap { flex: 1; background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 10px; overflow: hidden; position: relative; aspect-ratio: 3/4; display: flex; align-items: center; justify-content: center; }
+        .main-image-wrap svg { width: 90%; height: 90%; }
+        .img-badge-sale { position: absolute; top: 16px; left: 16px; background: #e74c3c; color: white; padding: 5px 12px; border-radius: 3px; font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 900; letter-spacing: 1.5px; text-transform: uppercase; }
+        .img-badge-lifetime { position: absolute; top: 16px; right: 16px; background: rgba(120,190,32,0.15); border: 1px solid var(--green); color: var(--green); padding: 5px 10px; border-radius: 3px; font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; }
+
+        .info-col { padding: 0 24px; border-left: 1px solid #1e1e1e; border-right: 1px solid #1e1e1e; }
+        .brand-link { font-size: 13px; color: var(--green); text-decoration: none; font-weight: 600; display: inline-block; margin-bottom: 8px; }
+        .brand-link:hover { text-decoration: underline; }
+        .product-title { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 900; line-height: 1.25; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .rating-row { display: flex; align-items: center; gap: 6px; margin-bottom: 12px; flex-wrap: wrap; }
+        .stars-gold { color: var(--gold); font-size: 16px; letter-spacing: 1px; }
+        .rating-score { font-size: 14px; font-weight: 700; color: var(--gold); }
+        .rating-link { font-size: 13px; color: #5b9bd5; text-decoration: none; }
+        .rating-link:hover { text-decoration: underline; }
+        .rating-sep { color: #444; font-size: 12px; }
+        .divider { height: 1px; background: #1e1e1e; margin: 16px 0; }
+        .price-main { margin-bottom: 16px; }
+        .price-label { font-size: 12px; color: #777; margin-bottom: 4px; }
+        .price-now { font-family: 'Barlow Condensed', sans-serif; font-size: 38px; font-weight: 900; color: var(--white); line-height: 1; }
+        .price-now sup { font-size: 20px; vertical-align: super; }
+        .price-row2 { display: flex; align-items: center; gap: 10px; margin-top: 6px; flex-wrap: wrap; }
+        .price-was-label { font-size: 13px; color: #777; }
+        .price-was { font-size: 13px; color: #777; text-decoration: line-through; }
+        .price-save-badge { background: #c0392b; color: white; padding: 3px 10px; border-radius: 3px; font-size: 12px; font-weight: 800; }
+        .about-section { margin-top: 4px; }
+        .about-heading { font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+        .bullet-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+        .bullet-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 13.5px; line-height: 1.6; color: #ccc; }
+        .bullet-list li::before { content: '✓'; color: var(--green); font-weight: 900; font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+
+        .buy-box { background: var(--dark2); border: 1px solid #2a2a2a; border-radius: 10px; padding: 22px; position: sticky; top: 120px; }
+        .buy-price { font-family: 'Barlow Condensed', sans-serif; font-size: 36px; font-weight: 900; color: var(--white); line-height: 1; margin-bottom: 6px; }
+        .buy-price sup { font-size: 18px; vertical-align: super; }
+        .buy-delivery { font-size: 13px; color: #bbb; margin-bottom: 4px; line-height: 1.5; }
+        .buy-delivery strong { color: var(--green); }
+        .buy-stock { font-size: 15px; color: var(--green); font-weight: 700; margin: 10px 0; }
+        .buy-divider { height: 1px; background: #2a2a2a; margin: 14px 0; }
+        .qty-label-sm { font-size: 11px; color: #777; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 8px; font-weight: 700; }
+        .qty-select { width: 100%; background: var(--dark); border: 1px solid #2a2a2a; color: var(--white); padding: 10px 14px; border-radius: 4px; font-size: 14px; font-family: 'Barlow', sans-serif; cursor: pointer; outline: none; margin-bottom: 14px; }
+        .btn-add-cart { width: 100%; background: var(--green); color: var(--black); border: none; border-radius: 20px; padding: 14px; font-family: 'Barlow Condensed', sans-serif; font-size: 17px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: all 0.28s; margin-bottom: 10px; }
+        .btn-add-cart:hover { background: var(--green-light); transform: translateY(-1px); box-shadow: 0 8px 28px rgba(120,190,32,0.4); }
+        .btn-buy-now { width: 100%; background: #ffa41c; color: var(--black); border: none; border-radius: 20px; padding: 14px; font-family: 'Barlow Condensed', sans-serif; font-size: 17px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: all 0.28s; margin-bottom: 14px; }
+        .btn-buy-now:hover { background: #ffb340; transform: translateY(-1px); }
+        .secure-line { display: flex; align-items: center; gap: 8px; justify-content: center; font-size: 12px; color: #777; margin-bottom: 14px; }
+        .buy-meta { display: flex; flex-direction: column; gap: 8px; }
+        .buy-meta-row { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: #999; }
+        .buy-meta-row strong { color: #bbb; font-weight: 600; }
+        .lifetime-badge { background: rgba(120,190,32,0.08); border: 1px solid rgba(120,190,32,0.25); border-radius: 6px; padding: 10px 14px; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--green); font-weight: 700; }
+
+        .below-fold { max-width: 1400px; margin: 0 auto; padding: 0 5%; }
+        .section-block { padding: 48px 0; border-top: 1px solid #1e1e1e; }
+        .section-block-title { font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 2px solid var(--green); display: inline-block; }
+        .about-desc { font-size: 15px; line-height: 1.8; color: #aaa; margin-bottom: 24px; max-width: 800px; }
+        .about-bullets { list-style: none; display: flex; flex-direction: column; gap: 16px; max-width: 800px; }
+        .about-bullets li { display: flex; align-items: flex-start; gap: 14px; font-size: 14.5px; line-height: 1.7; color: #ccc; }
+        .about-bullets li .bullet-icon { width: 26px; height: 26px; background: rgba(120,190,32,0.1); border: 1px solid rgba(120,190,32,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--green); font-size: 13px; font-weight: 900; margin-top: 2px; }
+        .about-bullets li strong { color: var(--white); }
+        .specs-table { width: 100%; max-width: 700px; border-collapse: collapse; }
+        .specs-table tr { border-bottom: 1px solid #1e1e1e; }
+        .specs-table tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+        .specs-table td { padding: 13px 16px; font-size: 14px; }
+        .specs-table td:first-child { color: #888; font-weight: 600; text-transform: uppercase; font-size: 12px; letter-spacing: 1px; width: 40%; }
+        .specs-table td:last-child { color: var(--white); font-weight: 500; }
+
+        .rating-overview { display: flex; gap: 48px; align-items: flex-start; margin-bottom: 36px; flex-wrap: wrap; }
+        .rating-big { text-align: center; }
+        .rating-big .num { font-family: 'Barlow Condensed', sans-serif; font-size: 72px; font-weight: 900; color: var(--white); line-height: 1; }
+        .rating-big .stars-lg { color: var(--gold); font-size: 22px; display: block; margin: 4px 0; }
+        .rating-big .count { font-size: 13px; color: #777; }
+        .rating-bars { flex: 1; min-width: 240px; }
+        .bar-row { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+        .bar-label { font-size: 13px; color: #5b9bd5; text-decoration: underline; cursor: pointer; width: 28px; text-align: right; flex-shrink: 0; }
+        .bar-track { flex: 1; height: 12px; background: #222; border-radius: 6px; overflow: hidden; }
+        .bar-fill { height: 100%; background: var(--green); border-radius: 6px; }
+        .bar-pct { font-size: 13px; color: #777; width: 36px; flex-shrink: 0; }
+        .review-cards { display: flex; flex-direction: column; gap: 28px; }
+        .review-card { background: var(--dark2); border: 1px solid #1e1e1e; border-radius: 10px; padding: 28px; transition: border-color 0.3s; }
+        .review-card:hover { border-color: rgba(120,190,32,0.2); }
+        .review-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 12px; gap: 16px; flex-wrap: wrap; }
+        .reviewer-info { display: flex; align-items: center; gap: 12px; }
+        .reviewer-avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--green), var(--green-dark)); display: flex; align-items: center; justify-content: center; font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 900; color: var(--black); flex-shrink: 0; }
+        .reviewer-name { font-weight: 700; font-size: 15px; }
+        .reviewer-loc { font-size: 12px; color: #666; margin-top: 2px; }
+        .verified-badge { background: rgba(120,190,32,0.1); border: 1px solid rgba(120,190,32,0.25); color: var(--green); padding: 3px 10px; border-radius: 100px; font-size: 10px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; white-space: nowrap; }
+        .review-stars-date { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; flex-wrap: wrap; }
+        .review-stars { color: var(--gold); font-size: 15px; letter-spacing: 1px; }
+        .review-date { font-size: 12px; color: #666; }
+        .review-title { font-weight: 700; font-size: 15px; margin-bottom: 8px; }
+        .review-body { font-size: 14px; line-height: 1.75; color: #999; margin-bottom: 16px; }
+        .helpful-row { display: flex; align-items: center; gap: 12px; font-size: 13px; color: #777; flex-wrap: wrap; }
+        .helpful-btn { background: transparent; border: 1px solid #2a2a2a; color: #aaa; padding: 5px 14px; border-radius: 4px; font-size: 12px; cursor: pointer; transition: all 0.22s; font-family: 'Barlow', sans-serif; }
+        .helpful-btn:hover { border-color: var(--green); color: var(--green); }
+        .helpful-btn.voted { border-color: var(--green); color: var(--green); background: rgba(120,190,32,0.06); }
+        .qa-item { background: var(--dark2); border: 1px solid #1e1e1e; border-radius: 10px; padding: 24px; margin-bottom: 16px; }
+        .qa-q { display: flex; gap: 12px; margin-bottom: 14px; align-items: flex-start; }
+        .qa-badge-q { background: #2a2a2a; color: #999; padding: 3px 10px; border-radius: 3px; font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 800; letter-spacing: 1px; flex-shrink: 0; }
+        .qa-badge-a { background: rgba(120,190,32,0.12); color: var(--green); padding: 3px 10px; border-radius: 3px; font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 800; letter-spacing: 1px; flex-shrink: 0; }
+        .qa-text-q { font-size: 15px; font-weight: 600; color: var(--white); line-height: 1.5; }
+        .qa-text-a { font-size: 14px; color: #aaa; line-height: 1.7; }
+        .qa-a { display: flex; gap: 12px; align-items: flex-start; }
+        .qa-helpful { font-size: 12px; color: #666; margin-top: 12px; padding-top: 12px; border-top: 1px solid #1e1e1e; display: flex; align-items: center; gap: 10px; }
+
+        footer { background: #060606; border-top: 1px solid #181818; padding: 80px 5% 36px; margin-top: 60px; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
+        .footer-logo { font-family: 'Barlow Condensed', sans-serif; font-size: 30px; font-weight: 900; letter-spacing: 3px; margin-bottom: 8px; }
+        .footer-logo em { color: var(--green); font-style: normal; }
+        .footer-tagline { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: rgba(120,190,32,0.6); margin-bottom: 16px; }
+        .footer-brand p { font-size: 14px; color: #444; line-height: 1.75; margin-bottom: 24px; max-width: 280px; }
+        .socials { display: flex; gap: 10px; }
+        .social-btn { width: 36px; height: 36px; background: #181818; border: 1px solid #222; border-radius: 4px; display: flex; align-items: center; justify-content: center; text-decoration: none; color: #666; font-size: 13px; font-weight: 700; transition: all 0.25s; }
+        .social-btn:hover { background: var(--green); color: var(--black); border-color: var(--green); }
+        .footer-col h5 { font-family: 'Barlow Condensed', sans-serif; font-size: 15px; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 20px; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col ul li a { color: #444; text-decoration: none; font-size: 14px; transition: color 0.25s; }
+        .footer-col ul li a:hover { color: var(--green); }
+        .footer-bottom { border-top: 1px solid #181818; padding-top: 28px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+        .footer-bottom p { font-size: 13px; color: #383838; }
+        .footer-bottom em { color: var(--green); font-style: normal; }
+        .payments { display: flex; gap: 8px; }
+        .pay-badge { background: #181818; border: 1px solid #222; border-radius: 3px; padding: 5px 12px; font-size: 10px; font-weight: 800; letter-spacing: 1px; color: #444; }
+
+        @media (max-width: 1100px) { .product-main { grid-template-columns: 1fr 1fr; } .buy-box-col { display: none; } }
+        @media (max-width: 780px) {
+            .nav-links { display: none; }
+            .product-main { grid-template-columns: 1fr; padding: 20px 4%; }
+            .info-col { border: none; padding: 0; }
+            .gallery-col { padding-right: 0; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
+            .footer-bottom { flex-direction: column; }
+            .rating-overview { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="announcement-bar">⚡ Launch Offer — Free Shipping on Every Order &nbsp;·&nbsp; Lifetime Guarantee on Cultivator</div>
+
+<nav id="main-nav">
+    <a href="index.html" class="nav-logo">LAWN<em>IX</em><sup style="font-size:10px;color:#555;margin-left:2px;">™</sup></a>
+    <ul class="nav-links">
+        <li class="nav-item has-dropdown">
+            <a href="collections.html">Products <span style="font-size:10px;">▾</span></a>
+            <div class="nav-dropdown">
+                <div class="dropdown-group-label">Lawn Leveler</div>
+                <a href="product-lx30.html" class="dropdown-link">30" Leveling Rake</a>
+                <a href="product-lx48.html" class="dropdown-link">48" Leveling Rake</a>
+                <div class="dropdown-divider"></div>
+                <div class="dropdown-group-label">Cultivator</div>
+                <a href="product-cultivator.html" class="dropdown-link active">Rotary Cultivator &amp; Hand Tiller</a>
+            </div>
+        </li>
+        <li><a href="index.html#features">Features</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="collections.html" class="nav-shop-btn">Shop Now</a></li>
+    </ul>
+    <div class="nav-right">
+        <button class="nav-icon" aria-label="Search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
+        <button class="nav-icon" aria-label="Cart"><svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></button>
+    </div>
+</nav>
+
+<div class="page-wrap">
+    <div class="breadcrumb-bar">
+        <div class="breadcrumb">
+            <a href="index.html">Home</a><span>/</span>
+            <a href="collections.html">Products</a><span>/</span>
+            <a href="collections.html">Cultivator</a><span>/</span>
+            Rotary Cultivator &amp; Hand Tiller RC-01
+        </div>
+    </div>
+
+    <div class="product-main">
+
+        <!-- LEFT: GALLERY -->
+        <div class="gallery-col">
+            <div class="gallery-layout">
+                <div class="thumb-strip">
+                    <div class="thumb-item active" onclick="switchImg(this)">
+                        <svg viewBox="0 0 72 72" fill="none">
+                            <rect width="72" height="72" fill="#1a1a1a"/>
+                            <rect x="30" y="4" width="12" height="10" rx="5" fill="#78BE20"/>
+                            <rect x="34" y="14" width="4" height="34" rx="2" fill="#c0c0c0"/>
+                            <rect x="20" y="36" width="32" height="4" rx="2" fill="#888"/>
+                            <!-- Star wheels -->
+                            <circle cx="27" cy="58" r="9" fill="none" stroke="#aaa" stroke-width="2"/>
+                            <polygon points="27,49 29,55 36,55 30,59 32,66 27,62 22,66 24,59 18,55 25,55" fill="#c0c0c0" transform="scale(0.9) translate(3,3)"/>
+                            <circle cx="45" cy="58" r="9" fill="none" stroke="#aaa" stroke-width="2"/>
+                            <polygon points="45,49 47,55 54,55 48,59 50,66 45,62 40,66 42,59 36,55 43,55" fill="#c0c0c0" transform="scale(0.9) translate(5,3)"/>
+                        </svg>
+                    </div>
+                    <div class="thumb-item" onclick="switchImg(this)">
+                        <svg viewBox="0 0 72 72" fill="none">
+                            <rect width="72" height="72" fill="#1a1a1a"/>
+                            <!-- Close up of tine wheels -->
+                            <circle cx="25" cy="44" r="18" fill="none" stroke="#555" stroke-width="1"/>
+                            <circle cx="47" cy="44" r="18" fill="none" stroke="#555" stroke-width="1"/>
+                            <g transform="translate(25,44)">
+                                <polygon points="0,-14 3,-4 14,-4 5,2 8,12 0,7 -8,12 -5,2 -14,-4 -3,-4" fill="#d0d0d0" opacity="0.9"/>
+                            </g>
+                            <g transform="translate(47,44)">
+                                <polygon points="0,-14 3,-4 14,-4 5,2 8,12 0,7 -8,12 -5,2 -14,-4 -3,-4" fill="#d0d0d0" opacity="0.9"/>
+                            </g>
+                            <circle cx="25" cy="44" r="3" fill="#78BE20"/>
+                            <circle cx="47" cy="44" r="3" fill="#78BE20"/>
+                            <text x="36" y="14" text-anchor="middle" fill="#78BE20" font-size="5" font-weight="bold">TINE DETAIL</text>
+                        </svg>
+                    </div>
+                    <div class="thumb-item" onclick="switchImg(this)">
+                        <svg viewBox="0 0 72 72" fill="none">
+                            <rect width="72" height="72" fill="#1a1a1a"/>
+                            <!-- T-handle close up -->
+                            <rect x="10" y="34" width="52" height="5" rx="2.5" fill="#78BE20"/>
+                            <rect x="34" y="14" width="4" height="22" rx="2" fill="#c0c0c0"/>
+                            <ellipse cx="10" cy="36" rx="6" ry="4" fill="#3d6a0d"/>
+                            <ellipse cx="62" cy="36" rx="6" ry="4" fill="#3d6a0d"/>
+                            <text x="36" y="60" text-anchor="middle" fill="#78BE20" font-size="5" font-weight="bold">T-HANDLE</text>
+                        </svg>
+                    </div>
+                    <div class="thumb-item" onclick="switchImg(this)">
+                        <svg viewBox="0 0 72 72" fill="none">
+                            <rect width="72" height="72" fill="#1a1a1a"/>
+                            <!-- In soil use -->
+                            <rect x="34" y="4" width="4" height="42" rx="2" fill="#c0c0c0"/>
+                            <rect x="18" y="35" width="36" height="4" rx="2" fill="#78BE20"/>
+                            <ellipse cx="36" cy="62" rx="28" ry="6" fill="#3d2000" opacity="0.7"/>
+                            <path d="M20 58 Q36 52 52 58" stroke="#5a3000" stroke-width="2" fill="none"/>
+                            <circle cx="27" cy="60" r="7" fill="none" stroke="#c0c0c0" stroke-width="1.5"/>
+                            <circle cx="45" cy="60" r="7" fill="none" stroke="#c0c0c0" stroke-width="1.5"/>
+                            <text x="36" y="22" text-anchor="middle" fill="#78BE20" font-size="5" font-weight="bold">IN SOIL</text>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- MAIN IMAGE - CULTIVATOR SVG -->
+                <div class="main-image-wrap">
+                    <div class="img-badge-sale">-25%</div>
+                    <div class="img-badge-lifetime">Lifetime Guarantee</div>
+                    <svg viewBox="0 0 300 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <radialGradient id="bgGradC" cx="50%" cy="50%" r="60%">
+                                <stop offset="0%" stop-color="#1a1f10"/>
+                                <stop offset="100%" stop-color="#0f1008"/>
+                            </radialGradient>
+                            <linearGradient id="poleGradC" x1="0" y1="0" x2="1" y2="0">
+                                <stop offset="0%" stop-color="#777"/>
+                                <stop offset="35%" stop-color="#d8d8d8"/>
+                                <stop offset="65%" stop-color="#c8c8c8"/>
+                                <stop offset="100%" stop-color="#666"/>
+                            </linearGradient>
+                            <linearGradient id="gripGradC" x1="0" y1="0" x2="1" y2="0">
+                                <stop offset="0%" stop-color="#3d6a0d"/>
+                                <stop offset="30%" stop-color="#78BE20"/>
+                                <stop offset="70%" stop-color="#6aaa1a"/>
+                                <stop offset="100%" stop-color="#3d6a0d"/>
+                            </linearGradient>
+                            <linearGradient id="tbarGradC" x1="0" y1="0" x2="1" y2="0">
+                                <stop offset="0%" stop-color="#555"/>
+                                <stop offset="30%" stop-color="#bbb"/>
+                                <stop offset="70%" stop-color="#aaa"/>
+                                <stop offset="100%" stop-color="#555"/>
+                            </linearGradient>
+                            <radialGradient id="wheelGrad1" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" stop-color="#e0e0e0"/>
+                                <stop offset="60%" stop-color="#c0c0c0"/>
+                                <stop offset="100%" stop-color="#888"/>
+                            </radialGradient>
+                            <radialGradient id="wheelGrad2" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" stop-color="#e0e0e0"/>
+                                <stop offset="60%" stop-color="#c0c0c0"/>
+                                <stop offset="100%" stop-color="#888"/>
+                            </radialGradient>
+                            <filter id="glowC">
+                                <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                                <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                            </filter>
+                            <filter id="wheelShadow">
+                                <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="rgba(0,0,0,0.5)"/>
+                            </filter>
+                        </defs>
+
+                        <!-- Background -->
+                        <rect width="300" height="500" fill="url(#bgGradC)" rx="10"/>
+                        <!-- Grid -->
+                        <line x1="0" y1="100" x2="300" y2="100" stroke="rgba(120,190,32,0.04)" stroke-width="1"/>
+                        <line x1="0" y1="200" x2="300" y2="200" stroke="rgba(120,190,32,0.04)" stroke-width="1"/>
+                        <line x1="0" y1="300" x2="300" y2="300" stroke="rgba(120,190,32,0.04)" stroke-width="1"/>
+                        <line x1="0" y1="400" x2="300" y2="400" stroke="rgba(120,190,32,0.04)" stroke-width="1"/>
+                        <line x1="75" y1="0" x2="75" y2="500" stroke="rgba(120,190,32,0.04)" stroke-width="1"/>
+                        <line x1="150" y1="0" x2="150" y2="500" stroke="rgba(120,190,32,0.04)" stroke-width="1"/>
+                        <line x1="225" y1="0" x2="225" y2="500" stroke="rgba(120,190,32,0.04)" stroke-width="1"/>
+
+                        <!-- Brand watermark -->
+                        <text x="150" y="16" text-anchor="middle" fill="rgba(120,190,32,0.06)" font-size="24" font-weight="900" font-family="Barlow Condensed, sans-serif" letter-spacing="6">LAWNIX</text>
+
+                        <!-- Glow behind T-handle -->
+                        <ellipse cx="150" cy="50" rx="80" ry="22" fill="rgba(120,190,32,0.1)" filter="url(#glowC)"/>
+
+                        <!-- T-HANDLE -->
+                        <!-- Left grip -->
+                        <rect x="46" y="38" width="52" height="20" rx="10" fill="url(#gripGradC)"/>
+                        <ellipse cx="46" cy="48" rx="7" ry="10" fill="#3d6a0d"/>
+                        <rect x="50" y="40" width="44" height="16" rx="8" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+                        <!-- Left grip texture -->
+                        <line x1="58" y1="40" x2="58" y2="56" stroke="rgba(0,0,0,0.2)" stroke-width="1.5"/>
+                        <line x1="65" y1="40" x2="65" y2="56" stroke="rgba(0,0,0,0.2)" stroke-width="1.5"/>
+                        <line x1="72" y1="40" x2="72" y2="56" stroke="rgba(0,0,0,0.2)" stroke-width="1.5"/>
+                        <line x1="79" y1="40" x2="79" y2="56" stroke="rgba(0,0,0,0.2)" stroke-width="1.5"/>
+                        <line x1="86" y1="40" x2="86" y2="56" stroke="rgba(0,0,0,0.2)" stroke-width="1.5"/>
+
+                        <!-- Right grip -->
+                        <rect x="202" y="38" width="52" height="20" rx="10" fill="url(#gripGradC)"/>
+                        <ellipse cx="254" cy="48" rx="7" ry="10" fill="#3d6a0d"/>
+                        <rect x="206" y="40" width="44" height="16" rx="8" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+                        <!-- Right grip texture -->
+                        <line x1="214" y1="40" x2="214" y2="56" stroke="rgba(0,0,0,0.2)" stroke-width="1.5"/>
+                        <line x1="221" y1="40" x2="221" y2="56" stroke="rgba(0,0,0,0.2)" stroke-width="1.5"/>
+                        <line x1="228" y1="40" x2="228" y2="56" stroke="rgba(0,0,0,0.2)" stroke-width="1.5"/>
+                        <line x1="235" y1="40" x2="235" y2="56" stroke="rgba(0,0,0,0.2)" stroke-width="1.5"/>
+                        <line x1="242" y1="40" x2="242" y2="56" stroke="rgba(0,0,0,0.2)" stroke-width="1.5"/>
+
+                        <!-- T-bar connector -->
+                        <rect x="97" y="43" width="106" height="10" rx="5" fill="url(#tbarGradC)"/>
+                        <rect x="100" y="45" width="100" height="4" rx="2" fill="rgba(255,255,255,0.1)"/>
+
+                        <!-- Center collar at T junction -->
+                        <rect x="143" y="38" width="14" height="20" rx="3" fill="#999"/>
+                        <rect x="145" y="40" width="10" height="16" rx="2" fill="#bbb"/>
+
+                        <!-- MAIN POLE -->
+                        <rect x="143" y="58" width="14" height="272" fill="url(#poleGradC)"/>
+                        <rect x="146" y="58" width="4" height="272" fill="rgba(255,255,255,0.1)"/>
+
+                        <!-- Mid-pole adjuster collar -->
+                        <rect x="140" y="180" width="20" height="16" rx="3" fill="#aaa"/>
+                        <rect x="140" y="184" width="20" height="4" fill="#ccc"/>
+                        <rect x="140" y="188" width="20" height="4" fill="#999"/>
+
+                        <!-- Lower bracket / fork assembly -->
+                        <rect x="140" y="315" width="20" height="12" rx="3" fill="#aaa"/>
+                        <!-- Fork arms going down and outward -->
+                        <path d="M144 327 L106 368" stroke="#aaa" stroke-width="8" stroke-linecap="round"/>
+                        <path d="M156 327 L194 368" stroke="#aaa" stroke-width="8" stroke-linecap="round"/>
+                        <!-- Fork arm highlight -->
+                        <path d="M144 327 L106 368" stroke="rgba(255,255,255,0.15)" stroke-width="3" stroke-linecap="round"/>
+                        <path d="M156 327 L194 368" stroke="rgba(255,255,255,0.15)" stroke-width="3" stroke-linecap="round"/>
+
+                        <!-- Axle bar -->
+                        <rect x="96" y="362" width="108" height="10" rx="5" fill="url(#tbarGradC)"/>
+                        <rect x="100" y="364" width="100" height="4" rx="2" fill="rgba(255,255,255,0.1)"/>
+
+                        <!-- WHEEL 1 (left) - 8-pointed star tine wheel -->
+                        <g transform="translate(107, 390)" filter="url(#wheelShadow)">
+                            <!-- Outer ring -->
+                            <circle cx="0" cy="0" r="36" fill="none" stroke="#666" stroke-width="2"/>
+                            <!-- Hub -->
+                            <circle cx="0" cy="0" r="8" fill="url(#wheelGrad1)"/>
+                            <circle cx="0" cy="0" r="5" fill="#78BE20"/>
+                            <!-- 8 tine spokes/blades -->
+                            <polygon points="0,-36 5,-12 0,-6 -5,-12" fill="#d0d0d0"/>
+                            <polygon points="25.5,-25.5 8,-8 4,-12 14,-22" fill="#d0d0d0"/>
+                            <polygon points="36,0 12,-5 6,0 12,5" fill="#d0d0d0"/>
+                            <polygon points="25.5,25.5 8,8 12,4 22,14" fill="#d0d0d0"/>
+                            <polygon points="0,36 5,12 0,6 -5,12" fill="#d0d0d0"/>
+                            <polygon points="-25.5,25.5 -8,8 -4,12 -14,22" fill="#d0d0d0"/>
+                            <polygon points="-36,0 -12,5 -6,0 -12,-5" fill="#d0d0d0"/>
+                            <polygon points="-25.5,-25.5 -8,-8 -12,-4 -22,-14" fill="#d0d0d0"/>
+                            <!-- Tine highlights -->
+                            <polygon points="0,-36 2,-20 0,-6 -2,-20" fill="rgba(255,255,255,0.25)"/>
+                            <polygon points="36,0 20,-2 6,0 20,2" fill="rgba(255,255,255,0.25)"/>
+                            <polygon points="0,36 2,20 0,6 -2,20" fill="rgba(255,255,255,0.25)"/>
+                            <polygon points="-36,0 -20,2 -6,0 -20,-2" fill="rgba(255,255,255,0.25)"/>
+                            <!-- Inner circle detail -->
+                            <circle cx="0" cy="0" r="12" fill="none" stroke="#888" stroke-width="1"/>
+                        </g>
+
+                        <!-- WHEEL 2 (right) - 8-pointed star tine wheel -->
+                        <g transform="translate(193, 390)" filter="url(#wheelShadow)">
+                            <circle cx="0" cy="0" r="36" fill="none" stroke="#666" stroke-width="2"/>
+                            <circle cx="0" cy="0" r="8" fill="url(#wheelGrad2)"/>
+                            <circle cx="0" cy="0" r="5" fill="#78BE20"/>
+                            <polygon points="0,-36 5,-12 0,-6 -5,-12" fill="#d0d0d0"/>
+                            <polygon points="25.5,-25.5 8,-8 4,-12 14,-22" fill="#d0d0d0"/>
+                            <polygon points="36,0 12,-5 6,0 12,5" fill="#d0d0d0"/>
+                            <polygon points="25.5,25.5 8,8 12,4 22,14" fill="#d0d0d0"/>
+                            <polygon points="0,36 5,12 0,6 -5,12" fill="#d0d0d0"/>
+                            <polygon points="-25.5,25.5 -8,8 -4,12 -14,22" fill="#d0d0d0"/>
+                            <polygon points="-36,0 -12,5 -6,0 -12,-5" fill="#d0d0d0"/>
+                            <polygon points="-25.5,-25.5 -8,-8 -12,-4 -22,-14" fill="#d0d0d0"/>
+                            <polygon points="0,-36 2,-20 0,-6 -2,-20" fill="rgba(255,255,255,0.25)"/>
+                            <polygon points="36,0 20,-2 6,0 20,2" fill="rgba(255,255,255,0.25)"/>
+                            <polygon points="0,36 2,20 0,6 -2,20" fill="rgba(255,255,255,0.25)"/>
+                            <polygon points="-36,0 -20,2 -6,0 -20,-2" fill="rgba(255,255,255,0.25)"/>
+                            <circle cx="0" cy="0" r="12" fill="none" stroke="#888" stroke-width="1"/>
+                        </g>
+
+                        <!-- Ground line / soil hint -->
+                        <path d="M60 440 Q150 434 240 440" stroke="rgba(120,190,32,0.15)" stroke-width="2" fill="none"/>
+                        <ellipse cx="150" cy="444" rx="90" ry="8" fill="rgba(78,50,10,0.25)"/>
+
+                        <!-- LAWNIX branding on pole -->
+                        <text x="153" y="260" fill="rgba(120,190,32,0.5)" font-size="9" font-weight="bold" font-family="Barlow Condensed, sans-serif" letter-spacing="2" transform="rotate(90, 153, 260)">LAWNIX™</text>
+
+                        <!-- Model / size label -->
+                        <text x="150" y="486" text-anchor="middle" fill="#555" font-size="10" font-family="Barlow Condensed, sans-serif" letter-spacing="3">RC-01 · 2-IN-1 ROTARY CULTIVATOR</text>
+
+                        <!-- "2-in-1" badge -->
+                        <rect x="114" y="148" width="72" height="26" rx="4" fill="rgba(120,190,32,0.1)" stroke="rgba(120,190,32,0.3)" stroke-width="1"/>
+                        <text x="150" y="165" text-anchor="middle" fill="#78BE20" font-size="11" font-weight="bold" font-family="Barlow Condensed, sans-serif" letter-spacing="2">2-IN-1 TOOL</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- MIDDLE: PRODUCT INFO -->
+        <div class="info-col">
+            <a href="collections.html" class="brand-link">Visit the Lawnix™ Store</a>
+            <h1 class="product-title">Rotary Cultivator &amp; Hand Tiller - 2-in-1 | Aerate, Weed, Cultivate, Plant, Reseed | Lawn Reseeding Garden Tool, Garden Soil Loosener</h1>
+
+            <div class="rating-row">
+                <span class="stars-gold">★★★★½</span>
+                <span class="rating-score">4.6</span>
+                <a href="#reviews" class="rating-link">214 ratings</a>
+                <span class="rating-sep">|</span>
+                <a href="#qa" class="rating-link">58 answered questions</a>
+            </div>
+
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap;">
+                <span style="font-size:12px;font-weight:700;color:#888;letter-spacing:1px;text-transform:uppercase;">Brand:</span>
+                <a href="collections.html" style="color:var(--green);text-decoration:none;font-size:13px;font-weight:600;">LAWNIX™</a>
+                <span style="color:#444;">|</span>
+                <span style="font-size:12px;color:#777;">SKU: RC-01</span>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="price-main">
+                <div class="price-label">Price:</div>
+                <div class="price-now"><sup>$</sup>39<span style="font-size:24px;">.99</span></div>
+                <div class="price-row2">
+                    <span class="price-was-label">Was:</span>
+                    <span class="price-was">$52.99</span>
+                    <span class="price-save-badge">Save $13.00 (25%)</span>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="about-section">
+                <div class="about-heading">About this item</div>
+                <ul class="bullet-list">
+                    <li><strong>THE KEY TO HEALTHY SOIL &gt;&gt;</strong> Use this handy 2-in-1 cultivator tool to aerate, prepare and maintain soil areas for planting, reseeding grass, or preventing weed growth. With its rotating blade wheels, this rotary tiller effortlessly breaks apart soil - it combines the tasks of a hoe and spade in one!</li>
+                    <li><strong>PROFESSIONAL GRADE &gt;&gt;</strong> This is one of the world's top selling rotary cultivators! The design is tried and true - the performance is unmatched!</li>
+                    <li><strong>DURABILITY AT ITS BEST &gt;&gt;</strong> Unlike the many knockoffs out there, premium Lawnix cultivator and tilling tools are manufactured from the highest quality materials and built for decades of reliable use.</li>
+                    <li><strong>SATISFACTION GUARANTEED &gt;&gt;</strong> Designed and assembled in the USA. Comes with the legendary Lawnix "no hassle" lifetime guarantee against defects in materials and workmanship.</li>
+                    <li><strong>REAL CUSTOMER SERVICE &gt;&gt;</strong> If you have any questions, suggestions, or concerns, our friendly US-based customer service team is here to help.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- RIGHT: BUY BOX -->
+        <div class="buy-box-col">
+            <div class="buy-box">
+                <div class="buy-price"><sup>$</sup>39<span style="font-size:18px;">.99</span></div>
+                <div class="buy-delivery"><strong>FREE delivery</strong> Tomorrow, May 18</div>
+                <div class="buy-delivery" style="font-size:12px;color:#777;">Order within <strong style="color:var(--gold);">6 hrs 22 mins</strong></div>
+                <div class="buy-stock">✓ In Stock</div>
+                <div class="buy-divider"></div>
+                <div class="lifetime-badge">
+                    <span>🛡️</span>
+                    <span>Lifetime "No Hassle" Guarantee</span>
+                </div>
+                <div class="qty-label-sm">Quantity:</div>
+                <select class="qty-select">
+                    <option>1</option><option>2</option><option>3</option><option>4</option>
+                    <option>5</option><option>6</option><option>7</option><option>8</option>
+                    <option>9</option><option>10</option>
+                </select>
+                <button class="btn-add-cart" onclick="addToCart(this)">Add to Cart</button>
+                <button class="btn-buy-now">Buy Now</button>
+                <div class="secure-line">🔒 Secure transaction</div>
+                <div class="buy-divider"></div>
+                <div class="buy-meta">
+                    <div class="buy-meta-row"><strong>Ships from</strong><span>Lawnix™</span></div>
+                    <div class="buy-meta-row"><strong>Sold by</strong><span>Lawnix™ Official Store</span></div>
+                    <div class="buy-meta-row"><strong>Returns</strong><span>Free Returns</span></div>
+                    <div class="buy-meta-row"><strong>Warranty</strong><span>Lifetime Guarantee</span></div>
+                    <div class="buy-meta-row"><strong>Assembled</strong><span>USA</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BELOW FOLD -->
+    <div class="below-fold">
+
+        <div class="section-block" id="about">
+            <div class="section-block-title">About This Item</div>
+            <p class="about-desc">The LAWNIX™ RC-01 Rotary Cultivator is the ultimate 2-in-1 garden tool — combining the functionality of a hoe, spade, and aerator in a single ergonomic design. The two rotating star-shaped tine wheels glide through soil effortlessly, breaking up compaction, clearing weeds, and preparing the perfect seedbed for your lawn or garden.</p>
+            <ul class="about-bullets">
+                <li>
+                    <span class="bullet-icon">1</span>
+                    <span><strong>THE KEY TO HEALTHY SOIL</strong> – Use this handy 2-in-1 cultivator tool to aerate, prepare and maintain soil areas for planting, reseeding grass, or preventing weed growth. With its rotating blade wheels, this rotary tiller effortlessly breaks apart soil — it combines the tasks of a hoe and spade in one!</span>
+                </li>
+                <li>
+                    <span class="bullet-icon">2</span>
+                    <span><strong>PROFESSIONAL GRADE</strong> – This is one of the world's top selling rotary cultivators! The design is tried and true — the performance is unmatched. Used by professionals and home gardeners across the world who demand consistent, reliable results.</span>
+                </li>
+                <li>
+                    <span class="bullet-icon">3</span>
+                    <span><strong>DURABILITY AT ITS BEST</strong> – Unlike the many knockoffs out there, premium Lawnix cultivator and tilling tools are manufactured from the highest quality materials and built for decades of reliable use. The tine wheels are engineered to maintain their shape and sharpness through thousands of uses.</span>
+                </li>
+                <li>
+                    <span class="bullet-icon">4</span>
+                    <span><strong>SATISFACTION GUARANTEED</strong> – Designed and assembled in the USA. Comes with the legendary Lawnix "no hassle" lifetime guarantee against defects in materials and workmanship. We stand behind every single product we make.</span>
+                </li>
+                <li>
+                    <span class="bullet-icon">5</span>
+                    <span><strong>REAL CUSTOMER SERVICE</strong> – If you have any questions, suggestions, or concerns, our friendly US-based customer service team is here to help. Reach us any time — we respond within 1 business day, guaranteed.</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="specs">
+            <div class="section-block-title">Product Information</div>
+            <table class="specs-table">
+                <tr><td>Type</td><td>2-in-1 Rotary Cultivator</td></tr>
+                <tr><td>Material</td><td>Premium Steel</td></tr>
+                <tr><td>Working Width</td><td>7 inches</td></tr>
+                <tr><td>Wheel Count</td><td>2 rotating tine wheels</td></tr>
+                <tr><td>Handle</td><td>Adjustable ergonomic T-bar handle</td></tr>
+                <tr><td>Weight</td><td>3.1 lbs</td></tr>
+                <tr><td>Warranty</td><td>Lifetime (No Hassle Guarantee)</td></tr>
+                <tr><td>Item Model Number</td><td>RC-01</td></tr>
+                <tr><td>Assembled In</td><td>USA</td></tr>
+                <tr><td>Best For</td><td>Aerating, weeding, cultivating, planting, reseeding</td></tr>
+                <tr><td>Grip Type</td><td>Ergonomic dual-grip T-handle, green non-slip</td></tr>
+            </table>
+        </div>
+
+        <div class="section-block" id="reviews">
+            <div class="section-block-title">Customer Reviews</div>
+
+            <div class="rating-overview">
+                <div class="rating-big">
+                    <div class="num">4.6</div>
+                    <span class="stars-lg">★★★★½</span>
+                    <div class="count">out of 5</div>
+                    <div style="font-size:12px;color:#777;margin-top:6px;">214 global ratings</div>
+                </div>
+                <div class="rating-bars">
+                    <div class="bar-row">
+                        <span class="bar-label">5★</span>
+                        <div class="bar-track"><div class="bar-fill" style="width:65%"></div></div>
+                        <span class="bar-pct">65%</span>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">4★</span>
+                        <div class="bar-track"><div class="bar-fill" style="width:22%;background:#a0d050"></div></div>
+                        <span class="bar-pct">22%</span>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">3★</span>
+                        <div class="bar-track"><div class="bar-fill" style="width:8%;background:#c8e070"></div></div>
+                        <span class="bar-pct">8%</span>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">2★</span>
+                        <div class="bar-track"><div class="bar-fill" style="width:3%;background:#e0b040"></div></div>
+                        <span class="bar-pct">3%</span>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">1★</span>
+                        <div class="bar-track"><div class="bar-fill" style="width:2%;background:#e05040"></div></div>
+                        <span class="bar-pct">2%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="review-cards">
+                <div class="review-card">
+                    <div class="review-top">
+                        <div class="reviewer-info">
+                            <div class="reviewer-avatar">MP</div>
+                            <div>
+                                <div class="reviewer-name">Maria P.</div>
+                                <div class="reviewer-loc">Seattle, WA</div>
+                            </div>
+                        </div>
+                        <span class="verified-badge">✓ Verified Purchase</span>
+                    </div>
+                    <div class="review-stars-date">
+                        <span class="review-stars">★★★★★</span>
+                        <span class="review-date">Reviewed on May 1, 2026</span>
+                    </div>
+                    <div class="review-title">The only garden tool I've used this spring — replaces 3 tools</div>
+                    <div class="review-body">I was skeptical about a "2-in-1" claim but this thing genuinely does replace my hoe, hand aerator, and small spade. The wheels roll through my raised garden beds effortlessly. I've used it for aerating before seeding, breaking up weeds, and mixing in compost. Lightweight too — my back doesn't hurt after a full morning of gardening anymore. The lifetime guarantee is just icing on the cake.</div>
+                    <div class="helpful-row">
+                        <span>Was this helpful?</span>
+                        <button class="helpful-btn" onclick="toggleHelpful(this, 'r1-yes')">Yes (38)</button>
+                        <button class="helpful-btn" onclick="toggleHelpful(this, 'r1-no')">No (1)</button>
+                        <span style="margin-left:auto;font-size:12px;color:#555;">Report</span>
+                    </div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-top">
+                        <div class="reviewer-info">
+                            <div class="reviewer-avatar">HC</div>
+                            <div>
+                                <div class="reviewer-name">Henry C.</div>
+                                <div class="reviewer-loc">Portland, OR</div>
+                            </div>
+                        </div>
+                        <span class="verified-badge">✓ Verified Purchase</span>
+                    </div>
+                    <div class="review-stars-date">
+                        <span class="review-stars">★★★★★</span>
+                        <span class="review-date">Reviewed on April 15, 2026</span>
+                    </div>
+                    <div class="review-title">Perfect for reseeding bare patches in my lawn</div>
+                    <div class="review-body">I had several dead patches in my lawn from last summer's heat. Used the RC-01 to break up the compacted soil, then scattered seed, then lightly worked the seeds into the soil — all with the same tool. Within 3 weeks I had grass germinating evenly across every patch. This thing is incredibly efficient. The T-handle design makes it easy to control pressure and direction.</div>
+                    <div class="helpful-row">
+                        <span>Was this helpful?</span>
+                        <button class="helpful-btn" onclick="toggleHelpful(this, 'r2-yes')">Yes (27)</button>
+                        <button class="helpful-btn" onclick="toggleHelpful(this, 'r2-no')">No (0)</button>
+                        <span style="margin-left:auto;font-size:12px;color:#555;">Report</span>
+                    </div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-top">
+                        <div class="reviewer-info">
+                            <div class="reviewer-avatar">AK</div>
+                            <div>
+                                <div class="reviewer-name">Amy K.</div>
+                                <div class="reviewer-loc">Minneapolis, MN</div>
+                            </div>
+                        </div>
+                        <span class="verified-badge">✓ Verified Purchase</span>
+                    </div>
+                    <div class="review-stars-date">
+                        <span class="review-stars">★★★★☆</span>
+                        <span class="review-date">Reviewed on May 9, 2026</span>
+                    </div>
+                    <div class="review-title">Excellent tool, takes a little technique to master</div>
+                    <div class="review-body">Really good cultivator overall. Took me a couple passes to get the feel for the right angle and pressure. Once I figured it out, it was very effective at breaking up my clay-heavy soil. The wheels stayed sharp after multiple uses. Took off one star only because the adjustment mechanism for the handle could be a bit more intuitive, but the tool itself performs great. Would buy again.</div>
+                    <div class="helpful-row">
+                        <span>Was this helpful?</span>
+                        <button class="helpful-btn" onclick="toggleHelpful(this, 'r3-yes')">Yes (16)</button>
+                        <button class="helpful-btn" onclick="toggleHelpful(this, 'r3-no')">No (3)</button>
+                        <span style="margin-left:auto;font-size:12px;color:#555;">Report</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-block" id="qa">
+            <div class="section-block-title">Questions &amp; Answers</div>
+            <p style="font-size:14px;color:#777;margin-bottom:24px;">58 questions answered about this product</p>
+
+            <div class="qa-item">
+                <div class="qa-q">
+                    <span class="qa-badge-q">Q</span>
+                    <span class="qa-text-q">Will this work on hard, compact clay soil or does it need to be loosened first?</span>
+                </div>
+                <div class="qa-a">
+                    <span class="qa-badge-a">A</span>
+                    <span class="qa-text-a">The RC-01 works best on moist or moderately compacted soil. For very hard, dry clay, we recommend watering the area the day before to soften the surface. The tine wheels will then work through it much more effectively. Many customers in clay-heavy areas lightly water first and have great results. — <em style="color:var(--green);">Lawnix™ Support</em></span>
+                </div>
+                <div class="qa-helpful">
+                    Helpful?
+                    <button class="helpful-btn" onclick="toggleHelpful(this, 'qa1-yes')">Yes (22)</button>
+                    <button class="helpful-btn" onclick="toggleHelpful(this, 'qa1-no')">No (1)</button>
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="qa-q">
+                    <span class="qa-badge-q">Q</span>
+                    <span class="qa-text-q">What exactly does the "lifetime guarantee" cover? Is it the full tool or just specific parts?</span>
+                </div>
+                <div class="qa-a">
+                    <span class="qa-badge-a">A</span>
+                    <span class="qa-text-a">Our "no hassle" lifetime guarantee covers defects in materials and workmanship for the life of the product. This includes the tine wheels, handle, and all mechanical components. Normal wear from heavy use is expected, but if anything fails due to a manufacturing defect, we replace it — no forms, no hassle. — <em style="color:var(--green);">Lawnix™ Support</em></span>
+                </div>
+                <div class="qa-helpful">
+                    Helpful?
+                    <button class="helpful-btn" onclick="toggleHelpful(this, 'qa2-yes')">Yes (31)</button>
+                    <button class="helpful-btn" onclick="toggleHelpful(this, 'qa2-no')">No (0)</button>
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="qa-q">
+                    <span class="qa-badge-q">Q</span>
+                    <span class="qa-text-q">Can children or elderly users operate this comfortably? Is it heavy or hard to push?</span>
+                </div>
+                <div class="qa-a">
+                    <span class="qa-badge-a">A</span>
+                    <span class="qa-text-a">At just 3.1 lbs, the RC-01 is one of the lightest tools in its category. The ergonomic T-handle distributes force across both hands, reducing strain considerably. Many of our customers are older adults who specifically chose it for its lightweight design and comfortable grip. It's suitable for most users. — <em style="color:var(--green);">Verified Buyer, Sandra T.</em></span>
+                </div>
+                <div class="qa-helpful">
+                    Helpful?
+                    <button class="helpful-btn" onclick="toggleHelpful(this, 'qa3-yes')">Yes (18)</button>
+                    <button class="helpful-btn" onclick="toggleHelpful(this, 'qa3-no')">No (0)</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<footer>
+    <div class="footer-grid">
+        <div class="footer-brand">
+            <div class="footer-logo">LAWN<em>IX</em>™</div>
+            <div class="footer-tagline">Power · Precision · Performance</div>
+            <p>Professional-grade lawn tools built for those who take their lawn seriously. No shortcuts. No compromises.</p>
+            <div class="socials">
+                <a href="#" class="social-btn">f</a>
+                <a href="#" class="social-btn">ig</a>
+                <a href="#" class="social-btn">yt</a>
+                <a href="#" class="social-btn">in</a>
+            </div>
+        </div>
+        <div class="footer-col"><h5>Products</h5><ul>
+            <li><a href="product-lx30.html">30" Leveling Rake</a></li>
+            <li><a href="product-lx48.html">48" Leveling Rake</a></li>
+            <li><a href="product-cultivator.html">Rotary Cultivator</a></li>
+            <li><a href="collections.html">All Products</a></li>
+        </ul></div>
+        <div class="footer-col"><h5>Support</h5><ul>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Warranty</a></li>
+            <li><a href="#">Returns</a></li>
+            <li><a href="#">Contact Us</a></li>
+        </ul></div>
+        <div class="footer-col"><h5>Company</h5><ul>
+            <li><a href="about.html">About Lawnix</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Wholesale</a></li>
+            <li><a href="#">Careers</a></li>
+        </ul></div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2026 <em>Lawnix™</em>. All Rights Reserved. &nbsp;·&nbsp; Power. Precision. Performance.</p>
+        <div class="payments">
+            <span class="pay-badge">VISA</span><span class="pay-badge">MC</span>
+            <span class="pay-badge">AMEX</span><span class="pay-badge">PAYPAL</span><span class="pay-badge">SHOP PAY</span>
+        </div>
+    </div>
+</footer>
+
+<script>
+    function switchImg(thumb) {
+        document.querySelectorAll('.thumb-item').forEach(t => t.classList.remove('active'));
+        thumb.classList.add('active');
+    }
+    function addToCart(btn) {
+        const orig = btn.textContent;
+        btn.textContent = '✓ Added!';
+        btn.style.background = '#5a9018';
+        setTimeout(() => { btn.textContent = orig; btn.style.background = ''; }, 1600);
+    }
+    function toggleHelpful(btn, key) {
+        const stored = JSON.parse(localStorage.getItem('lawnix_helpful_rc01') || '{}');
+        const isYes = key.endsWith('-yes');
+        if (stored[key]) {
+            delete stored[key];
+            btn.classList.remove('voted');
+            const m = btn.textContent.match(/(\d+)/);
+            if (m) btn.textContent = btn.textContent.replace(/\d+/, Math.max(0, parseInt(m[1]) - 1));
+        } else {
+            const oppKey = isYes ? key.replace('-yes', '-no') : key.replace('-no', '-yes');
+            if (stored[oppKey]) {
+                delete stored[oppKey];
+                btn.parentElement.querySelectorAll('.helpful-btn').forEach(s => {
+                    if (s !== btn && s.classList.contains('voted')) {
+                        s.classList.remove('voted');
+                        const m = s.textContent.match(/(\d+)/);
+                        if (m) s.textContent = s.textContent.replace(/\d+/, Math.max(0, parseInt(m[1]) - 1));
+                    }
+                });
+            }
+            stored[key] = true;
+            btn.classList.add('voted');
+            const m = btn.textContent.match(/(\d+)/);
+            if (m) btn.textContent = btn.textContent.replace(/\d+/, parseInt(m[1]) + 1);
+        }
+        localStorage.setItem('lawnix_helpful_rc01', JSON.stringify(stored));
+    }
+    window.addEventListener('scroll', () => {
+        const nav = document.getElementById('main-nav');
+        if (nav) nav.style.boxShadow = window.scrollY > 40 ? '0 4px 30px rgba(0,0,0,0.6)' : 'none';
+    });
+</script>
+</body>
+</html>

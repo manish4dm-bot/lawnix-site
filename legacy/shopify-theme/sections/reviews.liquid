@@ -1,0 +1,64 @@
+<section class="reviews-section" id="reviews">
+  <div class="reviews-header">
+    <div>
+      <div class="section-eyebrow">{{ section.settings.eyebrow }}</div>
+      <h2 class="section-heading">{{ section.settings.heading | newline_to_br }}</h2>
+    </div>
+    <div class="rating-summary" style="text-align:right;">
+      <div class="big-rating">{{ section.settings.avg_rating }}</div>
+      <span class="stars">★★★★★</span>
+      <span style="font-size:13px;color:#666;">Based on {{ section.settings.review_count }} verified reviews</span>
+    </div>
+  </div>
+
+  <div class="reviews-grid">
+    {% for block in section.blocks %}
+      <div class="review-card reveal" {{ block.shopify_attributes }}>
+        <span class="review-verified">✓ Verified</span>
+        <div class="review-stars">{{ block.settings.stars }}</div>
+        <p class="review-text">"{{ block.settings.review_text }}"</p>
+        <div class="review-author">
+          <div class="review-avatar">{{ block.settings.name | slice: 0, 1 }}{{ block.settings.name | split: ' ' | last | slice: 0, 1 }}</div>
+          <div>
+            <div class="review-name">{{ block.settings.name }}</div>
+            <div class="review-loc">{{ block.settings.location }}</div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Reviews",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Customer Reviews" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Real Lawns.\nReal Results." },
+    { "type": "text", "id": "avg_rating", "label": "Average Rating", "default": "4.9" },
+    { "type": "text", "id": "review_count", "label": "Review Count", "default": "127" }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "text", "id": "stars", "label": "Stars", "default": "★★★★★" },
+        { "type": "textarea", "id": "review_text", "label": "Review Text", "default": "This rake transformed my backyard. Spread 2 tons of sand in a single afternoon — it's an absolute beast." },
+        { "type": "text", "id": "name", "label": "Reviewer Name", "default": "James M." },
+        { "type": "text", "id": "location", "label": "Location", "default": "Austin, TX" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Reviews",
+      "blocks": [
+        { "type": "review", "settings": { "review_text": "This rake transformed my backyard. Spread 2 tons of sand in a single afternoon — it's an absolute beast. The steel quality is obvious the moment you pick it up.", "name": "James M.", "location": "Austin, TX" } },
+        { "type": "review", "settings": { "review_text": "I've tried 4 leveling rakes over the years. This one is in a completely different league — the tines don't flex, the handle is solid, and the results are flawless.", "name": "Sarah R.", "location": "Denver, CO" } },
+        { "type": "review", "settings": { "review_text": "Professional landscaper — bought 6 for my crew. Incredibly durable, efficient, and the warranty sealed the deal. Lawnix has a permanent customer.", "name": "Derek K.", "location": "Tampa, FL" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

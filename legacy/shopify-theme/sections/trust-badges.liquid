@@ -1,0 +1,41 @@
+<section class="trust-section">
+  <div class="trust-grid">
+    {% for block in section.blocks %}
+      <div class="trust-badge-card" {{ block.shopify_attributes }}>
+        <div class="tbadge-icon">{{ block.settings.icon }}</div>
+        <div class="tbadge-title">{{ block.settings.title }}</div>
+        <div class="tbadge-desc">{{ block.settings.description }}</div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Trust Badges",
+  "blocks": [
+    {
+      "type": "badge",
+      "name": "Badge",
+      "settings": [
+        { "type": "text", "id": "icon", "label": "Icon (emoji)", "default": "🛡️" },
+        { "type": "text", "id": "title", "label": "Title", "default": "5-Year Warranty" },
+        { "type": "text", "id": "description", "label": "Description", "default": "Every product backed for 5 years — no questions asked" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Trust Badges",
+      "blocks": [
+        { "type": "badge", "settings": { "icon": "🚚", "title": "Free Shipping", "description": "Free on every order — always, no minimum" } },
+        { "type": "badge", "settings": { "icon": "↩️", "title": "30-Day Returns", "description": "Hassle-free returns within 30 days, no questions" } },
+        { "type": "badge", "settings": { "icon": "🛡️", "title": "5-Year Warranty", "description": "Full coverage warranty on all Lawnix products" } },
+        { "type": "badge", "settings": { "icon": "🔒", "title": "Secure Checkout", "description": "256-bit SSL encryption on every transaction" } },
+        { "type": "badge", "settings": { "icon": "⭐", "title": "4.9 Star Rating", "description": "127+ verified 5-star reviews and counting" } },
+        { "type": "badge", "settings": { "icon": "🇺🇸", "title": "US Designed", "description": "Engineered by American lawn care professionals" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

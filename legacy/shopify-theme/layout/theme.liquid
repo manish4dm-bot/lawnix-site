@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    {%- if template == 'index' -%}LAWNIX™ | Power. Precision. Performance.
+    {%- elsif page_title -%}{{ page_title }} | LAWNIX™
+    {%- else -%}LAWNIX™{%- endif -%}
+  </title>
+  <meta name="description" content="{{ page_description | default: 'Professional-grade lawn tools built for those who take their lawn seriously. Power. Precision. Performance.' | escape }}">
+  <link rel="canonical" href="{{ canonical_url }}">
+  {% if settings.favicon %}<link rel="icon" type="image/png" href="{{ settings.favicon | img_url: '32x32' }}">{% endif %}
+
+  {{ content_for_header }}
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  {{ 'lawnix.css' | asset_url | stylesheet_tag }}
+</head>
+<body class="template-{{ template.name }}{% if template.suffix %} template-{{ template.name }}-{{ template.suffix }}{% endif %}">
+
+  {% section 'announcement-bar' %}
+  {% section 'header' %}
+
+  <main id="main-content" role="main" tabindex="-1">
+    {{ content_for_layout }}
+  </main>
+
+  {% section 'footer' %}
+
+  {{ 'lawnix.js' | asset_url | script_tag }}
+</body>
+</html>

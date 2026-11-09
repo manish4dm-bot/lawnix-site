@@ -1,0 +1,17 @@
+<div class="announcement-bar">
+  {{ section.settings.text }}
+</div>
+
+{% schema %}
+{
+  "name": "Announcement Bar",
+  "settings": [
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Announcement Text",
+      "default": "⚡ Launch Offer — Free Shipping on Every Order · 30-Day Money Back Guarantee"
+    }
+  ]
+}
+{% endschema %}

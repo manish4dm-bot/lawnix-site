@@ -1,0 +1,114 @@
+<div style="padding-top: var(--offset);">
+
+  <!-- COLLECTION HERO -->
+  <div class="collection-hero">
+    <div class="collection-hero-inner">
+      <div class="breadcrumb">
+        <a href="{{ routes.root_url }}">Home</a> &nbsp;/&nbsp; {{ collection.title }}
+      </div>
+      <h1>{{ collection.title | replace: ' ', '<br>' | replace: 'Tools', '<em>Tools</em>' }}</h1>
+      {% if collection.description != blank %}
+        <p>{{ collection.description }}</p>
+      {% else %}
+        <p>Built for those who demand the best. Every Lawnix tool is engineered to professional grade — no compromises.</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- TOOLBAR -->
+  <div class="collection-toolbar">
+    <div class="filter-group">
+      <span class="filter-label">Filter:</span>
+      <button class="filter-btn active">All</button>
+      {% for tag in collection.all_tags %}
+        <button class="filter-btn" data-tag="{{ tag }}">{{ tag | capitalize }}</button>
+      {% endfor %}
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span style="font-size:12px;color:#555;letter-spacing:1px;">{{ collection.products_count }} products</span>
+      <select class="sort-select" id="sort-by">
+        <option value="manual" {% if collection.sort_by == 'manual' %}selected{% endif %}>Featured</option>
+        <option value="price-ascending" {% if collection.sort_by == 'price-ascending' %}selected{% endif %}>Price: Low to High</option>
+        <option value="price-descending" {% if collection.sort_by == 'price-descending' %}selected{% endif %}>Price: High to Low</option>
+        <option value="best-selling" {% if collection.sort_by == 'best-selling' %}selected{% endif %}>Best Selling</option>
+        <option value="created-descending" {% if collection.sort_by == 'created-descending' %}selected{% endif %}>Newest</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- LAYOUT -->
+  <div class="collection-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="collection-sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-title">Category</div>
+        <div class="sidebar-divider"></div>
+        {% assign types = collection.all_types | where_exp: 'type', 'type != blank' %}
+        {% for type in types %}
+          <div class="check-item" data-type="{{ type }}">
+            <div class="check-box"></div>
+            <span style="font-size:14px;color:#888;transition:color 0.2s;">{{ type }}</span>
+          </div>
+        {% endfor %}
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-title">Tags</div>
+        <div class="sidebar-divider"></div>
+        {% for tag in collection.all_tags limit: 8 %}
+          <div class="check-item" data-tag="{{ tag }}">
+            <div class="check-box"></div>
+            <span style="font-size:14px;color:#888;">{{ tag | capitalize }}</span>
+          </div>
+        {% endfor %}
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-title">Price Range</div>
+        <div class="sidebar-divider"></div>
+        <input type="range" style="width:100%;accent-color:var(--green);" min="0" max="200" value="200">
+        <div style="display:flex;justify-content:space-between;margin-top:8px;font-size:12px;color:#555;">
+          <span>$0</span><span>$200</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- PRODUCTS -->
+    <div class="products-grid-area">
+      <div class="products-grid">
+        {% for product in collection.products %}
+          {% render 'product-card', product: product %}
+        {% else %}
+          <p style="color:#555;font-size:15px;padding:40px 0;grid-column:1/-1;">No products found.</p>
+        {% endfor %}
+      </div>
+
+      {% if paginate.pages > 1 %}
+        {% paginate collection.products by 12 %}
+          <div class="pagination">
+            {% if paginate.previous %}
+              <a href="{{ paginate.previous.url }}" class="page-btn arrow">‹</a>
+            {% endif %}
+            {% for part in paginate.parts %}
+              {% if part.is_link %}
+                <a href="{{ part.url }}" class="page-btn">{{ part.title }}</a>
+              {% else %}
+                <span class="page-btn active">{{ part.title }}</span>
+              {% endif %}
+            {% endfor %}
+            {% if paginate.next %}
+              <a href="{{ paginate.next.url }}" class="page-btn arrow">›</a>
+            {% endif %}
+          </div>
+        {% endpaginate %}
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<script>
+  document.getElementById('sort-by')?.addEventListener('change', function() {
+    window.location = '{{ collection.url }}?sort_by=' + this.value;
+  });
+</script>

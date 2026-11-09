@@ -1,0 +1,106 @@
+<section class="featured-product-section">
+  <div class="fp-grid">
+
+    <!-- IMAGE -->
+    <div class="fp-image-wrap reveal">
+      <div class="fp-img-inner">
+        {% if section.settings.product_image %}
+          {{ section.settings.product_image | img_url: '700x' | img_tag: section.settings.heading, 'fp-main-img' }}
+        {% else %}
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:3px;color:#2a2a2a;text-transform:uppercase;text-align:center;">[Product Image]</div>
+        {% endif %}
+        <div class="fp-badge-float">
+          <span class="fp-badge-label">{{ section.settings.badge_text }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- INFO -->
+    <div class="fp-info reveal">
+      <div class="section-eyebrow">{{ section.settings.eyebrow }}</div>
+      <h2 class="fp-heading">
+        {{ section.settings.heading | newline_to_br }}
+      </h2>
+      <p class="fp-sub">{{ section.settings.subheading }}</p>
+
+      <!-- SPECS LIST -->
+      <div class="fp-specs">
+        {% for block in section.blocks %}
+          {% if block.type == 'spec' %}
+            <div class="fp-spec-row" {{ block.shopify_attributes }}>
+              <span class="fp-spec-icon">{{ block.settings.icon }}</span>
+              <div>
+                <div class="fp-spec-label">{{ block.settings.label }}</div>
+                <div class="fp-spec-value">{{ block.settings.value }}</div>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+      <!-- PRICE + CTA -->
+      <div class="fp-price-row">
+        <div class="fp-price-block">
+          <div class="fp-price-now">{{ section.settings.price }}</div>
+          {% if section.settings.compare_price != blank %}
+            <div class="fp-price-was">{{ section.settings.compare_price }}</div>
+          {% endif %}
+        </div>
+        <div class="fp-rating">
+          <span class="stars">★★★★★</span>
+          <span style="font-size:12px;color:#666;">{{ section.settings.rating_text }}</span>
+        </div>
+      </div>
+
+      <div class="fp-actions">
+        <a href="{{ section.settings.btn_url }}" class="btn-primary">⚡ {{ section.settings.btn_label }}</a>
+        {% if section.settings.secondary_url != blank %}
+          <a href="{{ section.settings.secondary_url }}" class="btn-ghost">{{ section.settings.secondary_label }}</a>
+        {% endif %}
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured Product",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow Text", "default": "Featured Product" },
+    { "type": "textarea", "id": "heading", "label": "Heading", "default": "LX-30 Pro\nLeveling Rake™" },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "The professional's choice for lawn leveling. 30 precision-calibrated tines, 304 stainless steel, and a 5-year warranty that means something." },
+    { "type": "image_picker", "id": "product_image", "label": "Product Image" },
+    { "type": "text", "id": "badge_text", "label": "Image Badge Text", "default": "New Launch" },
+    { "type": "text", "id": "price", "label": "Price", "default": "$59.99" },
+    { "type": "text", "id": "compare_price", "label": "Compare Price (optional)", "default": "$79.99" },
+    { "type": "text", "id": "rating_text", "label": "Rating Text", "default": "4.9 / 5.0 · 127 Reviews" },
+    { "type": "text", "id": "btn_label", "label": "Primary Button Label", "default": "Shop Now" },
+    { "type": "url", "id": "btn_url", "label": "Primary Button URL" },
+    { "type": "text", "id": "secondary_label", "label": "Secondary Button Label", "default": "See All Features" },
+    { "type": "url", "id": "secondary_url", "label": "Secondary Button URL" }
+  ],
+  "blocks": [
+    {
+      "type": "spec",
+      "name": "Spec Row",
+      "settings": [
+        { "type": "text", "id": "icon", "label": "Icon (emoji)", "default": "⚡" },
+        { "type": "text", "id": "label", "label": "Label", "default": "Steel Grade" },
+        { "type": "text", "id": "value", "label": "Value", "default": "304 Stainless — Military Grade" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Product",
+      "blocks": [
+        { "type": "spec", "settings": { "icon": "⚡", "label": "Steel Grade", "value": "304 Stainless — Military Grade" } },
+        { "type": "spec", "settings": { "icon": "📏", "label": "Rake Width", "value": "30\" / 76cm — Pro Standard" } },
+        { "type": "spec", "settings": { "icon": "🛡️", "label": "Warranty", "value": "5 Years — No Questions Asked" } },
+        { "type": "spec", "settings": { "icon": "🔧", "label": "Setup Time", "value": "2 Minutes — Tool-Free" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

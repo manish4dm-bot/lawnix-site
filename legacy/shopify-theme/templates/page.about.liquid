@@ -1,0 +1,88 @@
+<div style="padding-top: var(--offset);">
+
+  <!-- HERO -->
+  <section class="about-hero" style="background:linear-gradient(135deg,#0a1200 0%,#090909 70%);position:relative;overflow:hidden;">
+    <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(120,190,32,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(120,190,32,0.04) 1px,transparent 1px);background-size:64px 64px;pointer-events:none;"></div>
+    <div style="position:absolute;width:600px;height:600px;background:radial-gradient(circle,rgba(120,190,32,0.1) 0%,transparent 65%);right:0;top:50%;transform:translateY(-50%);pointer-events:none;"></div>
+    <div style="position:relative;z-index:2;max-width:680px;">
+      <div class="section-eyebrow">Our Story</div>
+      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(52px,8vw,100px);font-weight:900;text-transform:uppercase;line-height:0.9;margin-bottom:28px;">
+        Built by<br><em style="color:var(--green);font-style:normal;">Lawn Obsessives</em>
+      </h1>
+      <p style="font-size:18px;line-height:1.75;color:#999;max-width:520px;">
+        Lawnix was founded on one simple belief: professional-grade lawn tools shouldn't cost a fortune or break after one season. We set out to build the tools we always wanted but could never find.
+      </p>
+    </div>
+  </section>
+
+  <!-- STATS BAND -->
+  <div class="stats-band">
+    <div class="stats-row">
+      <div class="stat-block"><div class="stat-num">2026</div><div class="stat-lbl">Founded</div></div>
+      <div class="stat-block"><div class="stat-num">127<span style="font-size:22px;">+</span></div><div class="stat-lbl">5-Star Reviews</div></div>
+      <div class="stat-block"><div class="stat-num">5<span style="font-size:22px;">yr</span></div><div class="stat-lbl">Warranty</div></div>
+      <div class="stat-block"><div class="stat-num">304</div><div class="stat-lbl">Steel Grade</div></div>
+    </div>
+  </div>
+
+  <!-- STORY -->
+  <section style="padding:110px 5%;background:var(--black);">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:90px;align-items:center;">
+      <div style="background:linear-gradient(145deg,#181818,#111);border-radius:12px;border:1px solid #1e1e1e;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;">
+        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--green);"></div>
+        {% if page.metafields.lawnix.story_image %}
+          {{ page.metafields.lawnix.story_image | img_url: '800x' | img_tag: 'Lawnix Story' }}
+        {% else %}
+          <span style="font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:3px;color:#2a2a2a;text-transform:uppercase;">[Brand / Founders Image]</span>
+        {% endif %}
+        <div style="position:absolute;bottom:24px;left:24px;right:24px;background:rgba(9,9,9,0.92);border:1px solid rgba(120,190,32,0.2);padding:18px 20px;border-radius:8px;backdrop-filter:blur(10px);">
+          <p style="font-size:15px;font-style:italic;color:#bbb;line-height:1.6;margin-bottom:10px;">"We built Lawnix because we were tired of buying cheap tools that bent on the first use. Every product has to pass the test we'd give our own lawn."</p>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--green);">— Lawnix Founder</div>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="section-eyebrow">The Beginning</div>
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(36px,4vw,54px);font-weight:900;text-transform:uppercase;line-height:0.95;margin-bottom:28px;">
+          Where It All <em style="color:var(--green);font-style:normal;">Started</em>
+        </h2>
+        {{ page.content }}
+      </div>
+    </div>
+  </section>
+
+  <!-- MISSION -->
+  <section style="padding:110px 5%;background:var(--dark);text-align:center;position:relative;overflow:hidden;">
+    <div style="position:absolute;font-family:'Barlow Condensed',sans-serif;font-size:400px;font-weight:900;color:rgba(120,190,32,0.03);top:-60px;left:5%;pointer-events:none;line-height:1;">"</div>
+    <div style="max-width:860px;margin:0 auto;position:relative;">
+      <div class="section-eyebrow centered">Our Mission</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(28px,4.5vw,52px);font-weight:800;line-height:1.2;color:var(--white);margin-bottom:32px;">
+        "To build the most <em style="color:var(--green);font-style:normal;">precise, durable, and effective</em> lawn tools on the market — tools that make every lawn owner feel like a professional."
+      </div>
+      <div style="font-size:14px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#555;">Lawnix™ — Power. Precision. Performance.</div>
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <section style="padding:110px 5%;background:var(--black);">
+    <div class="section-eyebrow">What We Stand For</div>
+    <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(36px,5vw,62px);font-weight:900;text-transform:uppercase;line-height:0.95;">
+      Our Core <em style="color:var(--green);font-style:normal;">Values</em>
+    </h2>
+    <div class="values-grid">
+      {% assign value_icons  = '🛡️|🎯|🤝|♻️|⚡|🇺🇸' | split: '|' %}
+      {% assign value_titles = 'Uncompromising Quality|Precision First|Customer Obsessed|Built to Last|Performance Driven|American Designed' | split: '|' %}
+      {% assign value_descs  = "Every Lawnix product is held to the same standard: if we wouldn't use it on our own lawn, we won't put our name on it. Period.|We obsess over every millimeter — tine spacing, handle angles, steel gauge. The details most brands skip define Lawnix.|Our 5-year warranty isn't a marketing line — it's a promise. We stand behind every tool, for every customer, without question.|A tool that lasts 20 years is better for you and the planet than one that lasts two. Sustainability through durability.|Every design decision starts with one question: will this make the job faster, easier, and better? If not, we go back to the drawing board.|Designed by American lawn care professionals who demand uncompromising performance — real expertise, real results." | split: '|' %}
+      {% for i in (0..5) %}
+        <div class="value-card reveal">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:80px;font-weight:900;color:rgba(120,190,32,0.06);position:absolute;top:10px;right:24px;line-height:1;">0{{ forloop.index }}</div>
+          <span style="font-size:36px;display:block;margin-bottom:20px;">{{ value_icons[i] }}</span>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;">{{ value_titles[i] }}</div>
+          <p style="font-size:15px;line-height:1.75;color:#777;">{{ value_descs[i] }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+
+</div>
+
+{% section 'cta-banner' %}

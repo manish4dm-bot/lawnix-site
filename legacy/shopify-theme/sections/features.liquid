@@ -1,0 +1,50 @@
+<section class="features-section" id="features">
+  <div class="section-eyebrow">{{ section.settings.eyebrow }}</div>
+  <h2 class="section-heading">{{ section.settings.heading | newline_to_br }}</h2>
+
+  <div class="features-grid">
+    {% for block in section.blocks %}
+      <div class="feat-card" {{ block.shopify_attributes }}>
+          <span class="rake-wipe" aria-hidden="true"></span>
+        <div class="feat-num">0{{ forloop.index }}</div>
+        <div class="feat-icon">{{ block.settings.icon }}</div>
+        <div class="feat-title">{{ block.settings.title }}</div>
+        <p class="feat-desc">{{ block.settings.description }}</p>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Features Grid",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Why Choose Lawnix" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Built Different.\nBuilt Better." }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        { "type": "text", "id": "icon", "label": "Emoji Icon", "default": "⚡" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Military-Grade Steel" },
+        { "type": "textarea", "id": "description", "label": "Description", "default": "304 stainless steel resists rust, bending, and corrosion in any outdoor condition." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Features Grid",
+      "blocks": [
+        { "type": "feature", "settings": { "icon": "⚡", "title": "Military-Grade Steel", "description": "304 stainless steel resists rust, bending, and corrosion in any outdoor condition. Forged to outlast every competitor on the market." } },
+        { "type": "feature", "settings": { "icon": "🎯", "title": "Precision Leveling", "description": "30 calibrated tines engineered for uniform soil distribution. Achieve a perfectly level lawn in a single pass." } },
+        { "type": "feature", "settings": { "icon": "💪", "title": "Ergonomic Handle", "description": "64\" adjustable steel handle with cushioned non-slip grip. Engineered to reduce fatigue during extended use." } },
+        { "type": "feature", "settings": { "icon": "🌿", "title": "All-Surface Ready", "description": "Perfect for topdressing, spreading sand, leveling soil, and dethatching. One tool for every lawn care scenario." } },
+        { "type": "feature", "settings": { "icon": "🔧", "title": "2-Minute Assembly", "description": "Tool-free setup in under two minutes. Collapsible for flat storage in garage or shed." } },
+        { "type": "feature", "settings": { "icon": "🛡️", "title": "5-Year Warranty", "description": "Every Lawnix product is backed by a full 5-year warranty. If it breaks, we replace it — no questions asked." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

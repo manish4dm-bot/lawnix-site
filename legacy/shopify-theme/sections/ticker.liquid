@@ -1,0 +1,24 @@
+<div class="ticker-strip">
+  <div class="ticker-inner">
+    {% assign items = section.settings.ticker_text | split: '|' %}
+    {% assign doubled = items | concat: items %}
+    {% for item in doubled %}
+      <span class="ticker-item">{{ item | strip }} <span style="opacity:0.4;">⚡</span></span>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Ticker Strip",
+  "settings": [
+    {
+      "type": "text",
+      "id": "ticker_text",
+      "label": "Ticker Items (pipe-separated)",
+      "default": "Power|Precision|Performance|Pro-Grade Steel|Free Shipping|5-Year Warranty|Lawnix™"
+    }
+  ],
+  "presets": [{ "name": "Ticker Strip" }]
+}
+{% endschema %}

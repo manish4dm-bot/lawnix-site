@@ -1,0 +1,168 @@
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+{%- assign featured_image = current_variant.image | default: product.featured_image -%}
+
+<div class="product-page" style="padding-top: calc(var(--offset) + 60px);">
+  <div class="product-layout">
+
+    <!-- GALLERY -->
+    <div class="product-gallery">
+      <div class="main-img">
+        {% if current_variant.image or product.featured_image %}
+          <span class="img-badge">
+            {% if product.tags contains 'new' %}New Launch{% else %}Lawnix™{% endif %}
+          </span>
+          {{ featured_image | img_url: '800x' | img_tag: product.title, 'main-product-img' }}
+        {% else %}
+          <span class="img-badge">New Launch</span>
+          <span style="font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:3px;color:#333;text-align:center;text-transform:uppercase;">[Product Photography]</span>
+        {% endif %}
+      </div>
+
+      {% if product.images.size > 1 %}
+        <div class="thumbs">
+          {% for image in product.images limit: 4 %}
+            <div class="thumb {% if forloop.first %}active{% endif %}"
+                 data-src="{{ image | img_url: '800x' }}">
+              {{ image | img_url: '120x120', crop: 'center' | img_tag: product.title }}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- PRODUCT INFO -->
+    <div class="product-info">
+      <p class="product-cat">{{ product.type | default: 'Lawnix™ Professional Series' }}</p>
+      <h1 class="product-name">{{ product.title }}</h1>
+
+      <div class="rating-row">
+        <span class="stars">★★★★★</span>
+        <span class="rating-text">
+          {{ product.metafields.reviews.rating | default: '4.9' }} / 5.0 &nbsp;·&nbsp;
+          {{ product.metafields.reviews.rating_count | default: '127' }} Reviews
+        </span>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="price-block">
+        <span class="price-now">{{ current_variant.price | money }}</span>
+        {% if current_variant.compare_at_price > current_variant.price %}
+          <span class="price-was">{{ current_variant.compare_at_price | money }}</span>
+          <span class="price-tag">Save {{ current_variant.compare_at_price | minus: current_variant.price | times: 100 | divided_by: current_variant.compare_at_price }}%</span>
+        {% endif %}
+      </div>
+
+      <form action="/cart/add" method="post" enctype="multipart/form-data" id="product-form">
+        <input type="hidden" name="form_type" value="product">
+        <input type="hidden" name="utf8" value="✓">
+
+        {% for option in product.options_with_values %}
+          <div class="option-label">{{ option.name }}</div>
+          <div class="options-row" data-option-index="{{ forloop.index0 }}">
+            {% for value in option.values %}
+              <button type="button"
+                      class="opt-btn {% if option.selected_value == value %}active{% endif %}"
+                      data-value="{{ value }}">
+                {{ value }}
+              </button>
+            {% endfor %}
+          </div>
+        {% endfor %}
+
+        <select name="id" id="variant-select" style="display:none;">
+          {% for variant in product.variants %}
+            <option value="{{ variant.id }}"
+                    {% if variant == current_variant %}selected{% endif %}
+                    {% unless variant.available %}disabled{% endunless %}>
+              {{ variant.title }}
+            </option>
+          {% endfor %}
+        </select>
+
+        <div class="divider"></div>
+
+        <div class="qty-label">Quantity</div>
+        <div class="qty-wrap">
+          <button type="button" data-action="minus">−</button>
+          <input type="number" name="quantity" value="1" min="1" max="99">
+          <button type="button" data-action="plus">+</button>
+        </div>
+
+        <button type="submit" class="btn-cart" name="add">⚡ Add to Cart</button>
+        <button type="button" class="btn-buynow"
+                onclick="document.getElementById('product-form').action='/cart'; this.form.submit();">
+          Buy Now
+        </button>
+      </form>
+
+      <div class="trust-bar">
+        <div class="trust-item">
+          <span class="trust-icon">🚚</span>
+          <div class="trust-text"><strong>Free Shipping</strong>On all orders, always</div>
+        </div>
+        <div class="trust-item">
+          <span class="trust-icon">↩️</span>
+          <div class="trust-text"><strong>30-Day Returns</strong>No questions asked</div>
+        </div>
+        <div class="trust-item">
+          <span class="trust-icon">🛡️</span>
+          <div class="trust-text"><strong>5-Year Warranty</strong>Guaranteed</div>
+        </div>
+      </div>
+
+      {% if product.description != blank %}
+        <div class="divider"></div>
+        <div class="product-description" style="font-size:15px;line-height:1.8;color:#888;">
+          {{ product.description }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% section 'reviews' %}
+{% section 'faq' %}
+{% section 'cta-banner' %}
+
+<!-- STICKY ADD TO CART -->
+<div class="sticky-atc" id="sticky-atc" aria-hidden="true">
+  <div class="sticky-atc-inner">
+    <div class="sticky-atc-info">
+      <span class="sticky-atc-name">{{ product.title }}</span>
+      <span class="sticky-atc-price">{{ current_variant.price | money }}</span>
+    </div>
+    <button class="sticky-atc-btn" id="sticky-atc-btn">⚡ Add to Cart</button>
+  </div>
+</div>
+
+<script>
+  const variantSelect = document.getElementById('variant-select');
+  const options = {{ product.options_with_values | json }};
+  const variants = {{ product.variants | json }};
+
+  document.querySelectorAll('.options-row').forEach((row, optIdx) => {
+    row.querySelectorAll('.opt-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        row.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const selectedValues = [];
+        document.querySelectorAll('.options-row').forEach(r => {
+          const active = r.querySelector('.opt-btn.active');
+          if (active) selectedValues.push(active.dataset.value);
+        });
+
+        const matchedVariant = variants.find(v =>
+          v.options.every((opt, i) => opt === selectedValues[i])
+        );
+
+        if (matchedVariant) {
+          variantSelect.value = matchedVariant.id;
+          const priceEl = document.querySelector('.price-now');
+          if (priceEl) priceEl.textContent = Shopify.formatMoney(matchedVariant.price);
+        }
+      });
+    });
+  });
+</script>

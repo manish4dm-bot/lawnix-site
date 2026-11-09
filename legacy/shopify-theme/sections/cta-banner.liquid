@@ -1,0 +1,20 @@
+<section class="cta-section">
+  <h2>{{ section.settings.heading | newline_to_br }}</h2>
+  <p>{{ section.settings.subtext }}</p>
+  <a href="{{ section.settings.btn_url }}" class="btn-primary" style="font-size:21px;padding:18px 54px;">
+    {{ section.settings.btn_label }}
+  </a>
+</section>
+
+{% schema %}
+{
+  "name": "CTA Banner",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Ready to Level Up\nYour Lawn?" },
+    { "type": "textarea", "id": "subtext", "label": "Subtext", "default": "Join thousands of professionals and homeowners who trust Lawnix to get the job done right, every time." },
+    { "type": "text", "id": "btn_label", "label": "Button Label", "default": "Shop the LX-30 Now" },
+    { "type": "url", "id": "btn_url", "label": "Button URL" }
+  ],
+  "presets": [{ "name": "CTA Banner" }]
+}
+{% endschema %}

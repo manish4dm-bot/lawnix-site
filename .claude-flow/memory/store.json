@@ -1,0 +1,176 @@
+{
+  "entries": {
+    "cmd-1794199885840": {
+      "key": "cmd-1794199885840",
+      "value": "{\"command\":\"cd ~/lawnix-store && ls -la && (cat README* 2>/dev/null | head -60); find . -maxdepth 2 -not -path \\\"./node_modules*\\\" -not -path \\\"./.git/*\\\" | head -80; git log --oneline -10 2>/dev/null; ls ~/Downloads/LAWNIX_brand_files | head -40\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-11-09T04:51:25.840Z",
+      "lastAccessed": "2026-11-09T04:51:25.840Z",
+      "accessCount": 0,
+      "expiresAt": "2026-12-09T04:51:25.840Z"
+    },
+    "cmd-1794199891259": {
+      "key": "cmd-1794199891259",
+      "value": "{\"command\":\"cd ~/lawnix-store && cat .claude/launch.json; grep -o '<title>[^<]*' *.html; grep -oiE '\\\\$[0-9]+(\\\\.[0-9]{2})?' index.html | sort | uniq -c | head; grep -oiE '(lawnix\\\\.[a-z]+)' *.html | sort -u | head\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-11-09T04:51:31.259Z",
+      "lastAccessed": "2026-11-09T04:51:31.259Z",
+      "accessCount": 0,
+      "expiresAt": "2026-12-09T04:51:31.259Z"
+    },
+    "cmd-1794200338941": {
+      "key": "cmd-1794200338941",
+      "value": "{\"command\":\"cd ~/lawnix-store; ls -la .secrets 2>&1; ls shopify-theme/*; which shopify node npm 2>&1; node -v 2>&1\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-11-09T04:58:58.941Z",
+      "lastAccessed": "2026-11-09T04:58:58.941Z",
+      "accessCount": 0,
+      "expiresAt": "2026-12-09T04:58:58.941Z"
+    },
+    "cmd-1794200347333": {
+      "key": "cmd-1794200347333",
+      "value": "{\"command\":\"cd ~/lawnix-store && mkdir -p .secrets && chmod 700 .secrets && cat > .secrets/cpanel.env <<'EOF'\\n# Fill these in. Do not share this file or paste the token in chat.\\n# cPanel → Security → Manage API Tokens → Create (name it \\\"claude-lawnix\\\")\\nCPANEL_HOST=\\nCPANEL_USER=\\nCPANEL_TOKEN=\\nDOMAIN=\\nEOF\\nchmod 600 .secrets/cpanel.env && printf '.secrets/\\\\n' > .gitignore && ls -la .secrets\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-11-09T04:59:07.333Z",
+      "lastAccessed": "2026-11-09T04:59:07.333Z",
+      "accessCount": 0,
+      "expiresAt": "2026-12-09T04:59:07.333Z"
+    },
+    "cmd-1794200392321": {
+      "key": "cmd-1794200392321",
+      "value": "{\"command\":\"dig +short lawnixindustry.com A; dig +short lawnixindustry.com NS; dig +short lawnixindustry.com MX; curl -sI -m 10 https://lawnixindustry.com | head -5\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-11-09T04:59:52.321Z",
+      "lastAccessed": "2026-11-09T04:59:52.321Z",
+      "accessCount": 0,
+      "expiresAt": "2026-12-09T04:59:52.321Z"
+    },
+    "cmd-1794200859731": {
+      "key": "cmd-1794200859731",
+      "value": "{\"command\":\"cd ~/lawnix-store && rm -rf tools && ls ~/Downloads/LAWNIX_brand_files/ && unzip -l ~/Downloads/LAWNIX_brand_files.zip | head -30; file ~/Downloads/LAWNIX_brand_files/LAWNIX_logo.png; head -c 1500 shared.js; echo; grep -c \\\"\\\" index.html product-lx30.html; grep -oE 'https?://[^\\\"'\\\"'\\\"' )]+' index.html product-lx30.html | sort -u | head -40\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-11-09T05:07:39.731Z",
+      "lastAccessed": "2026-11-09T05:07:39.731Z",
+      "accessCount": 0,
+      "expiresAt": "2026-12-09T05:07:39.731Z"
+    },
+    "cmd-1794200867269": {
+      "key": "cmd-1794200867269",
+      "value": "{\"command\":\"cd ~/lawnix-store && cat ~/Downloads/LAWNIX_brand_files/LAWNIX_logo.svg; echo; sed -n 1,80p index.html | cut -c1-200; echo ----; grep -n \\\"<section\\\\|<h1\\\\|<h2\\\" index.html | cut -c1-160 | head -40\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-11-09T05:07:47.269Z",
+      "lastAccessed": "2026-11-09T05:07:47.269Z",
+      "accessCount": 0,
+      "expiresAt": "2026-12-09T05:07:47.269Z"
+    },
+    "cmd-1794200924536": {
+      "key": "cmd-1794200924536",
+      "value": "{\"command\":\"cd ~/lawnix-store && grep -oE \\\"[0-9.]+ ?(lb|lbs|inch|inches|cm|mm|tines|tine|gauge|ft|feet)\\\\b\\\" product-lx30.html product-lx48.html product-cultivator.html | sort -u | head -40; echo \\\"---- spec rows\\\"; grep -n \\\"spec-row\\\\|spec-label\\\\|spec-value\\\\|<th\\\\|<td\\\" product-lx30.html | head -30 | cut -c1-180\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-11-09T05:08:44.536Z",
+      "lastAccessed": "2026-11-09T05:08:44.536Z",
+      "accessCount": 0,
+      "expiresAt": "2026-12-09T05:08:44.536Z"
+    },
+    "cmd-1794200944606": {
+      "key": "cmd-1794200944606",
+      "value": "{\"command\":\"cd /Users/manishkumar/lawnix-store && OUT=\\\"$TMPDIR/lawnix-img\\\" && mkdir -p \\\"$OUT\\\" && python3 - \\\"$OUT\\\" <<'EOF'\\nimport re,base64,sys,os\\nout=sys.argv[1]\\nh=open('/Users/manishkumar/Downloads/lawnix_pdp_30inch.html').read()\\nfor i,m in enumerate(re.finditer(r'src=\\\"data:image/(\\\\w+);base64,([^\\\"]+)\\\"',h)):\\n    ext,b=m.group(1),m.group(2)\\n    p=os.path.join(out,f'img{i}.{ext}')\\n    open(p,'wb').write(base64.b64decode(b)); print(p, os.path.getsize(p))\\nEOF\\ngrep -o '<h1[^>]*>[^<]*\\\\|<h2[^>]*>[^<]*' /Users/manishkumar/Downloads/lawnix_pdp_30inch.html | head; echo ---; grep -oE '>[^<>{}]{25,}<' \\\"/Users/manishkumar/Downloads/lawnix-packaging (2).svg\\\" | head -30\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-11-09T05:09:04.606Z",
+      "lastAccessed": "2026-11-09T05:09:04.606Z",
+      "accessCount": 0,
+      "expiresAt": "2026-12-09T05:09:04.606Z"
+    },
+    "cmd-1794200996681": {
+      "key": "cmd-1794200996681",
+      "value": "{\"command\":\"for f in product-lx48.html product-cultivator.html; do echo \\\"== $f\\\"; grep -E \\\"<tr><td>\\\" $f | sed 's/<[^>]*>/ | /g' | tr -s ' ' | head -14; done; echo \\\"== features (index)\\\"; grep -A2 'class=\\\"feature-title\\\"\\\\|<h3' index.html | sed 's/<[^>]*>//g' | grep -v '^--$' | tr -s ' \\\\n' | head -40; echo \\\"== faq\\\"; grep -E 'faq-q|faq-question|<summary' product-lx30.html collections.html about.html 2>/dev/null | sed 's/<[^>]*>//g' | tr -s ' ' | head -20; echo \\\"== about\\\"; grep -E \\\"<p\\\" about.html | sed 's/<[^>]*>//g' | tr -s ' ' | awk 'length>60' | head -12 | cut -c1-300\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-11-09T05:09:56.681Z",
+      "lastAccessed": "2026-11-09T05:09:56.681Z",
+      "accessCount": 0,
+      "expiresAt": "2026-12-09T05:09:56.681Z"
+    },
+    "cmd-1794201049637": {
+      "key": "cmd-1794201049637",
+      "value": "{\"command\":\"gh auth status 2>&1 | head -5; python3 -c \\\"import PIL; print('PIL ok')\\\" 2>&1; ~/.local/bin/python3.13 -c \\\"\\nfrom PIL import Image\\nim=Image.open('/Users/manishkumar/Downloads/LAWNIX_brand_files/LAWNIX_logo.png').convert('RGB')\\nfrom collections import Counter\\nc=Counter(p for p in im.getdata() if p[1]>150 and p[0]<200 and p[2]<120)\\nprint(c.most_common(5))\\n\\\" 2>&1 | tail -3; mkdir -p legacy site/static/img site/static/css site/static/js docs && git mv -k . 2>/dev/null; mv -n about.html cart.html collections.html index.html preview-backgrounds.html product-*.html shared.js lawnix-theme-v2.zip lawnix-theme-v3.zip.bak lawnix-theme-v4.zip shopify-theme legacy/ 2>&1; cp /Users/manishkumar/Downloads/LAWNIX_brand_files/LAWNIX_logo.png site/static/img/lawnix-logo-lockup.png; ls; ls legacy | head\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-11-09T05:10:49.637Z",
+      "lastAccessed": "2026-11-09T05:10:49.637Z",
+      "accessCount": 0,
+      "expiresAt": "2026-12-09T05:10:49.637Z"
+    },
+    "cmd-1794201059993": {
+      "key": "cmd-1794201059993",
+      "value": "{\"command\":\"gh auth status 2>&1 | head -6; python3 -c \\\"\\nfrom PIL import Image\\nfrom collections import Counter\\nim=Image.open('/Users/manishkumar/Downloads/LAWNIX_brand_files/LAWNIX_logo.png').convert('RGB').resize((384,256))\\nc=Counter(p for p in im.getdata() if p[1]>140 and p[0]<210 and p[2]<110 and p[1]-p[2]>80)\\nfor p,n in c.most_common(4): print('#%02x%02x%02x'%p, n)\\n\\\"\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-11-09T05:10:59.993Z",
+      "lastAccessed": "2026-11-09T05:10:59.993Z",
+      "accessCount": 0,
+      "expiresAt": "2026-12-09T05:10:59.993Z"
+    },
+    "cmd-1794201527241": {
+      "key": "cmd-1794201527241",
+      "value": "{\"command\":\"python3 site/build.py && find docs -name \\\"*.html\\\" | sort | head -20 && grep -l \\\"—\\\\|–\\\" docs/*.html docs/*/index.html docs/*/*/index.html 2>/dev/null; echo \\\"dash check done\\\"\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-11-09T05:18:47.241Z",
+      "lastAccessed": "2026-11-09T05:18:47.241Z",
+      "accessCount": 0,
+      "expiresAt": "2026-12-09T05:18:47.241Z"
+    },
+    "cmd-1794201654865": {
+      "key": "cmd-1794201654865",
+      "value": "{\"command\":\"curl -sfL -o lifestyle-lawn.png \\\"https://www.figma.com/api/mcp/asset/9ead2194-59c5-4b0c-8e64-3a03096294ce.png\\\" && curl -sfL -o lifestyle-steel.png \\\"https://www.figma.com/api/mcp/asset/d7821e99-2ae9-4565-acd1-9eff7257c5e4.png\\\" && curl -sfL -o lifestyle-sand.png \\\"https://www.figma.com/api/mcp/asset/4c279333-dccf-4b18-a9a9-6c6915f21644.png\\\" && curl -sfL -o lx30-detail.png \\\"https://www.figma.com/api/mcp/asset/7354f03b-64d8-4233-8533-7f3cb099ad6b.png\\\" && curl -sfL -o rc01-detail.png \\\"https://www.figma.com/api/mcp/asset/65b715e7-d946-46c1-9005-225df4d17514.png\\\" && python3 - <<'EOF'\\nfrom PIL import Image\\nimport glob, os\\nfor p in glob.glob('*.png'):\\n    if p.startswith('lawnix-logo'): continue\\n    im = Image.open(p).convert('RGB')\\n    im.save(p[:-4] + '.jpg', 'JPEG', quality=84, optimize=True, progressive=True)\\n    os.remove(p)\\nim = Image.open('lifestyle-lawn.jpg'); w,h = im.size\\nt = 1200/630\\nif w/h > t: nw = int(h*t); im = im.crop(((w-nw)//2,0,(w-nw)//2+nw,h))\\nelse: nh = int(w/t); im = im.crop((0,(h-nh)//2,w,(h-nh)//2+nh))\\nim.resize((1200,630)).save('og-default.jpg','JPEG',quality=84)\\nEOF\\nls -la && cd /Users/manishkumar/lawnix-store && python3 site/build.py | head -1\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-11-09T05:20:54.865Z",
+      "lastAccessed": "2026-11-09T05:20:54.865Z",
+      "accessCount": 0,
+      "expiresAt": "2026-12-09T05:20:54.865Z"
+    },
+    "cmd-1794201683042": {
+      "key": "cmd-1794201683042",
+      "value": "{\"command\":\"cd /Users/manishkumar/lawnix-store/site/static/img && rm -rf .claude .claude-flow && curl -sfL -o lx48-detail.png \\\"https://www.figma.com/api/mcp/asset/657ffb0f-a8b1-4a84-a1db-fa2e91c317fc.png\\\" && python3 -c \\\"\\nfrom PIL import Image; im=Image.open('lx48-detail.png').convert('RGB'); im.save('lx48-detail.jpg','JPEG',quality=84,optimize=True,progressive=True)\\\" && rm lx48-detail.png && cd /Users/manishkumar/lawnix-store && python3 site/build.py | head -1 && ls docs/static/img\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-11-09T05:21:23.042Z",
+      "lastAccessed": "2026-11-09T05:21:23.042Z",
+      "accessCount": 0,
+      "expiresAt": "2026-12-09T05:21:23.042Z"
+    },
+    "cmd-1794201762872": {
+      "key": "cmd-1794201762872",
+      "value": "{\"command\":\"python3 site/build.py | head -1\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-11-09T05:22:42.872Z",
+      "lastAccessed": "2026-11-09T05:22:42.872Z",
+      "accessCount": 0,
+      "expiresAt": "2026-12-09T05:22:42.872Z"
+    },
+    "cmd-1794201824787": {
+      "key": "cmd-1794201824787",
+      "value": "{\"command\":\"python3 site/build.py | head -1\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-11-09T05:23:44.787Z",
+      "lastAccessed": "2026-11-09T05:23:44.787Z",
+      "accessCount": 0,
+      "expiresAt": "2026-12-09T05:23:44.787Z"
+    },
+    "cmd-1794201897686": {
+      "key": "cmd-1794201897686",
+      "value": "{\"command\":\"sed -i '' 's/(\\\"Handle\\\", \\\"78\\\\\\\\\\\" (adjusts to 50\\\\\\\\\\\")\\\", /(\\\"Handle\\\", \\\"78\\\\\\\\\\\" to 50\\\\\\\\\\\"\\\", /g' site/content.py && grep -n '\\\"Handle\\\"' site/content.py && python3 site/build.py | head -1\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-11-09T05:24:57.686Z",
+      "lastAccessed": "2026-11-09T05:24:57.686Z",
+      "accessCount": 0,
+      "expiresAt": "2026-12-09T05:24:57.686Z"
+    },
+    "cmd-1794201946682": {
+      "key": "cmd-1794201946682",
+      "value": "{\"command\":\"git init 2>&1 | tail -2; ls -la .git 2>&1 | head -3; git status 2>&1 | head -3\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-11-09T05:25:46.682Z",
+      "lastAccessed": "2026-11-09T05:25:46.682Z",
+      "accessCount": 0,
+      "expiresAt": "2026-12-09T05:25:46.682Z"
+    }
+  },
+  "version": "3.0.0"
+}

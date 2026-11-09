@@ -1,0 +1,51 @@
+<section class="newsletter-section">
+  <div class="newsletter-inner">
+    <div class="newsletter-text">
+      <div class="section-eyebrow">{{ section.settings.eyebrow }}</div>
+      <h2 class="newsletter-heading">{{ section.settings.heading }}</h2>
+      <p class="newsletter-sub">{{ section.settings.subheading }}</p>
+    </div>
+    <div class="newsletter-form-wrap">
+      {% form 'customer', class: 'newsletter-form' %}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <div class="newsletter-input-row">
+          <input
+            type="email"
+            name="contact[email]"
+            class="newsletter-input"
+            placeholder="{{ section.settings.placeholder }}"
+            required
+            autocomplete="email"
+          >
+          <button type="submit" class="newsletter-btn">
+            {{ section.settings.btn_label }}
+          </button>
+        </div>
+        {% if form.posted_successfully? %}
+          <p class="newsletter-success">✓ You're in! Welcome to the Lawnix family.</p>
+        {% endif %}
+        {% if form.errors %}
+          <p class="newsletter-error">{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}</p>
+        {% endif %}
+      {% endform %}
+      <p class="newsletter-disclaimer">{{ section.settings.disclaimer }}</p>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Stay In The Loop" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Join the Lawnix Community" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Get exclusive launch deals, lawn care tips, and first access to new tools." },
+    { "type": "text", "id": "placeholder", "label": "Input Placeholder", "default": "Enter your email address" },
+    { "type": "text", "id": "btn_label", "label": "Button Label", "default": "Subscribe" },
+    { "type": "text", "id": "disclaimer", "label": "Disclaimer", "default": "No spam. Unsubscribe anytime. We respect your privacy." }
+  ],
+  "presets": [
+    { "name": "Newsletter" }
+  ]
+}
+{% endschema %}

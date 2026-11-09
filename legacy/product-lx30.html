@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>30" Leveling Rake LX-30 | LAWNIX™</title>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --green: #78BE20; --green-dark: #5a9018; --green-light: #9fd44a;
+            --black: #090909; --dark: #101010; --dark2: #181818; --dark3: #222;
+            --white: #fff; --gray: #888; --gold: #F5A623;
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Barlow', sans-serif; background: var(--black); color: var(--white); overflow-x: hidden; }
+
+        /* ANNOUNCEMENT BAR */
+        .announcement-bar { background: var(--green); color: var(--black); text-align: center; padding: 11px 20px; font-size: 13px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; position: fixed; top: 0; width: 100%; z-index: 1001; }
+
+        /* NAV */
+        nav { position: fixed; top: 38px; width: 100%; z-index: 1000; height: 68px; display: flex; align-items: center; justify-content: space-between; padding: 0 5%; background: rgba(9,9,9,0.97); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(120,190,32,0.15); }
+        .nav-logo { font-family: 'Barlow Condensed', sans-serif; font-size: 26px; font-weight: 900; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; color: var(--white); }
+        .nav-logo em { color: var(--green); font-style: normal; }
+        .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+        .nav-links > li > a { color: #bbb; text-decoration: none; font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; transition: color 0.3s; }
+        .nav-links > li > a:hover { color: var(--green); }
+        .nav-shop-btn { background: var(--green); color: var(--black) !important; padding: 9px 22px; border-radius: 3px; font-weight: 800 !important; }
+        .nav-shop-btn:hover { background: var(--green-light) !important; }
+        .nav-right { display: flex; align-items: center; gap: 18px; }
+        .nav-icon { background: none; border: none; cursor: pointer; display: flex; }
+        .nav-icon svg { width: 21px; height: 21px; stroke: #aaa; fill: none; stroke-width: 1.8; transition: stroke 0.3s; }
+        .nav-icon:hover svg { stroke: var(--green); }
+
+        /* DROPDOWN */
+        .nav-item { position: relative; }
+        .nav-dropdown {
+            position: absolute; top: calc(100% + 10px); left: 50%; transform: translateX(-50%);
+            background: #111; border: 1px solid rgba(120,190,32,0.25); border-radius: 8px;
+            min-width: 240px; padding: 12px 0; opacity: 0; visibility: hidden;
+            transition: all 0.25s; box-shadow: 0 20px 60px rgba(0,0,0,0.6); z-index: 200;
+        }
+        .nav-item:hover .nav-dropdown { opacity: 1; visibility: visible; top: calc(100% + 6px); }
+        .dropdown-group-label { font-size: 10px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--green); padding: 8px 20px 4px; }
+        .dropdown-link { display: block; padding: 9px 20px; color: #bbb; text-decoration: none; font-size: 13px; font-weight: 600; transition: all 0.2s; }
+        .dropdown-link:hover { color: var(--green); background: rgba(120,190,32,0.05); }
+        .dropdown-link.active { color: var(--green); }
+        .dropdown-divider { height: 1px; background: #1e1e1e; margin: 8px 0; }
+
+        /* PAGE WRAPPER */
+        .page-wrap { margin-top: 106px; }
+
+        /* BREADCRUMB */
+        .breadcrumb-bar { padding: 14px 5%; background: var(--dark); border-bottom: 1px solid #1a1a1a; }
+        .breadcrumb { font-size: 12px; color: #555; letter-spacing: 1px; }
+        .breadcrumb a { color: var(--green); text-decoration: none; transition: opacity 0.2s; }
+        .breadcrumb a:hover { opacity: 0.75; }
+        .breadcrumb span { margin: 0 8px; }
+
+        /* PRODUCT MAIN */
+        .product-main { display: grid; grid-template-columns: 45% 35% 20%; gap: 0; padding: 40px 5%; max-width: 1400px; margin: 0 auto; align-items: start; }
+
+        /* LEFT: Gallery */
+        .gallery-col { padding-right: 28px; }
+        .gallery-layout { display: flex; gap: 12px; }
+        .thumb-strip { display: flex; flex-direction: column; gap: 10px; }
+        .thumb-item {
+            width: 72px; height: 72px; background: #1a1a1a; border: 2px solid #2a2a2a; border-radius: 6px;
+            cursor: pointer; overflow: hidden; flex-shrink: 0; transition: border-color 0.22s; display: flex; align-items: center; justify-content: center;
+        }
+        .thumb-item:hover, .thumb-item.active { border-color: var(--green); }
+        .thumb-item svg { width: 60px; height: 60px; }
+        .main-image-wrap { flex: 1; background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 10px; overflow: hidden; position: relative; aspect-ratio: 3/4; display: flex; align-items: center; justify-content: center; }
+        .main-image-wrap svg { width: 90%; height: 90%; }
+        .img-badge-sale { position: absolute; top: 16px; left: 16px; background: #e74c3c; color: white; padding: 5px 12px; border-radius: 3px; font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 900; letter-spacing: 1.5px; text-transform: uppercase; }
+
+        /* MIDDLE: Product Info */
+        .info-col { padding: 0 24px; border-left: 1px solid #1e1e1e; border-right: 1px solid #1e1e1e; }
+        .brand-link { font-size: 13px; color: var(--green); text-decoration: none; font-weight: 600; display: inline-block; margin-bottom: 8px; }
+        .brand-link:hover { text-decoration: underline; }
+        .product-title { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 900; line-height: 1.25; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .rating-row { display: flex; align-items: center; gap: 6px; margin-bottom: 12px; flex-wrap: wrap; }
+        .stars-gold { color: var(--gold); font-size: 16px; letter-spacing: 1px; }
+        .rating-score { font-size: 14px; font-weight: 700; color: var(--gold); }
+        .rating-link { font-size: 13px; color: #5b9bd5; text-decoration: none; }
+        .rating-link:hover { text-decoration: underline; }
+        .rating-sep { color: #444; font-size: 12px; }
+        .divider { height: 1px; background: #1e1e1e; margin: 16px 0; }
+        .price-main { margin-bottom: 16px; }
+        .price-label { font-size: 12px; color: #777; margin-bottom: 4px; }
+        .price-now { font-family: 'Barlow Condensed', sans-serif; font-size: 38px; font-weight: 900; color: var(--white); line-height: 1; }
+        .price-now sup { font-size: 20px; vertical-align: super; }
+        .price-row2 { display: flex; align-items: center; gap: 10px; margin-top: 6px; flex-wrap: wrap; }
+        .price-was-label { font-size: 13px; color: #777; }
+        .price-was { font-size: 13px; color: #777; text-decoration: line-through; }
+        .price-save-badge { background: #c0392b; color: white; padding: 3px 10px; border-radius: 3px; font-size: 12px; font-weight: 800; }
+        .variant-section { margin-bottom: 18px; }
+        .variant-label { font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #888; margin-bottom: 10px; }
+        .variant-label span { color: var(--white); font-weight: 600; }
+        .variant-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+        .var-btn { padding: 8px 16px; background: transparent; border: 2px solid #2a2a2a; border-radius: 4px; color: #bbb; font-size: 13px; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.22s; }
+        .var-btn:hover { border-color: var(--green); color: var(--green); }
+        .var-btn.active { border-color: var(--green); color: var(--green); background: rgba(120,190,32,0.06); }
+        .about-section { margin-top: 4px; }
+        .about-heading { font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+        .bullet-list { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+        .bullet-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 13.5px; line-height: 1.6; color: #ccc; }
+        .bullet-list li::before { content: '✓'; color: var(--green); font-weight: 900; font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+
+        /* RIGHT: Buy Box */
+        .buy-box { background: var(--dark2); border: 1px solid #2a2a2a; border-radius: 10px; padding: 22px; position: sticky; top: 120px; }
+        .buy-price { font-family: 'Barlow Condensed', sans-serif; font-size: 36px; font-weight: 900; color: var(--white); line-height: 1; margin-bottom: 6px; }
+        .buy-price sup { font-size: 18px; vertical-align: super; }
+        .buy-delivery { font-size: 13px; color: #bbb; margin-bottom: 4px; line-height: 1.5; }
+        .buy-delivery strong { color: var(--green); }
+        .buy-stock { font-size: 15px; color: var(--green); font-weight: 700; margin: 10px 0; }
+        .buy-divider { height: 1px; background: #2a2a2a; margin: 14px 0; }
+        .qty-label-sm { font-size: 11px; color: #777; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 8px; font-weight: 700; }
+        .qty-select { width: 100%; background: var(--dark); border: 1px solid #2a2a2a; color: var(--white); padding: 10px 14px; border-radius: 4px; font-size: 14px; font-family: 'Barlow', sans-serif; cursor: pointer; outline: none; margin-bottom: 14px; }
+        .btn-add-cart { width: 100%; background: var(--green); color: var(--black); border: none; border-radius: 20px; padding: 14px; font-family: 'Barlow Condensed', sans-serif; font-size: 17px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: all 0.28s; margin-bottom: 10px; }
+        .btn-add-cart:hover { background: var(--green-light); transform: translateY(-1px); box-shadow: 0 8px 28px rgba(120,190,32,0.4); }
+        .btn-buy-now { width: 100%; background: #ffa41c; color: var(--black); border: none; border-radius: 20px; padding: 14px; font-family: 'Barlow Condensed', sans-serif; font-size: 17px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: all 0.28s; margin-bottom: 14px; }
+        .btn-buy-now:hover { background: #ffb340; transform: translateY(-1px); }
+        .secure-line { display: flex; align-items: center; gap: 8px; justify-content: center; font-size: 12px; color: #777; margin-bottom: 14px; }
+        .buy-meta { display: flex; flex-direction: column; gap: 8px; }
+        .buy-meta-row { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: #999; }
+        .buy-meta-row strong { color: #bbb; font-weight: 600; }
+
+        /* BELOW FOLD */
+        .below-fold { max-width: 1400px; margin: 0 auto; padding: 0 5%; }
+
+        /* ABOUT SECTION */
+        .section-block { padding: 48px 0; border-top: 1px solid #1e1e1e; }
+        .section-block-title { font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 2px solid var(--green); display: inline-block; }
+        .about-desc { font-size: 15px; line-height: 1.8; color: #aaa; margin-bottom: 24px; max-width: 800px; }
+        .about-bullets { list-style: none; display: flex; flex-direction: column; gap: 16px; max-width: 800px; }
+        .about-bullets li { display: flex; align-items: flex-start; gap: 14px; font-size: 14.5px; line-height: 1.7; color: #ccc; }
+        .about-bullets li .bullet-icon { width: 26px; height: 26px; background: rgba(120,190,32,0.1); border: 1px solid rgba(120,190,32,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--green); font-size: 13px; font-weight: 900; margin-top: 2px; }
+        .about-bullets li strong { color: var(--white); }
+
+        /* SPECS TABLE */
+        .specs-table { width: 100%; max-width: 700px; border-collapse: collapse; }
+        .specs-table tr { border-bottom: 1px solid #1e1e1e; }
+        .specs-table tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+        .specs-table td { padding: 13px 16px; font-size: 14px; }
+        .specs-table td:first-child { color: #888; font-weight: 600; text-transform: uppercase; font-size: 12px; letter-spacing: 1px; width: 40%; }
+        .specs-table td:last-child { color: var(--white); font-weight: 500; }
+
+        /* REVIEWS */
+        .rating-overview { display: flex; gap: 48px; align-items: flex-start; margin-bottom: 36px; flex-wrap: wrap; }
+        .rating-big { text-align: center; }
+        .rating-big .num { font-family: 'Barlow Condensed', sans-serif; font-size: 72px; font-weight: 900; color: var(--white); line-height: 1; }
+        .rating-big .stars-lg { color: var(--gold); font-size: 22px; display: block; margin: 4px 0; }
+        .rating-big .count { font-size: 13px; color: #777; }
+        .rating-bars { flex: 1; min-width: 240px; }
+        .bar-row { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+        .bar-label { font-size: 13px; color: #5b9bd5; text-decoration: underline; cursor: pointer; width: 28px; text-align: right; flex-shrink: 0; }
+        .bar-track { flex: 1; height: 12px; background: #222; border-radius: 6px; overflow: hidden; }
+        .bar-fill { height: 100%; background: var(--green); border-radius: 6px; }
+        .bar-pct { font-size: 13px; color: #777; width: 36px; flex-shrink: 0; }
+        .review-cards { display: flex; flex-direction: column; gap: 28px; }
+        .review-card { background: var(--dark2); border: 1px solid #1e1e1e; border-radius: 10px; padding: 28px; transition: border-color 0.3s; }
+        .review-card:hover { border-color: rgba(120,190,32,0.2); }
+        .review-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 12px; gap: 16px; flex-wrap: wrap; }
+        .reviewer-info { display: flex; align-items: center; gap: 12px; }
+        .reviewer-avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--green), var(--green-dark)); display: flex; align-items: center; justify-content: center; font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 900; color: var(--black); flex-shrink: 0; }
+        .reviewer-name { font-weight: 700; font-size: 15px; }
+        .reviewer-loc { font-size: 12px; color: #666; margin-top: 2px; }
+        .verified-badge { background: rgba(120,190,32,0.1); border: 1px solid rgba(120,190,32,0.25); color: var(--green); padding: 3px 10px; border-radius: 100px; font-size: 10px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; white-space: nowrap; }
+        .review-stars-date { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; flex-wrap: wrap; }
+        .review-stars { color: var(--gold); font-size: 15px; letter-spacing: 1px; }
+        .review-date { font-size: 12px; color: #666; }
+        .review-title { font-weight: 700; font-size: 15px; margin-bottom: 8px; }
+        .review-body { font-size: 14px; line-height: 1.75; color: #999; margin-bottom: 16px; }
+        .helpful-row { display: flex; align-items: center; gap: 12px; font-size: 13px; color: #777; flex-wrap: wrap; }
+        .helpful-btn { background: transparent; border: 1px solid #2a2a2a; color: #aaa; padding: 5px 14px; border-radius: 4px; font-size: 12px; cursor: pointer; transition: all 0.22s; font-family: 'Barlow', sans-serif; }
+        .helpful-btn:hover { border-color: var(--green); color: var(--green); }
+        .helpful-btn.voted { border-color: var(--green); color: var(--green); background: rgba(120,190,32,0.06); }
+
+        /* Q&A */
+        .qa-item { background: var(--dark2); border: 1px solid #1e1e1e; border-radius: 10px; padding: 24px; margin-bottom: 16px; }
+        .qa-q { display: flex; gap: 12px; margin-bottom: 14px; align-items: flex-start; }
+        .qa-badge-q { background: #2a2a2a; color: #999; padding: 3px 10px; border-radius: 3px; font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 800; letter-spacing: 1px; flex-shrink: 0; }
+        .qa-badge-a { background: rgba(120,190,32,0.12); color: var(--green); padding: 3px 10px; border-radius: 3px; font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 800; letter-spacing: 1px; flex-shrink: 0; }
+        .qa-text-q { font-size: 15px; font-weight: 600; color: var(--white); line-height: 1.5; }
+        .qa-text-a { font-size: 14px; color: #aaa; line-height: 1.7; }
+        .qa-a { display: flex; gap: 12px; align-items: flex-start; }
+        .qa-helpful { font-size: 12px; color: #666; margin-top: 12px; padding-top: 12px; border-top: 1px solid #1e1e1e; display: flex; align-items: center; gap: 10px; }
+
+        /* FOOTER */
+        footer { background: #060606; border-top: 1px solid #181818; padding: 80px 5% 36px; margin-top: 60px; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
+        .footer-logo { font-family: 'Barlow Condensed', sans-serif; font-size: 30px; font-weight: 900; letter-spacing: 3px; margin-bottom: 8px; }
+        .footer-logo em { color: var(--green); font-style: normal; }
+        .footer-tagline { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: rgba(120,190,32,0.6); margin-bottom: 16px; }
+        .footer-brand p { font-size: 14px; color: #444; line-height: 1.75; margin-bottom: 24px; max-width: 280px; }
+        .socials { display: flex; gap: 10px; }
+        .social-btn { width: 36px; height: 36px; background: #181818; border: 1px solid #222; border-radius: 4px; display: flex; align-items: center; justify-content: center; text-decoration: none; color: #666; font-size: 13px; font-weight: 700; transition: all 0.25s; }
+        .social-btn:hover { background: var(--green); color: var(--black); border-color: var(--green); }
+        .footer-col h5 { font-family: 'Barlow Condensed', sans-serif; font-size: 15px; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 20px; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col ul li a { color: #444; text-decoration: none; font-size: 14px; transition: color 0.25s; }
+        .footer-col ul li a:hover { color: var(--green); }
+        .footer-bottom { border-top: 1px solid #181818; padding-top: 28px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+        .footer-bottom p { font-size: 13px; color: #383838; }
+        .footer-bottom em { color: var(--green); font-style: normal; }
+        .payments { display: flex; gap: 8px; }
+        .pay-badge { background: #181818; border: 1px solid #222; border-radius: 3px; padding: 5px 12px; font-size: 10px; font-weight: 800; letter-spacing: 1px; color: #444; }
+
+        @media (max-width: 1100px) {
+            .product-main { grid-template-columns: 1fr 1fr; }
+            .buy-box-col { display: none; }
+        }
+        @media (max-width: 780px) {
+            .nav-links { display: none; }
+            .product-main { grid-template-columns: 1fr; padding: 20px 4%; }
+            .info-col { border: none; padding: 0; }
+            .gallery-col { padding-right: 0; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
+            .footer-bottom { flex-direction: column; }
+            .rating-overview { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ANNOUNCEMENT BAR -->
+<div class="announcement-bar">
+    ⚡ Launch Offer — Free Shipping on Every Order &nbsp;·&nbsp; 12-Month Warranty on All Products
+</div>
+
+<!-- NAV -->
+<nav id="main-nav">
+    <a href="index.html" class="nav-logo">LAWN<em>IX</em><sup style="font-size:10px;color:#555;margin-left:2px;">™</sup></a>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li class="nav-item has-dropdown">
+            <a href="collections.html" style="color:var(--green);">Shop <span style="font-size:10px;">▾</span></a>
+            <div class="nav-dropdown">
+                <a href="collections.html" class="dropdown-link" style="font-weight:700;">🛍️ Shop All Products</a>
+                <div class="dropdown-divider"></div>
+                <div class="dropdown-group-label">Lawn Leveler</div>
+                <a href="product-lx30.html" class="dropdown-link active">30" Leveling Rake</a>
+                <a href="product-lx48.html" class="dropdown-link">48" Leveling Rake</a>
+                <div class="dropdown-divider"></div>
+                <div class="dropdown-group-label">Cultivator</div>
+                <a href="product-cultivator.html" class="dropdown-link">Rotary Cultivator &amp; Hand Tiller</a>
+            </div>
+        </li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="track-order.html">Track Order</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="collections.html" class="nav-shop-btn">Shop Now</a></li>
+    </ul>
+    <div class="nav-right">
+        <button class="nav-icon" aria-label="Search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
+        <button class="nav-icon" aria-label="Cart"><svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></button>
+    </div>
+</nav>
+
+<!-- PAGE WRAP -->
+<div class="page-wrap">
+
+    <!-- BREADCRUMB -->
+    <div class="breadcrumb-bar">
+        <div class="breadcrumb">
+            <a href="index.html">Home</a><span>/</span>
+            <a href="collections.html">Products</a><span>/</span>
+            <a href="collections.html">Lawn Leveler</a><span>/</span>
+            30" Leveling Rake LX-30
+        </div>
+    </div>
+
+    <!-- PRODUCT MAIN -->
+    <div class="product-main">
+
+        <!-- LEFT: GALLERY -->
+        <div class="gallery-col">
+            <div class="gallery-layout">
+                <div class="thumb-strip">
+                    <div class="thumb-item active" onclick="switchImg(this, 'side')">
+                        <svg viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="72" height="72" fill="#1a1a1a"/>
+                            <rect x="33" y="6" width="6" height="48" rx="3" fill="#78BE20"/>
+                            <rect x="20" y="52" width="32" height="6" rx="2" fill="#c0c0c0"/>
+                            <rect x="20" y="58" width="3" height="8" rx="1" fill="#888"/>
+                            <rect x="26" y="58" width="3" height="8" rx="1" fill="#888"/>
+                            <rect x="32" y="58" width="3" height="8" rx="1" fill="#888"/>
+                            <rect x="38" y="58" width="3" height="8" rx="1" fill="#888"/>
+                            <rect x="44" y="58" width="3" height="8" rx="1" fill="#888"/>
+                        </svg>
+                    </div>
+                    <div class="thumb-item" onclick="switchImg(this, 'detail')">
+                        <svg viewBox="0 0 72 72" fill="none">
+                            <rect width="72" height="72" fill="#1a1a1a"/>
+                            <rect x="10" y="30" width="52" height="8" rx="2" fill="#c0c0c0"/>
+                            <rect x="10" y="38" width="4" height="12" rx="1" fill="#888"/>
+                            <rect x="17" y="38" width="4" height="12" rx="1" fill="#888"/>
+                            <rect x="24" y="38" width="4" height="12" rx="1" fill="#888"/>
+                            <rect x="31" y="38" width="4" height="12" rx="1" fill="#888"/>
+                            <rect x="38" y="38" width="4" height="12" rx="1" fill="#888"/>
+                            <rect x="45" y="38" width="4" height="12" rx="1" fill="#888"/>
+                            <rect x="52" y="38" width="4" height="12" rx="1" fill="#888"/>
+                            <text x="36" y="26" text-anchor="middle" fill="#78BE20" font-size="6" font-weight="bold">PLATE DETAIL</text>
+                        </svg>
+                    </div>
+                    <div class="thumb-item" onclick="switchImg(this, 'handle')">
+                        <svg viewBox="0 0 72 72" fill="none">
+                            <rect width="72" height="72" fill="#1a1a1a"/>
+                            <rect x="32" y="8" width="8" height="16" rx="4" fill="#78BE20"/>
+                            <rect x="34" y="24" width="4" height="40" rx="2" fill="#c0c0c0"/>
+                            <text x="36" y="58" text-anchor="middle" fill="#78BE20" font-size="5" font-weight="bold">HANDLE</text>
+                        </svg>
+                    </div>
+                    <div class="thumb-item" onclick="switchImg(this, 'inuse')">
+                        <svg viewBox="0 0 72 72" fill="none">
+                            <rect width="72" height="72" fill="#1a1a1a"/>
+                            <rect x="32" y="5" width="8" height="14" rx="4" fill="#78BE20"/>
+                            <rect x="34" y="19" width="4" height="32" rx="2" fill="#c0c0c0"/>
+                            <ellipse cx="36" cy="60" rx="22" ry="5" fill="#5a9018" opacity="0.4"/>
+                            <rect x="14" y="51" width="44" height="6" rx="2" fill="#c0c0c0"/>
+                            <rect x="14" y="57" width="44" height="6" rx="1" fill="#888" opacity="0.7"/>
+                            <text x="36" y="42" text-anchor="middle" fill="#78BE20" font-size="5" font-weight="bold">IN USE</text>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- MAIN IMAGE -->
+                <div class="main-image-wrap" id="main-img-container">
+                    <div class="img-badge-sale">-21%</div>
+                    <!-- LEVELING RAKE SVG - LX-30 -->
+                    <svg id="main-svg" viewBox="0 0 400 550" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <radialGradient id="bgGrad" cx="50%" cy="50%" r="60%">
+                                <stop offset="0%" stop-color="#222222"/>
+                                <stop offset="100%" stop-color="#111111"/>
+                            </radialGradient>
+                            <linearGradient id="poleGrad" x1="0" y1="0" x2="1" y2="0">
+                                <stop offset="0%" stop-color="#888"/>
+                                <stop offset="40%" stop-color="#e0e0e0"/>
+                                <stop offset="60%" stop-color="#d0d0d0"/>
+                                <stop offset="100%" stop-color="#777"/>
+                            </linearGradient>
+                            <linearGradient id="gripGrad" x1="0" y1="0" x2="1" y2="0">
+                                <stop offset="0%" stop-color="#4a8010"/>
+                                <stop offset="30%" stop-color="#78BE20"/>
+                                <stop offset="70%" stop-color="#6aaa1a"/>
+                                <stop offset="100%" stop-color="#3d6a0d"/>
+                            </linearGradient>
+                            <linearGradient id="plateGrad" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#d8d8d8"/>
+                                <stop offset="30%" stop-color="#f0f0f0"/>
+                                <stop offset="70%" stop-color="#c8c8c8"/>
+                                <stop offset="100%" stop-color="#a0a0a0"/>
+                            </linearGradient>
+                            <linearGradient id="tineGrad" x1="0" y1="0" x2="1" y2="0">
+                                <stop offset="0%" stop-color="#999"/>
+                                <stop offset="50%" stop-color="#e0e0e0"/>
+                                <stop offset="100%" stop-color="#888"/>
+                            </linearGradient>
+                            <filter id="glow">
+                                <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                                <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                            </filter>
+                        </defs>
+                        <!-- Background -->
+                        <rect width="400" height="550" fill="url(#bgGrad)" rx="10"/>
+                        <!-- Grid pattern -->
+                        <line x1="0" y1="100" x2="400" y2="100" stroke="rgba(120,190,32,0.05)" stroke-width="1"/>
+                        <line x1="0" y1="200" x2="400" y2="200" stroke="rgba(120,190,32,0.05)" stroke-width="1"/>
+                        <line x1="0" y1="300" x2="400" y2="300" stroke="rgba(120,190,32,0.05)" stroke-width="1"/>
+                        <line x1="0" y1="400" x2="400" y2="400" stroke="rgba(120,190,32,0.05)" stroke-width="1"/>
+                        <line x1="100" y1="0" x2="100" y2="550" stroke="rgba(120,190,32,0.05)" stroke-width="1"/>
+                        <line x1="200" y1="0" x2="200" y2="550" stroke="rgba(120,190,32,0.05)" stroke-width="1"/>
+                        <line x1="300" y1="0" x2="300" y2="550" stroke="rgba(120,190,32,0.05)" stroke-width="1"/>
+                        <!-- Glow behind grip -->
+                        <ellipse cx="200" cy="58" rx="55" ry="30" fill="rgba(120,190,32,0.1)" filter="url(#glow)"/>
+                        <!-- GRIP HANDLE -->
+                        <rect x="163" y="22" width="74" height="36" rx="18" fill="url(#gripGrad)"/>
+                        <rect x="166" y="25" width="68" height="30" rx="15" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+                        <!-- Grip texture lines -->
+                        <line x1="178" y1="26" x2="178" y2="52" stroke="rgba(0,0,0,0.25)" stroke-width="1.5"/>
+                        <line x1="186" y1="26" x2="186" y2="52" stroke="rgba(0,0,0,0.25)" stroke-width="1.5"/>
+                        <line x1="194" y1="26" x2="194" y2="52" stroke="rgba(0,0,0,0.25)" stroke-width="1.5"/>
+                        <line x1="202" y1="26" x2="202" y2="52" stroke="rgba(0,0,0,0.25)" stroke-width="1.5"/>
+                        <line x1="210" y1="26" x2="210" y2="52" stroke="rgba(0,0,0,0.25)" stroke-width="1.5"/>
+                        <line x1="218" y1="26" x2="218" y2="52" stroke="rgba(0,0,0,0.25)" stroke-width="1.5"/>
+                        <line x1="226" y1="26" x2="226" y2="52" stroke="rgba(0,0,0,0.25)" stroke-width="1.5"/>
+                        <!-- Grip end caps -->
+                        <ellipse cx="163" cy="40" rx="8" ry="14" fill="#3d6a0d"/>
+                        <ellipse cx="237" cy="40" rx="8" ry="14" fill="#3d6a0d"/>
+                        <!-- STEEL POLE -->
+                        <rect x="191" y="58" width="18" height="320" fill="url(#poleGrad)"/>
+                        <!-- Pole highlight -->
+                        <rect x="195" y="58" width="4" height="320" fill="rgba(255,255,255,0.12)"/>
+                        <!-- Pole ferrule -->
+                        <rect x="188" y="340" width="24" height="14" rx="2" fill="#aaa"/>
+                        <rect x="188" y="344" width="24" height="3" fill="#ddd"/>
+                        <!-- CENTER MOUNT BRACKET -->
+                        <rect x="178" y="354" width="44" height="20" rx="4" fill="#bbb"/>
+                        <rect x="180" y="356" width="40" height="16" rx="3" fill="#d0d0d0"/>
+                        <ellipse cx="200" cy="364" rx="8" ry="5" fill="#888"/>
+                        <!-- GROUND PLATE (280px wide = 30") -->
+                        <rect x="60" y="374" width="280" height="28" rx="4" fill="url(#plateGrad)"/>
+                        <!-- Plate top highlight -->
+                        <rect x="60" y="374" width="280" height="5" rx="2" fill="rgba(255,255,255,0.35)"/>
+                        <!-- Plate bottom edge shadow -->
+                        <rect x="60" y="396" width="280" height="6" rx="2" fill="rgba(0,0,0,0.2)"/>
+                        <!-- Plate side reinforcement -->
+                        <rect x="60" y="374" width="10" height="28" rx="2" fill="#bbb"/>
+                        <rect x="330" y="374" width="10" height="28" rx="2" fill="#bbb"/>
+                        <!-- LAWNIX text on plate -->
+                        <text x="200" y="392" text-anchor="middle" fill="#78BE20" font-size="11" font-weight="bold" font-family="Barlow Condensed, sans-serif" letter-spacing="3">LAWNIX™</text>
+                        <!-- TINES (12 tines) -->
+                        <rect x="74" y="402" width="6" height="78" rx="3" fill="url(#tineGrad)"/>
+                        <rect x="97" y="402" width="6" height="82" rx="3" fill="url(#tineGrad)"/>
+                        <rect x="120" y="402" width="6" height="78" rx="3" fill="url(#tineGrad)"/>
+                        <rect x="143" y="402" width="6" height="82" rx="3" fill="url(#tineGrad)"/>
+                        <rect x="166" y="402" width="6" height="78" rx="3" fill="url(#tineGrad)"/>
+                        <rect x="189" y="402" width="6" height="82" rx="3" fill="url(#tineGrad)"/>
+                        <rect x="209" y="402" width="6" height="82" rx="3" fill="url(#tineGrad)"/>
+                        <rect x="229" y="402" width="6" height="78" rx="3" fill="url(#tineGrad)"/>
+                        <rect x="252" y="402" width="6" height="82" rx="3" fill="url(#tineGrad)"/>
+                        <rect x="275" y="402" width="6" height="78" rx="3" fill="url(#tineGrad)"/>
+                        <rect x="298" y="402" width="6" height="82" rx="3" fill="url(#tineGrad)"/>
+                        <rect x="321" y="402" width="6" height="78" rx="3" fill="url(#tineGrad)"/>
+                        <!-- Tine tips -->
+                        <ellipse cx="77" cy="480" rx="3.5" ry="4" fill="#bbb"/>
+                        <ellipse cx="100" cy="484" rx="3.5" ry="4" fill="#bbb"/>
+                        <ellipse cx="123" cy="480" rx="3.5" ry="4" fill="#bbb"/>
+                        <ellipse cx="146" cy="484" rx="3.5" ry="4" fill="#bbb"/>
+                        <ellipse cx="169" cy="480" rx="3.5" ry="4" fill="#bbb"/>
+                        <ellipse cx="192" cy="484" rx="3.5" ry="4" fill="#bbb"/>
+                        <ellipse cx="212" cy="484" rx="3.5" ry="4" fill="#bbb"/>
+                        <ellipse cx="232" cy="480" rx="3.5" ry="4" fill="#bbb"/>
+                        <ellipse cx="255" cy="484" rx="3.5" ry="4" fill="#bbb"/>
+                        <ellipse cx="278" cy="480" rx="3.5" ry="4" fill="#bbb"/>
+                        <ellipse cx="301" cy="484" rx="3.5" ry="4" fill="#bbb"/>
+                        <ellipse cx="324" cy="480" rx="3.5" ry="4" fill="#bbb"/>
+                        <!-- Model label -->
+                        <text x="200" y="532" text-anchor="middle" fill="#555" font-size="11" font-family="Barlow Condensed, sans-serif" letter-spacing="4">LX-30 · 30" × 10"</text>
+                        <!-- Dimension lines -->
+                        <line x1="60" y1="415" x2="60" y2="408" stroke="rgba(120,190,32,0.4)" stroke-width="1"/>
+                        <line x1="340" y1="415" x2="340" y2="408" stroke="rgba(120,190,32,0.4)" stroke-width="1"/>
+                        <line x1="60" y1="410" x2="340" y2="410" stroke="rgba(120,190,32,0.4)" stroke-width="1"/>
+                        <text x="200" y="406" text-anchor="middle" fill="rgba(120,190,32,0.6)" font-size="9" font-family="Barlow Condensed, sans-serif">30" WIDE</text>
+                        <!-- Brand watermark -->
+                        <text x="200" y="18" text-anchor="middle" fill="rgba(120,190,32,0.08)" font-size="32" font-weight="900" font-family="Barlow Condensed, sans-serif" letter-spacing="8">LAWNIX</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- MIDDLE: PRODUCT INFO -->
+        <div class="info-col">
+            <a href="collections.html" class="brand-link">Visit the Lawnix™ Store</a>
+            <h1 class="product-title">Lawn Leveling Rake | Stainless Steel Surface Leveling Tool | 30" x 10" Ground Plate | 78" Extra Long Handle</h1>
+
+            <div class="rating-row">
+                <span class="stars-gold">★★★★★</span>
+                <span class="rating-score">4.7</span>
+                <a href="#reviews" class="rating-link">127 ratings</a>
+                <span class="rating-sep">|</span>
+                <a href="#qa" class="rating-link">43 answered questions</a>
+            </div>
+
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap;">
+                <span style="font-size:12px;font-weight:700;color:#888;letter-spacing:1px;text-transform:uppercase;">Brand:</span>
+                <a href="collections.html" style="color:var(--green);text-decoration:none;font-size:13px;font-weight:600;">LAWNIX™</a>
+                <span style="color:#444;">|</span>
+                <span style="font-size:12px;color:#777;">SKU: LX-30</span>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="price-main">
+                <div class="price-label">Price:</div>
+                <div class="price-now"><sup>$</sup>54<span style="font-size:24px;">.99</span></div>
+                <div class="price-row2">
+                    <span class="price-was-label">Was:</span>
+                    <span class="price-was">$69.99</span>
+                    <span class="price-save-badge">Save $15.00 (21%)</span>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="variant-section">
+                <div class="variant-label">Size: <span>30" × 10"</span></div>
+                <div class="variant-btns">
+                    <a href="product-lx30.html" class="var-btn active">30" × 10"</a>
+                    <a href="product-lx48.html" class="var-btn">48" × 10"</a>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="about-section">
+                <div class="about-heading">About this item</div>
+                <ul class="bullet-list">
+                    <li><strong>Heavy-Duty Stainless Steel Construction</strong> – Built to last with premium stainless steel for rust resistance and long-term durability.</li>
+                    <li><strong>30" x 10" Wide Ground Plate</strong> – Our mid-sized rake head ideal for most lawn and soil leveling projects. Solid, center-mounted design that hugs the surface without flipping over.</li>
+                    <li><strong>Extra-Long 78" Handle for Easy Reach</strong> – Tackle large lawns and gardens without bending or straining your back. For tighter spaces, pole easily adjusts to 50".</li>
+                    <li><strong>Professional-Grade Lawn Leveler</strong> – Essential tool for evening out unwanted dips and undulations to achieve smooth, level, beautiful lawn. Perfect for homeowners and professional landscapers alike.</li>
+                    <li><strong>12-Month Warranty</strong> – We offer a 12-month warranty on all our products. Responsive after-sales service.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- RIGHT: BUY BOX -->
+        <div class="buy-box-col">
+            <div class="buy-box">
+                <div class="buy-price"><sup>$</sup>54<span style="font-size:18px;">.99</span></div>
+                <div class="buy-delivery"><strong>FREE delivery</strong> Tomorrow, May 18</div>
+                <div class="buy-delivery" style="font-size:12px;color:#777;">Order within <strong style="color:var(--gold);">6 hrs 22 mins</strong></div>
+                <div class="buy-stock">✓ In Stock</div>
+                <div class="buy-divider"></div>
+                <div class="qty-label-sm">Quantity:</div>
+                <select class="qty-select">
+                    <option>1</option><option>2</option><option>3</option><option>4</option>
+                    <option>5</option><option>6</option><option>7</option><option>8</option>
+                    <option>9</option><option>10</option>
+                </select>
+                <button class="btn-add-cart" onclick="addToCart(this)">Add to Cart</button>
+                <button class="btn-buy-now">Buy Now</button>
+                <div class="secure-line">🔒 Secure transaction</div>
+                <div class="buy-divider"></div>
+                <div class="buy-meta">
+                    <div class="buy-meta-row"><strong>Ships from</strong><span>Lawnix™</span></div>
+                    <div class="buy-meta-row"><strong>Sold by</strong><span>Lawnix™ Official Store</span></div>
+                    <div class="buy-meta-row"><strong>Returns</strong><span>Free Returns</span></div>
+                    <div class="buy-meta-row"><strong>Warranty</strong><span>12-Month Warranty</span></div>
+                    <div class="buy-meta-row"><strong>Payment</strong><span>Secure checkout</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BELOW FOLD -->
+    <div class="below-fold">
+
+        <!-- ABOUT THIS ITEM -->
+        <div class="section-block" id="about">
+            <div class="section-block-title">About This Item</div>
+            <p class="about-desc">The LAWNIX™ LX-30 Lawn Leveling Rake is the professional's choice for achieving a perfectly smooth, level lawn. Crafted from heavy-duty 304 stainless steel, this rake is built to withstand years of hard use while delivering consistent, precise results every time.</p>
+            <ul class="about-bullets">
+                <li>
+                    <span class="bullet-icon">1</span>
+                    <span><strong>Heavy-Duty Stainless Steel Construction</strong> – Built to last with premium stainless steel for rust resistance and long-term durability. Unlike cheaper alternatives, the LAWNIX rake won't bend, warp, or corrode even after seasons of heavy use.</span>
+                </li>
+                <li>
+                    <span class="bullet-icon">2</span>
+                    <span><strong>30" x 10" Wide Ground Plate</strong> – Our mid-sized rake head ideal for most lawn and soil leveling projects. Solid, center-mounted design that hugs the surface without flipping over. The generous plate width allows you to cover more ground per pass.</span>
+                </li>
+                <li>
+                    <span class="bullet-icon">3</span>
+                    <span><strong>Extra-Long 78" Handle for Easy Reach</strong> – Tackle large lawns and gardens without bending or straining your back. For tighter spaces, pole easily adjusts to 50". The ergonomic green grip handle provides comfort during extended use sessions.</span>
+                </li>
+                <li>
+                    <span class="bullet-icon">4</span>
+                    <span><strong>Professional-Grade Lawn Leveler</strong> – Essential tool for evening out unwanted dips and undulations to achieve smooth, level, beautiful lawn. Perfect for topdressing, spreading sand, and preparing seed beds. Used by professional landscapers and serious homeowners alike.</span>
+                </li>
+                <li>
+                    <span class="bullet-icon">5</span>
+                    <span><strong>12-Month Warranty</strong> – We offer a 12-month warranty on all our products. Our responsive after-sales service team is ready to help with any questions or issues. Your satisfaction is our priority.</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- PRODUCT INFORMATION / SPECS -->
+        <div class="section-block" id="specs">
+            <div class="section-block-title">Product Information</div>
+            <table class="specs-table">
+                <tr><td>Material</td><td>304 Stainless Steel</td></tr>
+                <tr><td>Plate Dimensions</td><td>30" × 10"</td></tr>
+                <tr><td>Handle Length</td><td>78" (adjustable to 50")</td></tr>
+                <tr><td>Tine Count</td><td>30</td></tr>
+                <tr><td>Weight</td><td>5.2 lbs</td></tr>
+                <tr><td>Assembly</td><td>Tool-free</td></tr>
+                <tr><td>Warranty</td><td>12 Months</td></tr>
+                <tr><td>Item Model Number</td><td>LX-30</td></tr>
+                <tr><td>Best For</td><td>Lawn leveling, topdressing, sand spreading, soil prep</td></tr>
+                <tr><td>Handle Grip</td><td>Ergonomic green grip, non-slip</td></tr>
+                <tr><td>Mount Type</td><td>Center-mounted, anti-flip design</td></tr>
+            </table>
+        </div>
+
+        <!-- CUSTOMER REVIEWS -->
+        <div class="section-block" id="reviews">
+            <div class="section-block-title">Customer Reviews</div>
+
+            <div class="rating-overview">
+                <div class="rating-big">
+                    <div class="num">4.7</div>
+                    <span class="stars-lg">★★★★½</span>
+                    <div class="count">out of 5</div>
+                    <div style="font-size:12px;color:#777;margin-top:6px;">127 global ratings</div>
+                </div>
+                <div class="rating-bars">
+                    <div class="bar-row">
+                        <span class="bar-label">5★</span>
+                        <div class="bar-track"><div class="bar-fill" style="width:71%"></div></div>
+                        <span class="bar-pct">71%</span>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">4★</span>
+                        <div class="bar-track"><div class="bar-fill" style="width:18%;background:#a0d050"></div></div>
+                        <span class="bar-pct">18%</span>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">3★</span>
+                        <div class="bar-track"><div class="bar-fill" style="width:7%;background:#c8e070"></div></div>
+                        <span class="bar-pct">7%</span>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">2★</span>
+                        <div class="bar-track"><div class="bar-fill" style="width:2%;background:#e0b040"></div></div>
+                        <span class="bar-pct">2%</span>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">1★</span>
+                        <div class="bar-track"><div class="bar-fill" style="width:2%;background:#e05040"></div></div>
+                        <span class="bar-pct">2%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="review-cards">
+                <!-- Review 1 -->
+                <div class="review-card">
+                    <div class="review-top">
+                        <div class="reviewer-info">
+                            <div class="reviewer-avatar">JM</div>
+                            <div>
+                                <div class="reviewer-name">James M.</div>
+                                <div class="reviewer-loc">Austin, TX</div>
+                            </div>
+                        </div>
+                        <span class="verified-badge">✓ Verified Purchase</span>
+                    </div>
+                    <div class="review-stars-date">
+                        <span class="review-stars">★★★★★</span>
+                        <span class="review-date">Reviewed on April 28, 2026</span>
+                    </div>
+                    <div class="review-title">Absolutely transformed my lawn — worth every penny</div>
+                    <div class="review-body">This rake transformed my backyard. Spread 2 tons of topdressing sand in a single afternoon — it's an absolute beast. The steel quality is obvious the moment you pick it up. The 30" plate is perfect for my medium-sized lawn; covers ground fast without being unwieldy. The center-mounted design really does hug the surface perfectly without flipping. Can't recommend this enough.</div>
+                    <div class="helpful-row">
+                        <span>Was this helpful?</span>
+                        <button class="helpful-btn" onclick="toggleHelpful(this, 'r1-yes')">Yes (24)</button>
+                        <button class="helpful-btn" onclick="toggleHelpful(this, 'r1-no')">No (1)</button>
+                        <span style="margin-left:auto;font-size:12px;color:#555;">Report</span>
+                    </div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="review-card">
+                    <div class="review-top">
+                        <div class="reviewer-info">
+                            <div class="reviewer-avatar">SR</div>
+                            <div>
+                                <div class="reviewer-name">Sarah R.</div>
+                                <div class="reviewer-loc">Denver, CO</div>
+                            </div>
+                        </div>
+                        <span class="verified-badge">✓ Verified Purchase</span>
+                    </div>
+                    <div class="review-stars-date">
+                        <span class="review-stars">★★★★★</span>
+                        <span class="review-date">Reviewed on May 3, 2026</span>
+                    </div>
+                    <div class="review-title">Best leveling rake I've owned — and I've tried four</div>
+                    <div class="review-body">I've tried 4 leveling rakes over the years. This one is in a completely different league. The tines don't flex, the handle is solid, and the results are flawless. The 78" handle means I can work standing fully upright — my back thanks me! The adjustable feature is also great for storage. Setup took literally 2 minutes.</div>
+                    <div class="helpful-row">
+                        <span>Was this helpful?</span>
+                        <button class="helpful-btn" onclick="toggleHelpful(this, 'r2-yes')">Yes (18)</button>
+                        <button class="helpful-btn" onclick="toggleHelpful(this, 'r2-no')">No (0)</button>
+                        <span style="margin-left:auto;font-size:12px;color:#555;">Report</span>
+                    </div>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="review-card">
+                    <div class="review-top">
+                        <div class="reviewer-info">
+                            <div class="reviewer-avatar">DK</div>
+                            <div>
+                                <div class="reviewer-name">Derek K.</div>
+                                <div class="reviewer-loc">Tampa, FL</div>
+                            </div>
+                        </div>
+                        <span class="verified-badge">✓ Verified Purchase</span>
+                    </div>
+                    <div class="review-stars-date">
+                        <span class="review-stars">★★★★★</span>
+                        <span class="review-date">Reviewed on May 10, 2026</span>
+                    </div>
+                    <div class="review-title">Bought 6 for my landscaping crew — all holding up great</div>
+                    <div class="review-body">Professional landscaper here — bought 6 of these for my crew. Incredibly durable after weeks of daily commercial use. Efficient, consistent results on every job. The 12-month warranty sealed the deal, but honestly we haven't needed it. Lawnix has a permanent customer in us. The stainless steel really holds up in Florida's humidity where other rakes corrode quickly.</div>
+                    <div class="helpful-row">
+                        <span>Was this helpful?</span>
+                        <button class="helpful-btn" onclick="toggleHelpful(this, 'r3-yes')">Yes (31)</button>
+                        <button class="helpful-btn" onclick="toggleHelpful(this, 'r3-no')">No (2)</button>
+                        <span style="margin-left:auto;font-size:12px;color:#555;">Report</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Q&A -->
+        <div class="section-block" id="qa">
+            <div class="section-block-title">Questions &amp; Answers</div>
+            <p style="font-size:14px;color:#777;margin-bottom:24px;">43 questions answered about this product</p>
+
+            <div class="qa-item">
+                <div class="qa-q">
+                    <span class="qa-badge-q">Q</span>
+                    <span class="qa-text-q">Does the handle truly adjust to 50 inches, and how easy is it to change the length?</span>
+                </div>
+                <div class="qa-a">
+                    <span class="qa-badge-a">A</span>
+                    <span class="qa-text-a">Yes! The pole has a quick-release collar that lets you shorten or extend the handle with no tools. It locks securely at 50" and 78" (and several lengths in between). Takes about 10 seconds. — <em style="color:var(--green);">Lawnix™ Support</em></span>
+                </div>
+                <div class="qa-helpful">
+                    Helpful?
+                    <button class="helpful-btn" onclick="toggleHelpful(this, 'qa1-yes')">Yes (12)</button>
+                    <button class="helpful-btn" onclick="toggleHelpful(this, 'qa1-no')">No (0)</button>
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="qa-q">
+                    <span class="qa-badge-q">Q</span>
+                    <span class="qa-text-q">Is this better for dry or wet topdressing? I'm planning to apply damp sand.</span>
+                </div>
+                <div class="qa-a">
+                    <span class="qa-badge-a">A</span>
+                    <span class="qa-text-a">The LX-30 works well with both dry and moderately damp topdressing. The stainless steel won't rust from wet material, and the tine spacing allows damp sand to pass through without clogging. Many customers use it specifically for wet topdressing applications. — <em style="color:var(--green);">Verified Buyer, Mike T.</em></span>
+                </div>
+                <div class="qa-helpful">
+                    Helpful?
+                    <button class="helpful-btn" onclick="toggleHelpful(this, 'qa2-yes')">Yes (8)</button>
+                    <button class="helpful-btn" onclick="toggleHelpful(this, 'qa2-no')">No (1)</button>
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="qa-q">
+                    <span class="qa-badge-q">Q</span>
+                    <span class="qa-text-q">How does this compare to the 48" version? Which should I get for a 1/4 acre lawn?</span>
+                </div>
+                <div class="qa-a">
+                    <span class="qa-badge-a">A</span>
+                    <span class="qa-text-a">For a 1/4 acre lawn, either would work well. The 30" LX-30 is more maneuverable around tight spots, garden edges, and landscaping features. The 48" LX-48 covers ground faster on open stretches. We'd recommend the LX-30 for mixed terrain, and the LX-48 if your lawn is mostly open and flat. — <em style="color:var(--green);">Lawnix™ Support</em></span>
+                </div>
+                <div class="qa-helpful">
+                    Helpful?
+                    <button class="helpful-btn" onclick="toggleHelpful(this, 'qa3-yes')">Yes (19)</button>
+                    <button class="helpful-btn" onclick="toggleHelpful(this, 'qa3-no')">No (0)</button>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- /below-fold -->
+</div><!-- /page-wrap -->
+
+<!-- NEWSLETTER BAR -->
+<div style="background:linear-gradient(135deg,#0a1200,#101010);border-top:1px solid rgba(120,190,32,0.15);padding:56px 5%;">
+    <div style="max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap;">
+        <div>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#78BE20;margin-bottom:8px;">Exclusive Offers</div>
+            <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(22px,3vw,34px);font-weight:900;text-transform:uppercase;line-height:1;margin-bottom:6px;">Get 10% Off Your First Order</h3>
+            <p style="font-size:14px;color:#666;max-width:360px;">Subscribe for exclusive deals, lawn care tips &amp; new product launches.</p>
+        </div>
+        <form onsubmit="handleNewsletter(event)" style="display:flex;gap:10px;flex-wrap:wrap;flex:1;max-width:480px;">
+            <input type="email" placeholder="Enter your email address" required
+                style="flex:1;min-width:200px;background:#1a1a1a;border:1px solid #2a2a2a;color:#fff;padding:13px 18px;border-radius:4px;font-size:14px;font-family:'Barlow',sans-serif;outline:none;">
+            <button type="submit"
+                style="background:#78BE20;color:#090909;border:none;padding:13px 28px;border-radius:4px;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:900;letter-spacing:2px;text-transform:uppercase;cursor:pointer;white-space:nowrap;transition:all 0.25s;"
+                onmouseover="this.style.background='#9fd44a'" onmouseout="this.style.background='#78BE20'">
+                Subscribe ⚡
+            </button>
+        </form>
+    </div>
+</div>
+
+<footer style="background:#060606;border-top:1px solid #181818;padding:70px 5% 30px;">
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:50px;margin-bottom:56px;max-width:1400px;margin-left:auto;margin-right:auto;">
+        <div>
+            <a href="index.html" style="font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:900;letter-spacing:3px;text-decoration:none;color:#fff;display:inline-block;margin-bottom:6px;">LAWN<em style="color:#78BE20;font-style:normal;">IX</em>™</a>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(120,190,32,0.6);margin-bottom:14px;">Power · Precision · Performance</div>
+            <p style="font-size:13px;color:#444;line-height:1.75;margin-bottom:22px;max-width:260px;">Professional-grade lawn tools built for those who take their lawn seriously. No shortcuts. No compromises.</p>
+            <div style="display:flex;gap:8px;">
+                <a href="#" style="width:34px;height:34px;background:#181818;border:1px solid #222;border-radius:4px;display:flex;align-items:center;justify-content:center;text-decoration:none;color:#666;font-size:12px;font-weight:700;transition:all 0.25s;" onmouseover="this.style.background='#78BE20';this.style.color='#090909'" onmouseout="this.style.background='#181818';this.style.color='#666'">f</a>
+                <a href="#" style="width:34px;height:34px;background:#181818;border:1px solid #222;border-radius:4px;display:flex;align-items:center;justify-content:center;text-decoration:none;color:#666;font-size:12px;font-weight:700;transition:all 0.25s;" onmouseover="this.style.background='#78BE20';this.style.color='#090909'" onmouseout="this.style.background='#181818';this.style.color='#666'">ig</a>
+                <a href="#" style="width:34px;height:34px;background:#181818;border:1px solid #222;border-radius:4px;display:flex;align-items:center;justify-content:center;text-decoration:none;color:#666;font-size:12px;font-weight:700;transition:all 0.25s;" onmouseover="this.style.background='#78BE20';this.style.color='#090909'" onmouseout="this.style.background='#181818';this.style.color='#666'">yt</a>
+                <a href="#" style="width:34px;height:34px;background:#181818;border:1px solid #222;border-radius:4px;display:flex;align-items:center;justify-content:center;text-decoration:none;color:#666;font-size:12px;font-weight:700;transition:all 0.25s;" onmouseover="this.style.background='#78BE20';this.style.color='#090909'" onmouseout="this.style.background='#181818';this.style.color='#666'">tt</a>
+            </div>
+        </div>
+        <div>
+            <h5 style="font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:18px;color:#fff;">Shop</h5>
+            <ul style="list-style:none;display:flex;flex-direction:column;gap:9px;">
+                <li><a href="collections.html" style="color:#444;text-decoration:none;font-size:13px;transition:color 0.25s;" onmouseover="this.style.color='#78BE20'" onmouseout="this.style.color='#444'">All Products</a></li>
+                <li><a href="product-lx30.html" style="color:#444;text-decoration:none;font-size:13px;transition:color 0.25s;" onmouseover="this.style.color='#78BE20'" onmouseout="this.style.color='#444'">30" Leveling Rake</a></li>
+                <li><a href="product-lx48.html" style="color:#444;text-decoration:none;font-size:13px;transition:color 0.25s;" onmouseover="this.style.color='#78BE20'" onmouseout="this.style.color='#444'">48" Leveling Rake</a></li>
+                <li><a href="product-cultivator.html" style="color:#444;text-decoration:none;font-size:13px;transition:color 0.25s;" onmouseover="this.style.color='#78BE20'" onmouseout="this.style.color='#444'">Rotary Cultivator</a></li>
+                <li><a href="collections.html" style="color:#444;text-decoration:none;font-size:13px;transition:color 0.25s;" onmouseover="this.style.color='#78BE20'" onmouseout="this.style.color='#444'">Best Sellers</a></li>
+            </ul>
+        </div>
+        <div>
+            <h5 style="font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:18px;color:#fff;">Help</h5>
+            <ul style="list-style:none;display:flex;flex-direction:column;gap:9px;">
+                <li><a href="faq.html" style="color:#444;text-decoration:none;font-size:13px;transition:color 0.25s;" onmouseover="this.style.color='#78BE20'" onmouseout="this.style.color='#444'">FAQ</a></li>
+                <li><a href="contact.html" style="color:#444;text-decoration:none;font-size:13px;transition:color 0.25s;" onmouseover="this.style.color='#78BE20'" onmouseout="this.style.color='#444'">Contact Us</a></li>
+                <li><a href="track-order.html" style="color:#444;text-decoration:none;font-size:13px;transition:color 0.25s;" onmouseover="this.style.color='#78BE20'" onmouseout="this.style.color='#444'">Track Order</a></li>
+                <li><a href="faq.html#returns" style="color:#444;text-decoration:none;font-size:13px;transition:color 0.25s;" onmouseover="this.style.color='#78BE20'" onmouseout="this.style.color='#444'">Returns &amp; Refunds</a></li>
+                <li><a href="faq.html#warranty" style="color:#444;text-decoration:none;font-size:13px;transition:color 0.25s;" onmouseover="this.style.color='#78BE20'" onmouseout="this.style.color='#444'">Warranty</a></li>
+            </ul>
+        </div>
+        <div>
+            <h5 style="font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:18px;color:#fff;">Company</h5>
+            <ul style="list-style:none;display:flex;flex-direction:column;gap:9px;">
+                <li><a href="about.html" style="color:#444;text-decoration:none;font-size:13px;transition:color 0.25s;" onmouseover="this.style.color='#78BE20'" onmouseout="this.style.color='#444'">About Us</a></li>
+                <li><a href="#" style="color:#444;text-decoration:none;font-size:13px;transition:color 0.25s;" onmouseover="this.style.color='#78BE20'" onmouseout="this.style.color='#444'">Privacy Policy</a></li>
+                <li><a href="#" style="color:#444;text-decoration:none;font-size:13px;transition:color 0.25s;" onmouseover="this.style.color='#78BE20'" onmouseout="this.style.color='#444'">Terms of Service</a></li>
+                <li><a href="#" style="color:#444;text-decoration:none;font-size:13px;transition:color 0.25s;" onmouseover="this.style.color='#78BE20'" onmouseout="this.style.color='#444'">Shipping Policy</a></li>
+                <li><a href="#" style="color:#444;text-decoration:none;font-size:13px;transition:color 0.25s;" onmouseover="this.style.color='#78BE20'" onmouseout="this.style.color='#444'">Refund Policy</a></li>
+            </ul>
+        </div>
+    </div>
+    <div style="border-top:1px solid #181818;padding-top:26px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;max-width:1400px;margin:0 auto;">
+        <p style="font-size:12px;color:#383838;">© 2026 <em style="color:#78BE20;font-style:normal;">Lawnix™</em>. All Rights Reserved. &nbsp;·&nbsp; Power. Precision. Performance.</p>
+        <div style="display:flex;gap:7px;">
+            <span style="background:#181818;border:1px solid #222;border-radius:3px;padding:4px 10px;font-size:10px;font-weight:800;letter-spacing:1px;color:#444;">VISA</span>
+            <span style="background:#181818;border:1px solid #222;border-radius:3px;padding:4px 10px;font-size:10px;font-weight:800;letter-spacing:1px;color:#444;">MC</span>
+            <span style="background:#181818;border:1px solid #222;border-radius:3px;padding:4px 10px;font-size:10px;font-weight:800;letter-spacing:1px;color:#444;">AMEX</span>
+            <span style="background:#181818;border:1px solid #222;border-radius:3px;padding:4px 10px;font-size:10px;font-weight:800;letter-spacing:1px;color:#444;">PAYPAL</span>
+            <span style="background:#181818;border:1px solid #222;border-radius:3px;padding:4px 10px;font-size:10px;font-weight:800;letter-spacing:1px;color:#444;">SHOP PAY</span>
+        </div>
+    </div>
+</footer>
+
+<script>
+function handleNewsletter(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('button');
+    const input = e.target.querySelector('input');
+    btn.textContent = '✓ Subscribed!';
+    btn.style.background = '#5a9018';
+    input.value = '';
+    setTimeout(() => { btn.textContent = 'Subscribe ⚡'; btn.style.background = '#78BE20'; }, 3000);
+}
+</script>
+
+<script>
+    // Thumbnail switching
+    function switchImg(thumb, view) {
+        document.querySelectorAll('.thumb-item').forEach(t => t.classList.remove('active'));
+        thumb.classList.add('active');
+    }
+
+    // Add to cart
+    function addToCart(btn) {
+        const orig = btn.textContent;
+        btn.textContent = '✓ Added!';
+        btn.style.background = '#5a9018';
+        setTimeout(() => {
+            btn.textContent = orig;
+            btn.style.background = '';
+        }, 1600);
+    }
+
+    // Helpful votes using localStorage
+    function toggleHelpful(btn, key) {
+        const stored = JSON.parse(localStorage.getItem('lawnix_helpful') || '{}');
+        const group = key.slice(0, -4); // e.g. 'r1-yes' -> 'r1'
+        const isYes = key.endsWith('-yes');
+
+        if (stored[key]) {
+            // Already voted this — remove
+            delete stored[key];
+            btn.classList.remove('voted');
+            const match = btn.textContent.match(/(\d+)/);
+            if (match) {
+                const newCount = Math.max(0, parseInt(match[1]) - 1);
+                btn.textContent = btn.textContent.replace(/\d+/, newCount);
+            }
+        } else {
+            // Remove opposite vote if exists
+            const oppositeKey = isYes ? key.replace('-yes', '-no') : key.replace('-no', '-yes');
+            if (stored[oppositeKey]) {
+                delete stored[oppositeKey];
+                const siblings = btn.parentElement.querySelectorAll('.helpful-btn');
+                siblings.forEach(s => {
+                    if (s !== btn && s.classList.contains('voted')) {
+                        s.classList.remove('voted');
+                        const m = s.textContent.match(/(\d+)/);
+                        if (m) { const n = Math.max(0, parseInt(m[1]) - 1); s.textContent = s.textContent.replace(/\d+/, n); }
+                    }
+                });
+            }
+            stored[key] = true;
+            btn.classList.add('voted');
+            const match = btn.textContent.match(/(\d+)/);
+            if (match) {
+                const newCount = parseInt(match[1]) + 1;
+                btn.textContent = btn.textContent.replace(/\d+/, newCount);
+            }
+        }
+        localStorage.setItem('lawnix_helpful', JSON.stringify(stored));
+    }
+
+    // Restore votes from localStorage
+    window.addEventListener('DOMContentLoaded', () => {
+        const stored = JSON.parse(localStorage.getItem('lawnix_helpful') || '{}');
+        // (votes are displayed as-is; in a real app we'd sync counts from backend)
+    });
+
+    // Sticky nav shadow
+    window.addEventListener('scroll', () => {
+        const nav = document.getElementById('main-nav');
+        if (nav) nav.style.boxShadow = window.scrollY > 40 ? '0 4px 30px rgba(0,0,0,0.6)' : 'none';
+    });
+
+    // Mobile nav dropdown toggle
+    document.querySelectorAll('.has-dropdown > a').forEach(link => {
+        link.addEventListener('click', function(e) {
+            if (window.innerWidth <= 780) {
+                e.preventDefault();
+                const dd = this.nextElementSibling;
+                if (dd) dd.style.opacity = dd.style.opacity === '1' ? '0' : '1';
+            }
+        });
+    });
+</script>
+</body>
+</html>

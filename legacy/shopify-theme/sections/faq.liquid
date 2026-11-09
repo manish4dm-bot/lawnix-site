@@ -1,0 +1,55 @@
+<section class="faq-section" id="faq">
+  <div class="faq-inner">
+    <div class="faq-header">
+      <div class="section-eyebrow">{{ section.settings.eyebrow }}</div>
+      <h2 class="section-heading">{{ section.settings.heading | newline_to_br }}</h2>
+    </div>
+
+    <div class="faq-list">
+      {% for block in section.blocks %}
+        <div class="faq-item" {{ block.shopify_attributes }}>
+          <button class="faq-q" aria-expanded="false">
+            <span>{{ block.settings.question }}</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a" aria-hidden="true">
+            <div class="faq-a-inner">{{ block.settings.answer }}</div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "FAQ",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "FAQ" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Got Questions?\nWe've Got Answers." }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "FAQ Item",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "What makes Lawnix tools different?" },
+        { "type": "textarea", "id": "answer", "label": "Answer", "default": "Every Lawnix tool is engineered to professional grade — 304 stainless steel, precision-calibrated components, and a 5-year warranty that we actually stand behind. We build what we'd use on our own lawns." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ",
+      "blocks": [
+        { "type": "faq_item", "settings": { "question": "What steel grade are Lawnix tools made from?", "answer": "All Lawnix products use 304-grade stainless steel — the same spec used in commercial kitchen and medical equipment. It resists rust, corrosion, and bending under heavy loads, season after season." } },
+        { "type": "faq_item", "settings": { "question": "What does the 5-year warranty cover?", "answer": "Everything. If any Lawnix product fails due to manufacturing defects or normal use within 5 years, we'll replace it — no paperwork, no questions, no hassle. Just contact us and we'll sort it." } },
+        { "type": "faq_item", "settings": { "question": "Do you offer free shipping?", "answer": "Yes — free standard shipping on every order, every time. No minimum, no exceptions. We also offer expedited options at checkout if you need it faster." } },
+        { "type": "faq_item", "settings": { "question": "What is your return policy?", "answer": "30-day hassle-free returns. If you're not 100% satisfied for any reason, return the product within 30 days for a full refund. We cover return shipping on defective items." } },
+        { "type": "faq_item", "settings": { "question": "How long does assembly take?", "answer": "Under 2 minutes — tool-free. The LX-30 and all Lawnix tools are designed for instant setup. Everything snaps and locks securely with no tools required." } },
+        { "type": "faq_item", "settings": { "question": "Are Lawnix tools suitable for commercial use?", "answer": "Absolutely. Many professional landscapers and lawn care crews use Lawnix tools daily. The build quality is designed for heavy commercial use — multiple uses per day, every day." } }
+      ]
+    }
+  ]
+}
+{% endschema %}
