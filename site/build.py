@@ -437,13 +437,10 @@ ErrorDocument 404 /404.html
 DirectoryIndex index.html
 Options -Indexes
 RewriteEngine On
-# Force HTTPS once the certificate is issued
-RewriteCond %{HTTPS} !=on
-RewriteCond %{HTTP:X-Forwarded-Proto} !https
-RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+# HTTPS redirect is turned on once AutoSSL has issued the certificate.
 # www -> apex
 RewriteCond %{HTTP_HOST} ^www\\.(.+)$ [NC]
-RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
+RewriteRule ^ %{REQUEST_SCHEME}://%1%{REQUEST_URI} [L,R=301]
 <IfModule mod_expires.c>
   ExpiresActive On
   ExpiresByType image/jpeg "access plus 30 days"

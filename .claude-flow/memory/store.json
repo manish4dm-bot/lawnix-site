@@ -296,6 +296,15 @@
       "lastAccessed": "2026-11-09T05:55:33.667Z",
       "accessCount": 0,
       "expiresAt": "2026-12-09T05:55:33.667Z"
+    },
+    "cmd-1794203773350": {
+      "key": "cmd-1794203773350",
+      "value": "{\"command\":\"echo | openssl s_client -connect lawnixindustry.com:443 -servername lawnixindustry.com 2>/dev/null | openssl x509 -noout -subject -enddate 2>/dev/null; curl -sk -o /dev/null -w \\\"https=%{http_code}\\\\n\\\" -m 15 https://lawnixindustry.com/; python3 - <<'EOF'\\nimport re\\np='site/build.py'; s=open(p).read()\\nold='    (OUT / \\\".nojekyll\\\").write_text(\\\"\\\")'\\nnew='''    (OUT / \\\".nojekyll\\\").write_text(\\\"\\\")\\n    (OUT / \\\".htaccess\\\").write_text(\\\"\\\"\\\"# Lawnix static site (cPanel / Apache)\\nErrorDocument 404 /404.html\\nDirectoryIndex index.html\\nOptions -Indexes\\nRewriteEngine On\\n# Force HTTPS once the certificate is issued\\nRewriteCond %{HTTPS} !=on\\nRewriteCond %{HTTP:X-Forwarded-Proto} !https\\nRewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]\\n# www -> apex\\nRewriteCond %{HTTP_HOST} ^www\\\\\\\\\\\\\\\\.(.+)$ [NC]\\nRewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]\\n<IfModule mod_expires.c>\\n  ExpiresActive On\\n  ExpiresByType image/jpeg \\\"access plus 30 days\\\"\\n  ExpiresByType image/png \\\"access plus 30 days\\\"\\n  ExpiresByType image/svg+xml \\\"access plus 30 days\\\"\\n  ExpiresByType text/css \\\"access plus 7 days\\\"\\n  ExpiresByType application/javascript \\\"access plus 7 days\\\"\\n</IfModule>\\n<IfModule mod_deflate.c>\\n  AddOutputFilterByType DEFLATE text/html text/css application/javascript image/svg+xml\\n</IfModule>\\n\\\"\\\"\\\")'''\\nassert old in s\\nopen(p,'w').write(s.replace(old,new,1))\\nEOF\\npython3 site/build.py | head -1 && cat docs/.htaccess | head -12 && git add -A && git -c user.name=\\\"Manish Kumar\\\" -c user.email=\\\"manish4dm@gmail.com\\\" commit -q -m \\\"Apache config: 404 page, HTTPS and www redirects, caching\\n\\nCo-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>\\\" && git push -q origin main && echo pushed && gh api -X DELETE repos/manish4dm-bot/lawnix-site/pages 2>&1 | tail -1; echo \\\"pages disabled\\\"\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-11-09T05:56:13.350Z",
+      "lastAccessed": "2026-11-09T05:56:13.350Z",
+      "accessCount": 0,
+      "expiresAt": "2026-12-09T05:56:13.350Z"
     }
   },
   "version": "3.0.0"

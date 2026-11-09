@@ -450,6 +450,15 @@
       "ts": 1794203733588,
       "event": "append",
       "hash": "9e8cfdcca09e60fba5e78c5d264cfdc919d21bee2e7e7f04eeb1390a833a342a"
+    },
+    {
+      "seq": 50,
+      "length": 51,
+      "headHash": "sha256:149ba33cdd05cb08d492ba0b6c8ef0291bd88d630ca45b10273d0dfd293276a3",
+      "prevAnchorHash": "9e8cfdcca09e60fba5e78c5d264cfdc919d21bee2e7e7f04eeb1390a833a342a",
+      "ts": 1794203773293,
+      "event": "append",
+      "hash": "e87b47b23122eb5aeca02b517d3be3a7106d203a86e401908c76c0910b37c9a8"
     }
   ]
 }
