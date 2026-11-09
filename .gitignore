@@ -3,3 +3,4 @@
 __pycache__/
 legacy/*.zip
 legacy/*.bak
+tools/

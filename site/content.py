@@ -7,7 +7,7 @@ OPEN_ITEMS below so it can be fixed before launch.
 SITE = {
     "name": "Lawnix",
     "legal_name": "Lawnix Industry Co",
-    "domain": "https://lawnixindustry.com",
+    "domain": "https://www.lawnixindustry.com",
     "tagline": "Power. Precision. Performance.",
     "email": "hello@lawnixindustry.com",
     "year": "2026",

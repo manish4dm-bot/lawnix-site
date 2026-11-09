@@ -179,6 +179,51 @@
       "lastAccessed": "2026-11-09T05:25:56.146Z",
       "accessCount": 0,
       "expiresAt": "2026-12-09T05:25:56.146Z"
+    },
+    "cmd-1794202003816": {
+      "key": "cmd-1794202003816",
+      "value": "{\"command\":\"python3 site/build.py | head -1 && git add -A && git -c user.name=\\\"Manish Kumar\\\" -c user.email=\\\"manish4dm@gmail.com\\\" commit -q -m \\\"Guide callout: plain bordered box instead of side accent\\n\\nCo-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>\\\" && git log --oneline | head -1\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-11-09T05:26:43.816Z",
+      "lastAccessed": "2026-11-09T05:26:43.816Z",
+      "accessCount": 0,
+      "expiresAt": "2026-12-09T05:26:43.816Z"
+    },
+    "cmd-1794202171104": {
+      "key": "cmd-1794202171104",
+      "value": "{\"command\":\"gh auth status 2>&1 | head -4\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-11-09T05:29:31.104Z",
+      "lastAccessed": "2026-11-09T05:29:31.104Z",
+      "accessCount": 0,
+      "expiresAt": "2026-12-09T05:29:31.104Z"
+    },
+    "cmd-1794202479486": {
+      "key": "cmd-1794202479486",
+      "value": "{\"command\":\"git add PLAN.md && git -c user.name=\\\"Manish Kumar\\\" -c user.email=\\\"manish4dm@gmail.com\\\" commit -q -m \\\"Add growth plan\\n\\nCo-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>\\\" && git log --oneline | head -1\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-11-09T05:34:39.486Z",
+      "lastAccessed": "2026-11-09T05:34:39.486Z",
+      "accessCount": 0,
+      "expiresAt": "2026-12-09T05:34:39.486Z"
+    },
+    "cmd-1794202655396": {
+      "key": "cmd-1794202655396",
+      "value": "{\"command\":\"gh repo create lawnix-site --private --source=. --remote=origin --description \\\"Lawnix website source (lawnixindustry.com)\\\" --push 2>&1 | tail -3 && gh repo view --json url,visibility -q '\\\"\\\\(.url) \\\\(.visibility)\\\"'; which wrangler cloudflared; ls ~/.wrangler ~/Library/Preferences/.wrangler 2>/dev/null | head\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-11-09T05:37:35.396Z",
+      "lastAccessed": "2026-11-09T05:37:35.396Z",
+      "accessCount": 0,
+      "expiresAt": "2026-12-09T05:37:35.396Z"
+    },
+    "cmd-1794202727688": {
+      "key": "cmd-1794202727688",
+      "value": "{\"command\":\"mkdir -p /Users/manishkumar/lawnix-store/tools && cd /Users/manishkumar/lawnix-store/tools && [ -f package.json ] || npm init -y >/dev/null; npm install wrangler@latest --no-fund --no-audit 2>&1 | grep -v \\\"trust settings\\\" | tail -3; npx wrangler --version 2>&1 | grep -v \\\"trust settings\\\" | tail -1; cd .. && grep -q '^tools/' .gitignore || echo 'tools/' >> .gitignore\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-11-09T05:38:47.688Z",
+      "lastAccessed": "2026-11-09T05:38:47.688Z",
+      "accessCount": 0,
+      "expiresAt": "2026-12-09T05:38:47.688Z"
     }
   },
   "version": "3.0.0"
