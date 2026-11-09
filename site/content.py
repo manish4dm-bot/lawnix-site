@@ -15,14 +15,14 @@ SITE = {
     # falls back to the contact page.
     "stripe_links": {
         "lx30": "https://buy.stripe.com/5kQ28qfzv5k4fbs0aH93y01",
-        "lx48": "",
-        "rc01": "",
+        "lx48": "https://buy.stripe.com/4gM9AS5YV3bW9R8aPl93y02",
+        "rc01": "https://buy.stripe.com/9B600ibjf5k4gfw6z593y03",
     },
     # Amazon ASINs. Empty = Amazon button hidden.
     "amazon_asins": {
         "lx30": "https://buy.stripe.com/5kQ28qfzv5k4fbs0aH93y01",
-        "lx48": "",
-        "rc01": "",
+        "lx48": "https://buy.stripe.com/4gM9AS5YV3bW9R8aPl93y02",
+        "rc01": "https://buy.stripe.com/9B600ibjf5k4gfw6z593y03",
     },
     # Email list endpoint (Formspree, Mailchimp, etc.). Empty = mailto fallback.
     "form_endpoint": "",

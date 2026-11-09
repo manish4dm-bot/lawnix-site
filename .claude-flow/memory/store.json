@@ -332,6 +332,51 @@
       "lastAccessed": "2026-11-09T06:05:21.462Z",
       "accessCount": 0,
       "expiresAt": "2026-12-09T06:05:21.462Z"
+    },
+    "cmd-1794204584861": {
+      "key": "cmd-1794204584861",
+      "value": "{\"command\":\"sed -i '' 's#\\\"lx30\\\": \\\"\\\",#\\\"lx30\\\": \\\"https://buy.stripe.com/5kQ28qfzv5k4fbs0aH93y01\\\",#' site/content.py && grep -n 'buy.stripe' site/content.py && python3 site/build.py | head -1 && grep -o 'href=\\\"https://buy.stripe[^\\\"]*\\\"[^>]*>[^<]*' docs/products/lx-30-lawn-leveling-rake/index.html | head -1 && git add -A && git -c user.name=\\\"Manish Kumar\\\" -c user.email=\\\"manish4dm@gmail.com\\\" commit -q -m \\\"LX-30 Stripe payment link\\n\\nCo-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>\\\" && git push -q origin main && echo pushed\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-11-09T06:09:44.861Z",
+      "lastAccessed": "2026-11-09T06:09:44.861Z",
+      "accessCount": 0,
+      "expiresAt": "2026-12-09T06:09:44.861Z"
+    },
+    "cmd-1794204614742": {
+      "key": "cmd-1794204614742",
+      "value": "{\"command\":\"echo | openssl s_client -connect lawnixindustry.com:443 -servername lawnixindustry.com 2>/dev/null | openssl x509 -noout -issuer -dates 2>/dev/null || echo \\\"no cert read\\\"\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-11-09T06:10:14.742Z",
+      "lastAccessed": "2026-11-09T06:10:14.742Z",
+      "accessCount": 0,
+      "expiresAt": "2026-12-09T06:10:14.742Z"
+    },
+    "cmd-1794204625220": {
+      "key": "cmd-1794204625220",
+      "value": "{\"command\":\"curl -skI -m 15 https://lawnixindustry.com/ | head -2; echo | openssl s_client -connect lawnixindustry.com:443 -servername lawnixindustry.com 2>&1 | grep -E \\\"subject=|issuer=|Verify return\\\" | head -3\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-11-09T06:10:25.220Z",
+      "lastAccessed": "2026-11-09T06:10:25.220Z",
+      "accessCount": 0,
+      "expiresAt": "2026-12-09T06:10:25.220Z"
+    },
+    "cmd-1794204755072": {
+      "key": "cmd-1794204755072",
+      "value": "{\"command\":\"echo | openssl s_client -connect lawnixindustry.com:443 -servername lawnixindustry.com 2>&1 | grep -E \\\"issuer=|Verify return\\\" | head -2\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-11-09T06:12:35.072Z",
+      "lastAccessed": "2026-11-09T06:12:35.072Z",
+      "accessCount": 0,
+      "expiresAt": "2026-12-09T06:12:35.072Z"
+    },
+    "cmd-1794204779115": {
+      "key": "cmd-1794204779115",
+      "value": "{\"command\":\"sed -i '' 's#\\\"lx48\\\": \\\"\\\",#\\\"lx48\\\": \\\"https://buy.stripe.com/4gM9AS5YV3bW9R8aPl93y02\\\",#' site/content.py && grep -c 'buy.stripe' site/content.py\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-11-09T06:12:59.115Z",
+      "lastAccessed": "2026-11-09T06:12:59.115Z",
+      "accessCount": 0,
+      "expiresAt": "2026-12-09T06:12:59.115Z"
     }
   },
   "version": "3.0.0"
