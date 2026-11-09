@@ -22,6 +22,12 @@ S = C.SITE
 E = html.escape
 
 
+def asset_v(rel: str) -> str:
+    """Short content hash so browsers refetch CSS/JS after every deploy."""
+    import hashlib
+    return hashlib.sha1((STATIC / rel).read_bytes()).hexdigest()[:8]
+
+
 def money(v: float) -> str:
     return f"${v:,.2f}"
 
@@ -65,7 +71,7 @@ def head(title: str, desc: str, path: str, image: str = "/static/img/og-default.
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css">
-<link rel="stylesheet" href="/static/css/lawnix.css">
+<link rel="stylesheet" href="/static/css/lawnix.css?v={asset_v('css/lawnix.css')}">
 {schema}
 </head>
 <body>
@@ -108,8 +114,8 @@ def footer() -> str:
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
-<script src="/static/js/lawnix.js" defer></script>
-<script src="/static/js/motion.js" defer></script>
+<script src="/static/js/lawnix.js?v={asset_v('js/lawnix.js')}" defer></script>
+<script src="/static/js/motion.js?v={asset_v('js/motion.js')}" defer></script>
 </body>
 </html>
 """
