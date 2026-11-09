@@ -400,3 +400,4 @@ h3 { font-size: clamp(22px, 2.4vw, 30px); line-height: 1.05; }
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
   .gallery-main:hover::after { animation: cardscan 1s var(--ease-in-out) forwards; }
 }
+@media (max-width: 900px) { .exploded .lede { display: none; } .exploded-copy h2 { font-size: clamp(30px, 8vw, 40px); } .exploded .wrap { padding: 24px 0; gap: 16px; } .exploded-labels { min-height: 120px; margin-top: 12px; } }

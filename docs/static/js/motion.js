@@ -55,7 +55,7 @@
 
     var tl = gsap.timeline({
       scrollTrigger: {
-        trigger: section, start: "top top", end: "+=" + (parts.length * 420),
+        trigger: section, start: "top 68px", end: "+=" + (parts.length * 420),
         pin: true, scrub: 0.6, anticipatePin: 1, invalidateOnRefresh: true,
         onUpdate: function (st) { if (readout) readout.textContent = Math.round(st.progress * 100) + "%"; }
       }
