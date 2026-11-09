@@ -377,6 +377,69 @@
       "lastAccessed": "2026-11-09T06:12:59.115Z",
       "accessCount": 0,
       "expiresAt": "2026-12-09T06:12:59.115Z"
+    },
+    "cmd-1794204894864": {
+      "key": "cmd-1794204894864",
+      "value": "{\"command\":\"sed -i '' 's#\\\"rc01\\\": \\\"\\\",#\\\"rc01\\\": \\\"https://buy.stripe.com/9B600ibjf5k4gfw6z593y03\\\",#' site/content.py && grep -n 'buy.stripe' site/content.py && python3 site/build.py | head -1 && grep -ho 'href=\\\"https://buy.stripe[^\\\"]*\\\"[^>]*>[^<]*' docs/products/*/index.html && git add -A && git -c user.name=\\\"Manish Kumar\\\" -c user.email=\\\"manish4dm@gmail.com\\\" commit -q -m \\\"Stripe payment links for all three products\\n\\nCo-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>\\\" && git push -q origin main && echo pushed\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-11-09T06:14:54.864Z",
+      "lastAccessed": "2026-11-09T06:14:54.864Z",
+      "accessCount": 0,
+      "expiresAt": "2026-12-09T06:14:54.864Z"
+    },
+    "cmd-1794204963154": {
+      "key": "cmd-1794204963154",
+      "value": "{\"command\":\"for p in lx-30-lawn-leveling-rake lx-48-lawn-leveling-rake rc-01-rotary-cultivator; do curl -s -m 15 \\\"http://lawnixindustry.com/products/$p/\\\" | grep -o 'href=\\\"https://buy.stripe[^\\\"]*\\\"[^>]*>[^<]*' | head -1; done; echo | openssl s_client -connect lawnixindustry.com:443 -servername lawnixindustry.com 2>&1 | grep -E \\\"issuer=|Verify return\\\" | head -2\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-11-09T06:16:03.154Z",
+      "lastAccessed": "2026-11-09T06:16:03.154Z",
+      "accessCount": 0,
+      "expiresAt": "2026-12-09T06:16:03.154Z"
+    },
+    "cmd-1794205002077": {
+      "key": "cmd-1794205002077",
+      "value": "{\"command\":\"until echo | openssl s_client -connect lawnixindustry.com:443 -servername lawnixindustry.com 2>&1 | grep -q \\\"Verify return code: 0\\\"; do sleep 60; done; echo \\\"CERT OK: $(echo | openssl s_client -connect lawnixindustry.com:443 -servername lawnixindustry.com 2>/dev/null | openssl x509 -noout -issuer)\\\"\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-11-09T06:16:42.077Z",
+      "lastAccessed": "2026-11-09T06:16:42.077Z",
+      "accessCount": 0,
+      "expiresAt": "2026-12-09T06:16:42.077Z"
+    },
+    "cmd-1794206499256": {
+      "key": "cmd-1794206499256",
+      "value": "{\"command\":\"echo | openssl s_client -connect lawnixindustry.com:443 -servername lawnixindustry.com 2>&1 | grep -E \\\"issuer=|Verify return\\\" | head -2; which acme.sh certbot; ls ~/.acme.sh/acme.sh 2>/dev/null; brew list --versions certbot 2>/dev/null | head -1\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-11-09T06:41:39.256Z",
+      "lastAccessed": "2026-11-09T06:41:39.256Z",
+      "accessCount": 0,
+      "expiresAt": "2026-12-09T06:41:39.256Z"
+    },
+    "cmd-1794206532868": {
+      "key": "cmd-1794206532868",
+      "value": "{\"command\":\"which brew && brew --version | head -1; ls /opt/homebrew/bin/acme.sh /usr/local/bin/acme.sh 2>/dev/null; git --version\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-11-09T06:42:12.868Z",
+      "lastAccessed": "2026-11-09T06:42:12.868Z",
+      "accessCount": 0,
+      "expiresAt": "2026-12-09T06:42:12.868Z"
+    },
+    "cmd-1794206578753": {
+      "key": "cmd-1794206578753",
+      "value": "{\"command\":\"for h in serverhostgroup.com www.serverhostgroup.com my.serverhostgroup.com clients.serverhostgroup.com client.serverhostgroup.com billing.serverhostgroup.com portal.serverhostgroup.com manage.serverhostgroup.com; do a=$(curl -s \\\"https://dns.google/resolve?name=$h&type=A\\\" | python3 -c \\\"import sys,json; d=json.load(sys.stdin); print(','.join(x['data'] for x in d.get('Answer',[]) if x['type']==1))\\\"); echo \\\"$h -> ${a:-none}\\\"; done\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-11-09T06:42:58.753Z",
+      "lastAccessed": "2026-11-09T06:42:58.753Z",
+      "accessCount": 0,
+      "expiresAt": "2026-12-09T06:42:58.753Z"
+    },
+    "cmd-1794206662332": {
+      "key": "cmd-1794206662332",
+      "value": "{\"command\":\"cat /private/tmp/claude-501/-Users-manishkumar/57d51a6e-0e14-47f3-8cf2-99191a948ccc/tasks/bs6hq1sds.output | tail -2; for u in https://lawnixindustry.com/ https://www.lawnixindustry.com/ https://lawnixindustry.com/products/lx-30-lawn-leveling-rake/; do curl -s -o /dev/null -w \\\"%{http_code} -> %{redirect_url} $u\\\\n\\\" -m 15 \\\"$u\\\"; done\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-11-09T06:44:22.332Z",
+      "lastAccessed": "2026-11-09T06:44:22.332Z",
+      "accessCount": 0,
+      "expiresAt": "2026-12-09T06:44:22.332Z"
     }
   },
   "version": "3.0.0"
