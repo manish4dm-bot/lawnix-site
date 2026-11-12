@@ -78,7 +78,7 @@ def head(title: str, desc: str, path: str, image: str = "/static/img/og-default.
 <a class="skip" href="#main">Skip to content</a>
 <header class="header">
   <div class="wrap">
-    <a class="logo" href="/" aria-label="Lawnix home"><img class="logo-img" src="/static/img/logo-wordmark.png" alt="Lawnix" width="640" height="100"></a>
+    <a class="logo" href="/" aria-label="Lawnix home"><img class="logo-img" src="/static/img/logo-wordmark.svg" alt="Lawnix" width="1260" height="205"></a>
     <nav class="nav" aria-label="Main">
       {''.join(f'<a href="{h}">{E(t)}</a>' for t, h in C.NAV)}
       <a class="btn btn-primary" href="{product_url(C.PRODUCTS[0])}">Buy the LX-30</a>
@@ -100,7 +100,7 @@ def footer() -> str:
   <div class="wrap">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a class="logo" href="/" aria-label="Lawnix home"><img class="logo-img" src="/static/img/logo-wordmark.png" alt="Lawnix" width="640" height="100" loading="lazy"></a>
+        <a class="logo" href="/" aria-label="Lawnix home"><img class="logo-img" src="/static/img/logo-wordmark.svg" alt="Lawnix" width="1260" height="205" loading="lazy"></a>
         <p>{E(S['tagline'])} Stainless lawn and garden tools from {E(S['legal_name'])}.</p>
         <p><a href="mailto:{S['email']}">{S['email']}</a></p>
       </div>
@@ -406,7 +406,7 @@ def about() -> None:
   <div class="prose"><h1>Tools we would <span class="em">use ourselves</span></h1><p class="lede">{E(C.ABOUT['intro'])}</p></div>
   <div class="about-points">{pts}</div>
   <div class="prose" style="margin-top:56px"><h2>What comes next</h2><p>{E(C.ABOUT['roadmap'])}</p></div>
-  <div class="reveal"><img class="logo-lockup" src="/static/img/logo-lockup.png" alt="Lawnix logo: Power. Precision. Performance." loading="lazy" width="900" height="464"></div>
+  <div class="reveal"><img class="logo-lockup" src="/static/img/logo-lockup.svg" alt="Lawnix logo: Power. Precision. Performance." loading="lazy" width="1290" height="690"></div>
 </div></section>
 {signup()}"""
     page("/about/", "About Lawnix | Stainless Lawn Tools", "Lawnix Industry Co makes stainless steel lawn leveling rakes and garden tools for people who do the work themselves.", body)
