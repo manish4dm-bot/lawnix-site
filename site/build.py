@@ -42,8 +42,22 @@ def buy_href(p) -> str:
 
 
 def amazon_href(p) -> str:
-    asin = S["amazon_asins"].get(p["id"], "")
-    return f"https://www.amazon.com/dp/{asin}" if asin else ""
+    import re
+    asin = S["amazon_asins"].get(p["id"], "").strip()
+    # Only a real 10-character ASIN makes a button; anything else is ignored.
+    return f"https://www.amazon.com/dp/{asin}" if re.fullmatch(r"[A-Z0-9]{10}", asin) else ""
+
+
+def warranty_ok() -> bool:
+    return bool(S.get("warranty_confirmed"))
+
+
+def track(event: str, placement: str, p=None) -> str:
+    """data-* hooks read by lawnix.js and pushed to window.dataLayer."""
+    attrs = f' data-track="{event}" data-placement="{placement}"'
+    if p:
+        attrs += f' data-product="{p["sku"]}" data-value="{p["price"]:.2f}"'
+    return attrs
 
 
 # ---------- shell ----------
@@ -67,9 +81,11 @@ def head(title: str, desc: str, path: str, image: str = "/static/img/og-default.
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#0b0c0a">
 <link rel="icon" href="/static/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/static/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/static/img/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;1,800;1,900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css">
 <link rel="stylesheet" href="/static/css/lawnix.css?v={asset_v('css/lawnix.css')}">
 {schema}
@@ -81,7 +97,7 @@ def head(title: str, desc: str, path: str, image: str = "/static/img/og-default.
     <a class="logo" href="/" aria-label="Lawnix home"><img class="logo-img" src="/static/img/logo-wordmark.svg" alt="Lawnix" width="1260" height="205"></a>
     <nav class="nav" aria-label="Main">
       {''.join(f'<a href="{h}">{E(t)}</a>' for t, h in C.NAV)}
-      <a class="btn btn-primary" href="{product_url(C.PRODUCTS[0])}">Buy the LX-30</a>
+      <a class="btn btn-primary btn-sm" href="{buy_href(C.PRODUCTS[0])}"{track("buy_click", "header", C.PRODUCTS[0])}>Buy now <span class="btn-price">{money(C.PRODUCTS[0]['price'])}</span></a>
     </nav>
     <button class="menu-btn" aria-label="Menu" aria-expanded="false"><i class="ph ph-list" aria-hidden="true"></i></button>
   </div>
@@ -158,7 +174,7 @@ def lineup() -> str:
 
 def ticker() -> str:
     items = ["<b>304</b> stainless steel", "<b>30</b> and <b>48</b> inch plates", "<b>78</b> inch handle", "tool-free assembly",
-             "center mount, anti-flip", "ships from US warehouses", f"{E(S['warranty'])}", "<b>10</b> inch deep plate"]
+             "center mount, anti-flip", "ships from US warehouses", "<b>30</b>-day returns", "<b>10</b> inch deep plate"]
     row = "".join(f"<span>{i}</span>" for i in items)
     return f'<div class="ticker" aria-hidden="true"><div class="ticker-track"><div class="ticker-row">{row}</div><div class="ticker-row">{row}</div></div></div>'
 
@@ -281,57 +297,254 @@ def signup() -> str:
 
 # ---------- pages ----------
 
-def home() -> None:
-    p = C.PRODUCTS[0]
-    body = f"""<section class="hero">
+# ---------- LX-30 landing (home) ----------
+
+def lawn_profile_svg(after: bool) -> str:
+    """Cross-section illustration of a lawn, before or after leveling. Not a photo."""
+    import math
+    W, H, top = 1200, 360, 168
+    knots = [178, 172, 214, 246, 222, 182, 170, 190, 238, 252, 214, 176, 180]
+    def y(x):
+        f = x / 100; i = min(int(f), len(knots) - 2); t = f - i
+        t = (1 - math.cos(t * math.pi)) / 2
+        return knots[i] * (1 - t) + knots[i + 1] * t
+    xs = list(range(0, W + 1, 8))
+    prof = [(x, y(x)) for x in xs]
+    soil = "M0 " + f"{H} " + " ".join(f"L{x} {v:.1f}" for x, v in prof) + f" L{W} {H} Z"
+    out = [f'<svg viewBox="0 0 {W} {H}" preserveAspectRatio="xMidYMid slice" aria-hidden="true">',
+           f'<rect width="{W}" height="{H}" fill="#e9ebe2"/>']
+    if after:
+        out.append(f'<path d="{soil}" class="lp-soil"/>')
+        # sand layer sits on top of the soil in the dips
+        sand = f"M0 {top} L{W} {top} " + " ".join(f"L{x} {max(v, top):.1f}" for x, v in reversed(prof)) + " Z"
+        out.append(f'<path d="{sand}" class="lp-sand"/>')
+        surface = [(x, top) for x in xs]
+    else:
+        lvl = 218
+        segs, cur = [], []
+        for x, v in prof:
+            if v > lvl: cur.append((x, v))
+            elif cur: segs.append(cur); cur = []
+        if cur: segs.append(cur)
+        out.append(f'<path d="{soil}" class="lp-soil"/>')
+        for seg in segs:
+            d = f"M{seg[0][0]} {lvl} " + " ".join(f"L{x} {v:.1f}" for x, v in seg) + f" L{seg[-1][0]} {lvl} Z"
+            out.append(f'<path d="{d}" class="lp-water"/>')
+        surface = prof
+    blades = []
+    for x, v in surface[::2]:
+        h = 14 + (x * 7919 % 11)
+        lean = ((x * 31) % 9) - 4
+        blades.append(f"M{x} {v:.1f} l{lean} -{h}")
+    out.append(f'<path d="{" ".join(blades)}" class="lp-grass"/>')
+    out.append("</svg>")
+    return "".join(out)
+
+
+def before_after() -> str:
+    tags_before = '<span class="ba-tag" style="left:30%;top:30%">Standing water</span><span class="ba-tag" style="left:12%;top:16%">Scalped high spot</span>'
+    tags_after = '<span class="ba-tag ba-tag-lime" style="left:63%;top:13%">Dips filled with sand</span><span class="ba-tag ba-tag-lime" style="left:84%;top:13%">One level surface</span>'
+    return f"""<figure class="ba reveal" data-ba>
+      <div class="ba-stage">
+        <div class="ba-layer">{lawn_profile_svg(False)}{tags_before}</div>
+        <div class="ba-layer ba-after">{lawn_profile_svg(True)}{tags_after}</div>
+        <span class="ba-label ba-label-l">Before</span><span class="ba-label ba-label-r">After</span>
+        <span class="ba-handle" aria-hidden="true"><i class="ph ph-arrows-left-right"></i></span>
+        <input class="ba-range" type="range" min="0" max="100" value="50" aria-label="Compare the lawn before and after leveling">
+      </div>
+      <figcaption>Illustration of a lawn cross-section. Drag to level it. Product photos follow below.</figcaption>
+    </figure>"""
+
+
+def trust_row(dark: bool = True) -> str:
+    items = [("truck", S["shipping"]), ("arrow-u-up-left", S["returns"]), ("lock-simple", "Secure checkout by Stripe")]
+    if warranty_ok():
+        items.append(("shield-check", S["warranty"]))
+    return '<ul class="trust">' + "".join(f'<li><i class="ph ph-{i}" aria-hidden="true"></i>{E(t)}</li>' for i, t in items) + "</ul>"
+
+
+def buy_button(p, placement: str, label: str = "Buy the LX-30", cls: str = "btn btn-primary btn-lg") -> str:
+    rel = ' rel="noopener"' if S["stripe_links"].get(p["id"]) else ""
+    return f'<a class="{cls}" href="{buy_href(p)}"{rel}{track("buy_click", placement, p)}>{E(label)} <i class="ph ph-arrow-right" aria-hidden="true"></i></a>'
+
+
+def price_tag(p) -> str:
+    save = p["compare"] - p["price"]
+    return f"""<div class="price-tag"><span class="now">{money(p['price'])}</span><span class="was"><s>{money(p['compare'])}</s> list</span><span class="flag">Launch price, save {money(save)}</span></div>"""
+
+
+def landing_hero(p) -> str:
+    L = C.LANDING
+    return f"""<section class="lp-hero" data-section="hero">
   <div class="wrap">
-    <div>
-      <h1 class="reveal in">Level your lawn with <span class="em">the right rake.</span></h1>
-      <p class="lede reveal in" data-delay="1">Stainless steel leveling rakes and garden tools for homeowners who want a lawn that looks professionally cut.</p>
-      <div class="hero-actions reveal in" data-delay="2">
-        <a class="btn btn-primary" href="/shop/">Shop the rakes</a>
-        <a class="btn btn-ghost" href="#engineered">See it assemble</a>
+    <div class="lp-hero-copy">
+      <p class="eyebrow reveal in">{E(L['eyebrow'])}</p>
+      <h1 class="reveal in" data-delay="1">{E(L['h1'][0])} <span class="em">{E(L['h1'][1])}</span></h1>
+      <p class="lede reveal in" data-delay="2">{E(L['lede'])}</p>
+      <div class="lp-buy reveal in" data-delay="3">
+        {price_tag(p)}
+        <div class="lp-buy-actions">{buy_button(p, 'hero')}<a class="text-link" href="#how"{track('nav_click', 'hero_how')}>See how it works <i class="ph ph-arrow-down" aria-hidden="true"></i></a></div>
       </div>
-      <div class="hero-chips reveal in" data-delay="3">
-        <div class="chip"><b data-count="304">0</b><span>stainless</span></div>
-        <div class="chip"><b data-count="30">0</b><span>inch plate</span></div>
-        <div class="chip"><b data-count="78">0</b><span>inch handle</span></div>
-        <div class="chip"><b data-count="5.2">0</b><span>pounds</span></div>
-      </div>
+      <div class="reveal in" data-delay="3">{trust_row()}</div>
     </div>
-    <div class="hero-media reveal in" data-delay="1">
-      <img src="/static/img/hero.jpg" alt="Lawnix LX-30 leveling rake spreading sand across a lawn" width="1200" height="1500" fetchpriority="high">
-      <div class="hero-scan"></div>
-      <svg class="hero-bp" viewBox="0 0 400 500" preserveAspectRatio="none" aria-hidden="true">
-        <path class="bp-corner" d="M14 44 V14 H44 M356 14 H386 V44 M386 456 V486 H356 M44 486 H14 V456"/>
-        <path class="bp-line" d="M60 470 H340 M60 462 V478 M340 462 V478"/>
-        <path class="bp-line" d="M372 120 V440 M364 120 H380 M364 440 H380"/>
-        <path class="bp-line" d="M300 60 H250 L236 92"/>
-        <text class="bp-tag accent" x="200" y="492" text-anchor="middle">30 in plate</text>
-        <text class="bp-tag" x="372" y="110" text-anchor="middle">78 in</text>
-        <text class="bp-tag accent" x="300" y="52" text-anchor="end">non-slip grip</text>
-      </svg>
-      <a class="hero-price" href="{product_url(p)}"><strong>{money(p['price'])}</strong><span>{E(p['short'])}</span></a>
+    <div class="lp-hero-media reveal in" data-delay="1">
+      <div class="lp-hero-frame">
+        <img src="/static/img/hero.jpg" alt="Lawnix LX-30 leveling rake spreading sand across a lawn at sunset" width="1024" height="1280" fetchpriority="high">
+        <div class="hero-scan"></div>
+        <svg class="hero-bp" viewBox="0 0 400 500" preserveAspectRatio="none" aria-hidden="true">
+          <path class="bp-corner" d="M14 44 V14 H44 M356 14 H386 V44 M386 456 V486 H356 M44 486 H14 V456"/>
+          <path class="bp-line" d="M60 470 H340 M60 462 V478 M340 462 V478"/>
+          <path class="bp-line" d="M372 120 V440 M364 120 H380 M364 440 H380"/>
+          <text class="bp-tag accent" x="200" y="492" text-anchor="middle">30 in plate</text>
+          <text class="bp-tag" x="372" y="110" text-anchor="middle">78 in</text>
+        </svg>
+      </div>
+      <div class="lp-hero-stats" aria-label="Key specs">
+        <div><b data-count="304">304</b><span>stainless</span></div>
+        <div><b data-count="30">30</b><span>inch plate</span></div>
+        <div><b data-count="5.2">5.2</b><span>pounds</span></div>
+      </div>
     </div>
   </div>
-</section>
+</section>"""
+
+
+def landing_problem() -> str:
+    L = C.LANDING
+    items = "".join(f'<li class="reveal" data-delay="{i}"><span class="n">0{i + 1}</span><div><h3>{E(t)}</h3><p>{E(d)}</p></div></li>' for i, (t, d) in enumerate(L["problems"]))
+    return f"""<section class="paper slant" id="problem" data-section="problem">
+  <div class="wrap">
+    <div class="split">
+      <div class="reveal"><p class="eyebrow">The problem</p><h2>A bumpy lawn <span class="em">costs you</span> every mow.</h2></div>
+      <ol class="problems">{items}</ol>
+    </div>
+    {before_after()}
+  </div>
+</section>"""
+
+
+def landing_benefits() -> str:
+    rows = []
+    for i, (t, d, img, alt, proof) in enumerate(C.LANDING["benefits"]):
+        chips = "".join(f'<div><b>{E(v)}</b><span>{E(k)}</span></div>' for v, k in proof)
+        rows.append(f"""<article class="benefit reveal{' flip' if i % 2 else ''}">
+      <div class="benefit-media"><img src="/static/img/{img}" alt="{E(alt)}" loading="lazy" width="1200" height="900"><span class="benefit-n">0{i + 1}</span></div>
+      <div class="benefit-copy"><h3>{E(t)}</h3><p>{E(d)}</p><div class="proof">{chips}</div></div>
+    </article>""")
+    return f"""<section class="paper slant" id="benefits" data-section="benefits">
+  <div class="wrap">
+    <div class="section-head reveal"><p class="eyebrow">Why the LX-30</p><h2>Built to do one job <span class="em">properly.</span></h2></div>
+    <div class="benefits">{''.join(rows)}</div>
+  </div>
+</section>"""
+
+
+def landing_how(p) -> str:
+    items = "".join(f'<li class="how-step reveal" data-delay="{i}"><span class="how-dot">{i + 1}</span><h3>{E(t)}</h3><p>{E(d)}</p></li>' for i, (t, d) in enumerate(C.LANDING["steps"]))
+    return f"""<section class="lp-how slant-dark" id="how" data-section="how">
+  <div class="wrap">
+    <div class="section-head reveal"><p class="eyebrow">How it works</p><h2>Spread. Pull. Level. <span class="em">Finish.</span></h2>
+      <p class="lede">Four moves, repeated across the lawn. Most home lawns take one afternoon.</p></div>
+    <div class="how-track" aria-hidden="true"><span class="how-fill"></span></div>
+    <ol class="how">{items}</ol>
+    <div class="how-foot reveal">{buy_button(p, 'how', 'Get yours')}<a class="text-link" href="/guides/{C.GUIDE['slug']}/">Read the full leveling guide <i class="ph ph-arrow-right" aria-hidden="true"></i></a></div>
+  </div>
+</section>"""
+
+
+def landing_proof() -> str:
+    if C.REVIEWS:
+        cards = "".join(
+            f'<figure class="review reveal"><div class="stars" aria-label="{r[2]} out of 5 stars">' + "".join('<i class="ph-fill ph-star" aria-hidden="true"></i>' for _ in range(r[2])) +
+            f'</div><blockquote>{E(r[3])}</blockquote><figcaption>{E(r[0])}<span>{E(r[1])} · Verified buyer</span></figcaption></figure>'
+            for r in C.REVIEWS)
+        intro = "What owners say"
+        note = ""
+    else:
+        cards = "".join(
+            f'<div class="review review-slot reveal" data-delay="{i}"><span class="slot-tag">Placeholder</span><div class="stars dim" aria-hidden="true">' + "".join('<i class="ph ph-star"></i>' for _ in range(5)) +
+            '</div><p>Verified buyer review will appear here after the first deliveries.</p></div>'
+            for i in range(3))
+        intro = "Reviews open after launch"
+        note = '<p class="proof-note">We only publish reviews from verified buyers. No paid, gifted or invented reviews, ever.</p>'
+    facts = [("304 stainless steel plate and frame", "check-circle"), ("30-day returns from delivery", "check-circle"),
+             ("Checkout handled by Stripe", "check-circle"), (S["shipping"], "check-circle")]
+    fact_list = "".join(f'<li><i class="ph ph-{ic}" aria-hidden="true"></i>{E(t)}</li>' for t, ic in facts)
+    return f"""<section class="paper slant" id="proof" data-section="proof">
+  <div class="wrap">
+    <div class="split">
+      <div class="reveal"><p class="eyebrow">Proof</p><h2>{E(intro)}</h2>{note}
+        <h3 class="facts-h">What you can count on today</h3><ul class="facts">{fact_list}</ul></div>
+      <div class="reviews">{cards}</div>
+    </div>
+  </div>
+</section>"""
+
+
+def landing_objections(p) -> str:
+    cells = []
+    for i, (q, a, link) in enumerate(C.LANDING["objections"]):
+        more = f'<a class="text-link" href="{link[1]}">{E(link[0])} <i class="ph ph-arrow-right" aria-hidden="true"></i></a>' if link else ""
+        cells.append(f'<div class="obj reveal" data-delay="{i % 2}"><h3>{E(q)}</h3><p>{E(a)}</p>{more}</div>')
+    skip = {"Which size should I buy?", "How long does assembly take?", "Can I return it?"}
+    qs = "".join(f'<details><summary>{E(q)}<i class="ph ph-plus" aria-hidden="true"></i></summary><p>{E(a)}</p></details>' for q, a in C.FAQ if q not in skip)
+    return f"""<section class="paper alt" id="faq" data-section="faq">
+  <div class="wrap">
+    <div class="section-head reveal"><p class="eyebrow">Before you buy</p><h2>The honest <span class="em">answers.</span></h2></div>
+    <div class="objs">{''.join(cells)}</div>
+    <div class="faq faq-light reveal">{qs}</div>
+  </div>
+</section>"""
+
+
+def landing_final(p) -> str:
+    L = C.LANDING
+    return f"""<section class="lp-final" id="buy" data-section="final">
+  <img class="lp-final-bg" src="/static/img/lifestyle-lawn.jpg" alt="" loading="lazy" width="1536" height="864">
+  <div class="wrap">
+    <div class="lp-final-card reveal">
+      <div class="lp-final-copy">
+        <h2>{E(L['final_h'][0])} <span class="em">{E(L['final_h'][1])}</span></h2>
+        <p class="lede">{E(L['final_lede'])}</p>
+        {price_tag(p)}
+        <div class="lp-buy-actions">{buy_button(p, 'final', 'Buy now')}</div>
+        {trust_row()}
+      </div>
+      <div class="lp-final-product"><img src="/static/img/{p['image']}" alt="{E(p['image_alt'])}" loading="lazy" width="1024" height="1024"></div>
+    </div>
+  </div>
+</section>"""
+
+
+def sticky_cta(p) -> str:
+    return f"""<div class="sticky-buy" data-sticky hidden>
+  <div class="sticky-info"><b>{E(p['sku'])}</b><span>{money(p['price'])} <s>{money(p['compare'])}</s></span></div>
+  {buy_button(p, 'sticky_mobile', 'Buy now', 'btn btn-primary')}
+</div>"""
+
+
+def home() -> None:
+    p = C.PRODUCTS[0]
+    body = f"""{landing_hero(p)}
 {ticker()}
-{lineup()}
+{landing_problem()}
 {exploded()}
-{why_band()}
-{build_bento()}
-{steps()}
-{compare()}
-{faq_block(C.FAQ[:6])}
-{signup()}"""
-    schema = org_schema()
-    page("/", "Lawnix | Stainless Lawn Leveling Rakes and Garden Tools", "Lawnix makes 30 and 48 inch stainless steel lawn leveling rakes and a rotary cultivator for homeowners who want a flat, even lawn.", body, "/static/img/hero.jpg", schema)
+{landing_benefits()}
+{landing_how(p)}
+{landing_proof()}
+{landing_objections(p)}
+{landing_final(p)}
+{sticky_cta(p)}"""
+    schema = org_schema() + f"""<script type="application/ld+json">{{"@context":"https://schema.org","@type":"Product","name":{json_s(p['name'])},"sku":"{p['sku']}","brand":{{"@type":"Brand","name":"Lawnix"}},"description":{json_s(p['summary'])},"image":"{S['domain']}/static/img/{p['image']}","offers":{{"@type":"Offer","priceCurrency":"USD","price":"{p['price']:.2f}","availability":"https://schema.org/PreOrder","url":"{S['domain']}/"}}}}</script>"""
+    page("/", "Lawnix LX-30 Lawn Leveling Rake | Flat Lawn in One Afternoon",
+         "The Lawnix LX-30 is a 30-inch, 304 stainless steel lawn leveling rake. Spread sand into low spots, skim the bumps and get a flat lawn in one afternoon.",
+         body, "/static/img/hero.jpg", schema)
 
 
 def shop() -> None:
     body = f"""<section class="section page-head">
   <div class="wrap">
-    <div class="section-head"><h1>Shop <span class="em">Lawnix</span></h1><p class="lede">Every tool ships from US warehouses. {E(S['returns'])}. {E(S['warranty'])}.</p></div>
+    <div class="section-head"><h1>Shop <span class="em">Lawnix</span></h1><p class="lede">Every tool ships from US warehouses. {E(S['returns'])}.{(' ' + E(S['warranty']) + '.') if warranty_ok() else ''}</p></div>
     <div class="lineup">{''.join(product_card(p, big=(i == 0)) for i, p in enumerate(C.PRODUCTS))}</div>
   </div>
 </section>
@@ -345,7 +558,7 @@ def product_page(p) -> None:
     amz = amazon_href(p)
     buy_label = f"Buy now, {money(p['price'])}" if stripe else "Ask about availability"
     rel = ' rel="noopener"' if stripe else ""
-    actions = f'<a class="btn btn-primary btn-block" href="{buy_href(p)}"{rel}>{E(buy_label)}</a>'
+    actions = f'<a class="btn btn-primary btn-block" href="{buy_href(p)}"{rel}{track("buy_click", "product_page", p)}>{E(buy_label)}</a>'
     if amz:
         actions += f'<a class="btn btn-amazon btn-block" href="{amz}" rel="noopener"><i class="ph ph-amazon-logo" aria-hidden="true"></i>Buy on Amazon</a>'
     save = int(round((1 - p["price"] / p["compare"]) * 100))
@@ -372,7 +585,7 @@ def product_page(p) -> None:
     <div class="assure">
       <div><i class="ph ph-truck" aria-hidden="true"></i>{E(S['shipping'])}</div>
       <div><i class="ph ph-arrow-u-up-left" aria-hidden="true"></i>{E(S['returns'])}</div>
-      <div><i class="ph ph-shield-check" aria-hidden="true"></i>{E(S['warranty'])}</div>
+      <div><i class="ph ph-{'shield-check' if warranty_ok() else 'lock-simple'}" aria-hidden="true"></i>{E(S['warranty']) if warranty_ok() else 'Secure checkout by Stripe'}</div>
     </div>
     <h3 style="margin:30px 0 12px">Specs</h3>
     <div class="spec-cards">{spec_cards}</div>
@@ -418,7 +631,7 @@ def faq_page() -> None:
   <div class="faq" id="shipping">{''.join(f'<details><summary>{E(q)}<i class="ph ph-plus" aria-hidden="true"></i></summary><p>{E(a)}</p></details>' for q, a in C.FAQ)}</div>
   <div class="prose" id="warranty" style="margin-top:56px">
     <h2>Warranty</h2>
-    <p>Every Lawnix tool carries a {E(S['warranty'])} covering defects in materials and workmanship from the date of delivery. It does not cover normal wear, surface marks from sand, or damage from misuse. To claim, email {S['email']} with your order number and a photo.</p>
+    <p>{(f"Every Lawnix tool carries a {E(S['warranty'])} covering defects in materials and workmanship from the date of delivery. It does not cover normal wear, surface marks from sand, or damage from misuse. To claim, email {S['email']} with your order number and a photo.") if warranty_ok() else f"Warranty terms are being finalized and will be published on this page before the first orders ship. Email {S['email']} with any question."}</p>
     <h2>Returns</h2>
     <p>{E(S['returns'])} from the day your order arrives, in resalable condition with the original packaging. Email us to start a return and we will send instructions and the return address.</p>
   </div>
@@ -473,7 +686,7 @@ def legal() -> None:
   <h2>Orders and payment</h2><p>Prices are in US dollars. Payment is taken at checkout by Stripe. We confirm every order by email; if an item is unavailable we refund in full.</p>
   <h2>Shipping</h2><p>{E(S['shipping'])}. Delivery estimates are shown at checkout and in your confirmation email. Risk passes to you on delivery.</p>
   <h2>Returns</h2><p>{E(S['returns'])}, in resalable condition. Refunds go back to the original payment method within ten business days of receipt.</p>
-  <h2>Warranty</h2><p>{E(S['warranty'])} against defects in materials and workmanship. See the FAQ page for what is covered and how to claim.</p>
+  <h2>Warranty</h2><p>{(E(S['warranty']) + " against defects in materials and workmanship. See the FAQ page for what is covered and how to claim.") if warranty_ok() else "Warranty terms will be published on the FAQ page before the first orders ship."}</p>
   <h2>Use</h2><p>Lawnix tools are hand tools. Use them as described in the product guide, wear gloves and eye protection, and keep them away from children.</p>
   <h2>Contact</h2><p>{E(S['legal_name'])}, {S['email']}.</p>
   <p>Last updated {date.today().strftime('%B %Y')}.</p>

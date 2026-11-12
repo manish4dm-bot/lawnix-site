@@ -64,6 +64,75 @@
     });
   }
 
+  // ---------- Conversion measurement ----------
+  // Every event goes to window.dataLayer (Google Tag Manager format) and a
+  // "lawnix:track" DOM event. gtag and Meta pixel are called only if present.
+  window.dataLayer = window.dataLayer || [];
+  function track(name, data) {
+    data = data || {};
+    data.event = "lawnix_" + name;
+    window.dataLayer.push(data);
+    try { document.dispatchEvent(new CustomEvent("lawnix:track", { detail: data })); } catch (e) { /* old browsers */ }
+    if (typeof window.gtag === "function") { window.gtag("event", name, data); }
+    if (name === "buy_click" && typeof window.fbq === "function") {
+      window.fbq("track", "InitiateCheckout", { value: parseFloat(data.value) || 0, currency: "USD", content_ids: [data.product] });
+    }
+  }
+  window.lawnixTrack = track;
+  track("page_view", { path: window.location.pathname });
+  document.addEventListener("click", function (ev) {
+    var el = ev.target.closest ? ev.target.closest("[data-track]") : null;
+    if (!el) { return; }
+    track(el.getAttribute("data-track"), {
+      placement: el.getAttribute("data-placement") || "",
+      product: el.getAttribute("data-product") || "",
+      value: el.getAttribute("data-value") || "",
+      href: el.getAttribute("href") || ""
+    });
+  });
+  var sections = document.querySelectorAll("[data-section]");
+  if ("IntersectionObserver" in window && sections.length) {
+    var seen = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { track("section_view", { section: e.target.getAttribute("data-section") }); seen.unobserve(e.target); }
+      });
+    }, { threshold: 0.35 });
+    sections.forEach(function (s) { seen.observe(s); });
+  }
+
+  // ---------- Before / after slider ----------
+  document.querySelectorAll("[data-ba]").forEach(function (fig) {
+    var stage = fig.querySelector(".ba-stage");
+    var range = fig.querySelector(".ba-range");
+    if (!stage || !range) { return; }
+    var touched = false;
+    function set() { stage.style.setProperty("--pos", range.value + "%"); }
+    range.addEventListener("input", function () {
+      set();
+      if (!touched) { touched = true; track("before_after_drag", {}); }
+    });
+    set();
+  });
+
+  // ---------- Mobile sticky buy bar ----------
+  var sticky = document.querySelector("[data-sticky]");
+  if (sticky && "IntersectionObserver" in window) {
+    sticky.hidden = false;
+    document.body.classList.add("has-sticky");
+    var hero = document.querySelector(".lp-hero");
+    var finalCta = document.querySelector(".lp-final");
+    var state = { hero: true, final: false };
+    var watch = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.target === hero) { state.hero = e.isIntersecting; }
+        if (e.target === finalCta) { state.final = e.isIntersecting; }
+      });
+      sticky.classList.toggle("show", !state.hero && !state.final);
+    }, { threshold: 0 });
+    if (hero) { watch.observe(hero); }
+    if (finalCta) { watch.observe(finalCta); }
+  }
+
   // Mark current nav item
   var path = window.location.pathname.replace(/index\.html$/, "");
   document.querySelectorAll(".nav a").forEach(function (a) {

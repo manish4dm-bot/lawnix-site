@@ -113,8 +113,26 @@
     });
   }
 
+  // ---------- how it works: progress track fills as you read ----------
+  function runHowTrack() {
+    var fill = document.querySelector(".how-fill");
+    var list = document.querySelector(".how");
+    if (!fill || !list) return;
+    var steps = list.querySelectorAll(".how-step");
+    if (reduce || !hasGsap) { steps.forEach(function (s) { s.classList.add("lit"); }); fill.style.transform = "none"; return; }
+    gsap.fromTo(fill, { scaleX: 0 }, {
+      scaleX: 1, ease: "none",
+      scrollTrigger: {
+        trigger: list, start: "top 78%", end: "bottom 55%", scrub: 0.5,
+        onUpdate: function (st) {
+          steps.forEach(function (s, i) { s.classList.toggle("lit", st.progress >= i / steps.length); });
+        }
+      }
+    });
+  }
+
   function init() {
-    runCounters(); runExploded(); runBars(); runHero(); runHeadings();
+    runCounters(); runExploded(); runBars(); runHero(); runHeadings(); runHowTrack();
     if (hasGsap) { ScrollTrigger.refresh(); }
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();

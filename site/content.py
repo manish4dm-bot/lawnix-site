@@ -20,13 +20,16 @@ SITE = {
     },
     # Amazon ASINs. Empty = Amazon button hidden.
     "amazon_asins": {
-        "lx30": "https://buy.stripe.com/5kQ28qfzv5k4fbs0aH93y01",
-        "lx48": "https://buy.stripe.com/4gM9AS5YV3bW9R8aPl93y02",
-        "rc01": "https://buy.stripe.com/9B600ibjf5k4gfw6z593y03",
+        "lx30": "",
+        "lx48": "",
+        "rc01": "",
     },
     # Email list endpoint (Formspree, Mailchimp, etc.). Empty = mailto fallback.
     "form_endpoint": "",
     "warranty": "12-month warranty",
+    # False until the owner confirms the warranty length. While False the site
+    # makes no warranty promise and says terms are published before launch.
+    "warranty_confirmed": False,
     "returns": "30-day returns",
     "shipping": "Ships from US warehouses",
 }
@@ -150,7 +153,8 @@ FAQ = [
     ("Does it work on an uneven lawn with big dips?", "Yes, in stages. Fill deep dips no more than half an inch per application so the grass can grow through, then repeat."),
     ("How long does assembly take?", "Under five minutes. The two handle sections thread together and into the plate mount by hand."),
     ("Will the plate scratch or rust?", "The plate is 304 stainless steel. It will pick up fine surface marks from sand, which is normal, and it does not rust."),
-    ("What is the warranty?", f"Every Lawnix tool carries a {SITE['warranty']} against defects in materials and workmanship. Email {SITE['email']} with your order number and we will sort it out."),
+    ("What is the warranty?", f"Every Lawnix tool carries a {SITE['warranty']} against defects in materials and workmanship. Email {SITE['email']} with your order number and we will sort it out."
+     if SITE["warranty_confirmed"] else f"Warranty terms are being finalized and will be published here before the first orders ship. Email {SITE['email']} with any question in the meantime."),
     ("Where do orders ship from?", f"{SITE['shipping']}. Most US orders arrive within a few business days of shipping."),
     ("Can I return it?", f"Yes. {SITE['returns']} from delivery in resalable condition. Start a return by email and we will send instructions."),
 ]
@@ -182,11 +186,52 @@ GUIDE = {
 }
 
 NAV = [
+    ("How it works", "/#how"),
+    ("Why stainless", "/#benefits"),
+    ("Reviews", "/#proof"),
+    ("FAQ", "/#faq"),
     ("Shop", "/shop/"),
-    ("Leveling guide", "/guides/how-to-level-a-lawn/"),
-    ("About", "/about/"),
-    ("FAQ", "/faq/"),
 ]
+
+# ---------- LX-30 landing page (home) ----------
+# Copy is benefit-led; every number comes from PRODUCTS[0] specs above.
+LANDING = {
+    "eyebrow": "LX-30 / 30-inch stainless leveling rake",
+    "h1": ("Bumpy lawn?", "Flat in one afternoon."),
+    "lede": "Low spots scalp under the mower and hold water after rain. The LX-30 spreads topdressing sand into every dip and skims the high spots, so your lawn mows flat.",
+    "problems": [
+        ("Scalped high spots", "Mower wheels drop into the dips and the deck shaves the bumps down to brown."),
+        ("Standing water", "Rain collects in low patches, drowns the roots and leaves thin, yellow grass."),
+        ("Ankle-turning dips", "Uneven ground is hard to walk, hard to play on and impossible to stripe."),
+    ],
+    "benefits": [
+        ("Stays bright, season after season", "The plate and frame are 304 stainless steel, not painted mild steel. Rinse it off and hang it up; it will not rust in the shed or flake into your sand.",
+         "lifestyle-steel.jpg", "Close-up of the stainless steel plate and weld", [("304", "stainless steel"), ("0", "paint to chip")]),
+        ("Fills the dips, skims the bumps", "A 30 by 10 inch plate floats over the grass instead of digging in. On every pass it drops sand into the low spots and carries it off the high ones.",
+         "lifestyle-sand.jpg", "Leveling rake spreading sand over a lawn", [("30\"", "plate width"), ("10\"", "plate depth")]),
+        ("Work standing up, alone", "A 78 inch handle keeps your back straight. The center mount tracks true and will not roll over on the pull, and the handle threads together by hand.",
+         "lx30-detail.jpg", "Center mount where the handle meets the plate", [("78\"", "handle reach"), ("5.2", "pounds")]),
+    ],
+    "steps": [
+        ("Spread", "Mow a notch lower than usual, then tip piles of dry sand onto the low areas."),
+        ("Pull", "Draw the rake toward you in long, overlapping passes with the handle held low."),
+        ("Level", "Push back across the same strip. The plate drops sand into dips and skims the high spots."),
+        ("Finish", "Water it in so the sand settles. Go back to deep dips in two to three weeks."),
+    ],
+    "objections": [
+        ("Is my lawn too big for it?", "The LX-30 suits most home lawns up to about a quarter acre. Bigger yard or leveling for clients? The 48-inch LX-48 covers 60% more per pass.", ("See the LX-48", "/products/lx-48-lawn-leveling-rake/")),
+        ("Is it heavy to push?", "5.2 pounds. Heavy enough to cut through sand, light enough to carry across the yard in one hand.", None),
+        ("Is assembly a hassle?", "Under five minutes. Two handle sections thread together and into the plate mount by hand. No tools, no loose bolts.", None),
+        ("What if it is not right for my lawn?", "30-day returns from delivery in resalable condition. Email us and we send the instructions.", ("Return details", "/faq/#shipping")),
+    ],
+    "final_h": ("Flat lawn", "by the weekend."),
+    "final_lede": "One rake, one bag of sand, one afternoon. Order the LX-30 today and start leveling as soon as it lands.",
+}
+
+# Verified buyer reviews only. Leave empty until real reviews exist; the
+# landing page then shows clearly marked placeholders instead.
+# Format: ("First name L.", "City, ST", 5, "Review text")
+REVIEWS = []
 
 FOOTER_LINKS = {
     "Shop": [(p["short"], f"/products/{p['slug']}/") for p in PRODUCTS],
