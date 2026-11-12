@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 682 2048" width="682" height="2048" font-family="'Arial Black','Helvetica Neue',Impact,sans-serif">
+  <rect width="682" height="2048" fill="#FDFCFD"/>
+  <path d="M97,65 Q97,25 137,25 H247 Q287,25 287,65 V1978 Q287,2018 247,2018 H137 Q97,2018 97,1978 Z" fill="#131312"/>
+  <path d="M97,80 H287 V1080 L192,1130 L97,1080 Z" fill="#BED62C"/>
+  <path d="M97,1862 L192,1906 L287,1862 V1874 L192,1918 L97,1874 Z" fill="#BED62C"/>
+  <rect x="166" y="126" width="52" height="8" fill="#131312"/>
+  <g transform="translate(200,600) rotate(-90)">
+    <text text-anchor="middle" font-size="92" font-weight="900" fill="#131312" letter-spacing="-4">LAWNIX</text>
+  </g>
+  <g transform="translate(134,600) rotate(-90)">
+    <text text-anchor="middle" font-size="22" font-weight="900" fill="#131312" letter-spacing="6">POWER  ·  PRECISION  ·  PERFORMANCE</text>
+  </g>
+  <g transform="translate(222,1030)" fill="#131312">
+    <path d="M-34,0 L-30,-28 L-26,0 Z"/>
+    <path d="M-19,0 L-15,-40 L-11,0 Z"/>
+    <path d="M-4,0 L0,-48 L4,0 Z"/>
+    <path d="M11,0 L15,-38 L19,0 Z"/>
+    <path d="M26,0 L30,-26 L34,0 Z"/>
+  </g>
+  <text x="192" y="1215" text-anchor="middle" font-size="86" font-weight="900" fill="#BED62C">30&#8221;</text>
+  <text x="192" y="1280" text-anchor="middle" font-size="38" font-weight="900" fill="#FFFFFF" letter-spacing="2">LAWN</text>
+  <text x="192" y="1325" text-anchor="middle" font-size="38" font-weight="900" fill="#FFFFFF" letter-spacing="2">LEVELER</text>
+  <rect x="174" y="1352" width="36" height="6" fill="#FFFFFF"/>
+  <g transform="translate(192,1420)" stroke="#BED62C" stroke-width="4" fill="none" stroke-linecap="round">
+    <circle r="26"/>
+    <circle r="5" fill="#BED62C" stroke="none"/>
+    <line x1="-38" y1="0" x2="-18" y2="0"/>
+    <line x1="18" y1="0" x2="38" y2="0"/>
+    <line x1="0" y1="-38" x2="0" y2="-18"/>
+    <line x1="0" y1="18" x2="0" y2="38"/>
+  </g>
+  <text x="192" y="1492" text-anchor="middle" font-size="22" font-weight="900" fill="#F4F6DD" letter-spacing="3">PRECISION</text>
+  <text x="192" y="1520" text-anchor="middle" font-size="22" font-weight="900" fill="#F4F6DD" letter-spacing="3">LEVELING</text>
+  <g transform="translate(192,1580) rotate(-45)" stroke="#BED62C" stroke-width="5" fill="none" stroke-linecap="round">
+    <rect x="-34" y="-12" width="34" height="24" rx="12"/>
+    <rect x="0" y="-12" width="34" height="24" rx="12"/>
+    <line x1="-6" y1="0" x2="6" y2="0"/>
+  </g>
+  <text x="192" y="1642" text-anchor="middle" font-size="22" font-weight="900" fill="#F4F6DD" letter-spacing="3">BUILT TO</text>
+  <text x="192" y="1670" text-anchor="middle" font-size="22" font-weight="900" fill="#F4F6DD" letter-spacing="3">LAST</text>
+  <g transform="translate(192,1730)">
+    <path d="M-26,-28 L0,-34 L26,-28 V-4 Q26,18 0,32 Q-26,18 -26,-4 Z" fill="#BED62C"/>
+    <path d="M-12,-2 L-3,9 L13,-12" fill="none" stroke="#131312" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <text x="192" y="1792" text-anchor="middle" font-size="22" font-weight="900" fill="#F4F6DD" letter-spacing="3">PROFESSIONAL</text>
+  <text x="192" y="1820" text-anchor="middle" font-size="22" font-weight="900" fill="#F4F6DD" letter-spacing="3">GRADE</text>
+  <g transform="translate(192,1910)">
+    <rect x="-44" y="-22" width="88" height="5" fill="#F4F6DD"/>
+    <rect x="-44" y="-13" width="88" height="5" fill="#F4F6DD"/>
+    <rect x="-44" y="-4" width="88" height="5" fill="#F4F6DD"/>
+    <rect x="-44" y="5" width="88" height="5" fill="#F4F6DD"/>
+    <rect x="-44" y="14" width="88" height="5" fill="#F4F6DD"/>
+    <rect x="-44" y="-22" width="32" height="20" fill="#F4F6DD"/>
+  </g>
+  <text x="192" y="1965" text-anchor="middle" font-size="20" font-weight="900" fill="#F4F6DD" letter-spacing="3">DESIGNED IN</text>
+  <text x="192" y="1992" text-anchor="middle" font-size="20" font-weight="900" fill="#BED62C" letter-spacing="3">THE USA</text>
+  <path d="M395,65 Q395,25 435,25 H545 Q585,25 585,65 V1978 Q585,2018 545,2018 H435 Q395,2018 395,1978 Z" fill="#BED62C"/>
+  <path d="M395,65 Q395,25 435,25 H545 Q585,25 585,65 V65 L490,95 L395,65 Z" fill="#131312"/>
+  <path d="M395,1968 L490,1928 L585,1968 V1978 Q585,2018 545,2018 H435 Q395,2018 395,1978 Z" fill="#131312"/>
+  <g transform="translate(490,230)" fill="none" stroke="#131312" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="-22,0 0,-18 22,0"/>
+    <polyline points="-22,22 0,4 22,22"/>
+    <polyline points="-22,44 0,26 22,44"/>
+  </g>
+  <line x1="490" y1="275" x2="490" y2="600" stroke="#131312" stroke-width="6"/>
+  <g transform="translate(490,1024) rotate(-90)">
+    <text text-anchor="middle" font-size="60" font-weight="900" fill="#131312" letter-spacing="1">LAWNIXINDUSTRY.COM</text>
+  </g>
+  <line x1="490" y1="1480" x2="490" y2="1700" stroke="#131312" stroke-width="6"/>
+  <path d="M476,1695 L490,1718 L504,1695 Z" fill="#131312"/>
+  <g transform="translate(490,1730)" fill="none" stroke="#131312" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="-22,0 0,18 22,0"/>
+    <polyline points="-22,22 0,40 22,22"/>
+    <polyline points="-22,44 0,62 22,44"/>
+  </g>
+  <g fill="#131312">
+    <circle cx="466" cy="1830" r="2.06"/>
+    <circle cx="550" cy="1830" r="2.32"/>
+    <circle cx="466" cy="1837" r="1.84"/>
+    <circle cx="424" cy="1844" r="2.05"/>
+    <circle cx="452" cy="1844" r="2.20"/>
+    <circle cx="543" cy="1844" r="2.22"/>
+    <circle cx="431" cy="1851" r="2.08"/>
+    <circle cx="438" cy="1851" r="1.87"/>
+    <circle cx="445" cy="1851" r="2.26"/>
+    <circle cx="452" cy="1851" r="1.95"/>
+    <circle cx="473" cy="1851" r="2.07"/>
+    <circle cx="543" cy="1851" r="1.91"/>
+    <circle cx="424" cy="1858" r="2.05"/>
+    <circle cx="480" cy="1858" r="2.34"/>
+    <circle cx="522" cy="1858" r="2.18"/>
+    <circle cx="529" cy="1858" r="1.84"/>
+    <circle cx="536" cy="1858" r="1.90"/>
+    <circle cx="550" cy="1858" r="1.80"/>
+    <circle cx="557" cy="1858" r="1.86"/>
+    <circle cx="410" cy="1865" r="2.32"/>
+    <circle cx="424" cy="1865" r="1.95"/>
+    <circle cx="445" cy="1865" r="2.31"/>
+    <circle cx="473" cy="1865" r="1.86"/>
+    <circle cx="487" cy="1865" r="2.30"/>
+    <circle cx="494" cy="1865" r="1.81"/>
+    <circle cx="515" cy="1865" r="2.13"/>
+    <circle cx="522" cy="1865" r="2.12"/>
+    <circle cx="550" cy="1865" r="2.02"/>
+    <circle cx="557" cy="1865" r="2.26"/>
+    <circle cx="417" cy="1872" r="1.93"/>
+    <circle cx="466" cy="1872" r="2.11"/>
+    <circle cx="480" cy="1872" r="1.82"/>
+    <circle cx="487" cy="1872" r="1.96"/>
+    <circle cx="543" cy="1872" r="1.94"/>
+    <circle cx="550" cy="1872" r="1.92"/>
+    <circle cx="438" cy="1879" r="2.20"/>
+    <circle cx="473" cy="1879" r="2.27"/>
+    <circle cx="480" cy="1879" r="2.28"/>
+    <circle cx="522" cy="1879" r="1.88"/>
+    <circle cx="529" cy="1879" r="2.34"/>
+    <circle cx="543" cy="1879" r="2.30"/>
+    <circle cx="564" cy="1879" r="2.13"/>
+    <circle cx="410" cy="1886" r="1.81"/>
+    <circle cx="466" cy="1886" r="1.95"/>
+    <circle cx="473" cy="1886" r="1.94"/>
+    <circle cx="487" cy="1886" r="2.05"/>
+    <circle cx="494" cy="1886" r="2.35"/>
+    <circle cx="501" cy="1886" r="2.07"/>
+    <circle cx="522" cy="1886" r="2.35"/>
+    <circle cx="550" cy="1886" r="2.06"/>
+    <circle cx="557" cy="1886" r="1.80"/>
+    <circle cx="410" cy="1893" r="2.08"/>
+    <circle cx="431" cy="1893" r="2.11"/>
+    <circle cx="452" cy="1893" r="2.14"/>
+    <circle cx="459" cy="1893" r="1.97"/>
+    <circle cx="501" cy="1893" r="2.17"/>
+    <circle cx="529" cy="1893" r="2.12"/>
+    <circle cx="536" cy="1893" r="2.36"/>
+    <circle cx="564" cy="1893" r="2.14"/>
+    <circle cx="424" cy="1900" r="1.87"/>
+    <circle cx="431" cy="1900" r="1.84"/>
+    <circle cx="438" cy="1900" r="1.84"/>
+    <circle cx="466" cy="1900" r="2.23"/>
+    <circle cx="480" cy="1900" r="2.33"/>
+    <circle cx="494" cy="1900" r="2.37"/>
+    <circle cx="501" cy="1900" r="2.09"/>
+    <circle cx="522" cy="1900" r="2.06"/>
+    <circle cx="529" cy="1900" r="2.00"/>
+    <circle cx="536" cy="1900" r="1.99"/>
+    <circle cx="550" cy="1900" r="2.13"/>
+    <circle cx="557" cy="1900" r="1.81"/>
+    <circle cx="564" cy="1900" r="2.17"/>
+    <circle cx="410" cy="1907" r="1.84"/>
+    <circle cx="438" cy="1907" r="1.96"/>
+    <circle cx="445" cy="1907" r="2.27"/>
+    <circle cx="452" cy="1907" r="1.88"/>
+    <circle cx="459" cy="1907" r="2.35"/>
+    <circle cx="473" cy="1907" r="1.89"/>
+    <circle cx="487" cy="1907" r="2.22"/>
+    <circle cx="494" cy="1907" r="1.83"/>
+    <circle cx="508" cy="1907" r="1.84"/>
+    <circle cx="536" cy="1907" r="2.31"/>
+    <circle cx="543" cy="1907" r="2.32"/>
+    <circle cx="550" cy="1907" r="2.00"/>
+    <circle cx="557" cy="1907" r="2.36"/>
+    <circle cx="564" cy="1907" r="1.88"/>
+    <circle cx="410" cy="1914" r="1.94"/>
+    <circle cx="417" cy="1914" r="1.90"/>
+    <circle cx="424" cy="1914" r="1.92"/>
+    <circle cx="431" cy="1914" r="1.98"/>
+    <circle cx="445" cy="1914" r="2.10"/>
+    <circle cx="452" cy="1914" r="2.01"/>
+    <circle cx="459" cy="1914" r="1.95"/>
+    <circle cx="466" cy="1914" r="2.24"/>
+    <circle cx="473" cy="1914" r="1.91"/>
+    <circle cx="480" cy="1914" r="2.36"/>
+    <circle cx="487" cy="1914" r="2.29"/>
+    <circle cx="494" cy="1914" r="2.10"/>
+    <circle cx="508" cy="1914" r="2.10"/>
+    <circle cx="529" cy="1914" r="2.30"/>
+    <circle cx="550" cy="1914" r="2.01"/>
+    <circle cx="557" cy="1914" r="1.88"/>
+    <circle cx="564" cy="1914" r="2.24"/>
+    <circle cx="410" cy="1921" r="1.90"/>
+    <circle cx="417" cy="1921" r="2.30"/>
+    <circle cx="438" cy="1921" r="1.95"/>
+    <circle cx="445" cy="1921" r="2.08"/>
+    <circle cx="452" cy="1921" r="2.07"/>
+    <circle cx="459" cy="1921" r="2.38"/>
+    <circle cx="473" cy="1921" r="1.95"/>
+    <circle cx="487" cy="1921" r="2.01"/>
+    <circle cx="494" cy="1921" r="2.03"/>
+    <circle cx="501" cy="1921" r="2.10"/>
+    <circle cx="508" cy="1921" r="2.10"/>
+    <circle cx="515" cy="1921" r="1.96"/>
+    <circle cx="522" cy="1921" r="2.04"/>
+    <circle cx="529" cy="1921" r="1.81"/>
+    <circle cx="536" cy="1921" r="1.94"/>
+    <circle cx="543" cy="1921" r="2.12"/>
+    <circle cx="557" cy="1921" r="2.23"/>
+    <circle cx="410" cy="1928" r="2.00"/>
+    <circle cx="424" cy="1928" r="2.23"/>
+    <circle cx="431" cy="1928" r="1.83"/>
+    <circle cx="452" cy="1928" r="2.24"/>
+    <circle cx="466" cy="1928" r="2.11"/>
+    <circle cx="473" cy="1928" r="2.30"/>
+    <circle cx="494" cy="1928" r="2.34"/>
+    <circle cx="501" cy="1928" r="2.22"/>
+    <circle cx="508" cy="1928" r="1.82"/>
+    <circle cx="515" cy="1928" r="2.02"/>
+    <circle cx="522" cy="1928" r="2.30"/>
+    <circle cx="529" cy="1928" r="2.18"/>
+    <circle cx="536" cy="1928" r="2.21"/>
+    <circle cx="543" cy="1928" r="1.80"/>
+    <circle cx="564" cy="1928" r="2.12"/>
+    <circle cx="410" cy="1935" r="1.84"/>
+    <circle cx="417" cy="1935" r="1.95"/>
+    <circle cx="424" cy="1935" r="1.96"/>
+    <circle cx="431" cy="1935" r="1.92"/>
+    <circle cx="438" cy="1935" r="2.39"/>
+    <circle cx="445" cy="1935" r="2.03"/>
+    <circle cx="452" cy="1935" r="2.21"/>
+    <circle cx="466" cy="1935" r="2.19"/>
+    <circle cx="473" cy="1935" r="1.89"/>
+    <circle cx="480" cy="1935" r="2.25"/>
+    <circle cx="487" cy="1935" r="2.14"/>
+    <circle cx="494" cy="1935" r="1.84"/>
+    <circle cx="501" cy="1935" r="2.20"/>
+    <circle cx="508" cy="1935" r="2.21"/>
+    <circle cx="515" cy="1935" r="2.11"/>
+    <circle cx="522" cy="1935" r="2.08"/>
+    <circle cx="529" cy="1935" r="2.34"/>
+    <circle cx="536" cy="1935" r="2.39"/>
+    <circle cx="550" cy="1935" r="2.08"/>
+    <circle cx="410" cy="1942" r="1.96"/>
+    <circle cx="417" cy="1942" r="2.37"/>
+    <circle cx="424" cy="1942" r="2.15"/>
+    <circle cx="431" cy="1942" r="2.11"/>
+    <circle cx="445" cy="1942" r="2.29"/>
+    <circle cx="452" cy="1942" r="2.33"/>
+    <circle cx="459" cy="1942" r="1.94"/>
+    <circle cx="473" cy="1942" r="1.81"/>
+    <circle cx="480" cy="1942" r="2.10"/>
+    <circle cx="487" cy="1942" r="1.98"/>
+    <circle cx="494" cy="1942" r="2.01"/>
+    <circle cx="501" cy="1942" r="2.30"/>
+    <circle cx="508" cy="1942" r="2.25"/>
+    <circle cx="522" cy="1942" r="2.36"/>
+    <circle cx="529" cy="1942" r="2.34"/>
+    <circle cx="536" cy="1942" r="2.02"/>
+    <circle cx="543" cy="1942" r="2.40"/>
+    <circle cx="550" cy="1942" r="2.02"/>
+    <circle cx="557" cy="1942" r="1.97"/>
+    <circle cx="564" cy="1942" r="1.86"/>
+    <circle cx="410" cy="1949" r="1.97"/>
+    <circle cx="424" cy="1949" r="1.96"/>
+    <circle cx="431" cy="1949" r="1.91"/>
+    <circle cx="438" cy="1949" r="2.37"/>
+    <circle cx="452" cy="1949" r="2.18"/>
+    <circle cx="473" cy="1949" r="2.23"/>
+    <circle cx="480" cy="1949" r="2.24"/>
+    <circle cx="487" cy="1949" r="2.25"/>
+    <circle cx="494" cy="1949" r="1.97"/>
+    <circle cx="501" cy="1949" r="2.36"/>
+    <circle cx="508" cy="1949" r="2.08"/>
+    <circle cx="515" cy="1949" r="1.98"/>
+    <circle cx="522" cy="1949" r="2.39"/>
+    <circle cx="529" cy="1949" r="2.19"/>
+    <circle cx="536" cy="1949" r="2.13"/>
+    <circle cx="543" cy="1949" r="1.90"/>
+    <circle cx="550" cy="1949" r="1.92"/>
+    <circle cx="564" cy="1949" r="1.93"/>
+  </g>
+</svg>

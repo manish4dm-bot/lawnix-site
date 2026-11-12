@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 682 2048" width="682" height="2048" font-family="'Arial Black','Helvetica Neue',Arial,sans-serif">
+  <defs>
+    <style>
+      .green{fill:#BED62C}
+      .dark{fill:#131312}
+      .light{fill:#FDFCFD}
+      .white{fill:#ffffff}
+    </style>
+  </defs>
+
+  <rect width="682" height="2048" fill="#FDFCFD"/>
+
+  <!-- ============ LEFT PANEL (front of package) ============ -->
+  <g>
+    <!-- Body shape: rounded top + tapered black bottom -->
+    <path class="green" d="M97,60 Q97,25 175,25 H209 Q287,25 287,60 V1700 L192,1735 L97,1700 Z"/>
+    <!-- Black bottom section -->
+    <path class="dark" d="M97,1000 L192,1033 L287,1000 V1978 Q287,2023 192,2023 Q97,2023 97,1978 Z"/>
+    <!-- Bottom cap chevron -->
+    <path class="dark" d="M97,1740 L192,1773 L287,1740 V1978 Q287,2023 192,2023 Q97,2023 97,1978 Z"/>
+    <!-- Top cap -->
+    <path class="dark" d="M97,60 Q97,25 175,25 H209 Q287,25 287,60 V90 L192,115 L97,90 Z"/>
+
+    <!-- LAWNIX vertical wordmark (rotated) -->
+    <g transform="translate(192,560) rotate(-90)">
+      <text text-anchor="middle" font-size="115" font-weight="900" fill="#131312" letter-spacing="2">LAWNIX</text>
+      <text text-anchor="middle" y="-78" font-size="22" font-weight="700" fill="#131312" letter-spacing="6">POWER · PRECISION · PERFORMANCE</text>
+    </g>
+    <!-- Small grass tuft below LAWNIX -->
+    <g transform="translate(192,880)" fill="#131312">
+      <path d="M-18,0 L-14,-28 L-10,0 Z"/>
+      <path d="M-6,0 L-2,-34 L2,0 Z"/>
+      <path d="M6,0 L10,-30 L14,0 Z"/>
+      <path d="M-26,0 L-24,-20 L-20,0 Z"/>
+      <path d="M18,0 L22,-22 L26,0 Z"/>
+    </g>
+
+    <!-- Size + product name on black -->
+    <text x="192" y="1130" text-anchor="middle" font-size="90" font-weight="900" class="white">30"</text>
+    <text x="192" y="1205" text-anchor="middle" font-size="44" font-weight="900" class="white" letter-spacing="2">LAWN</text>
+    <text x="192" y="1265" text-anchor="middle" font-size="44" font-weight="900" class="white" letter-spacing="2">LEVELER</text>
+    <line x1="172" y1="1300" x2="212" y2="1300" stroke="#BED62C" stroke-width="4"/>
+
+    <!-- Feature icons -->
+    <!-- Icon 1: target / precision -->
+    <g transform="translate(192,1380)" stroke="#ffffff" stroke-width="3.5" fill="none">
+      <circle r="22"/>
+      <circle r="10"/>
+      <line x1="-32" y1="0" x2="-14" y2="0"/>
+      <line x1="14" y1="0" x2="32" y2="0"/>
+      <line x1="0" y1="-32" x2="0" y2="-14"/>
+      <line x1="0" y1="14" x2="0" y2="32"/>
+    </g>
+    <text x="192" y="1450" text-anchor="middle" font-size="22" font-weight="800" class="white" letter-spacing="2">PRECISION</text>
+    <text x="192" y="1482" text-anchor="middle" font-size="22" font-weight="800" class="white" letter-spacing="2">LEVELING</text>
+
+    <!-- Icon 2: chain link -->
+    <g transform="translate(192,1545) rotate(-45)" stroke="#ffffff" stroke-width="3.5" fill="none">
+      <rect x="-26" y="-10" width="24" height="20" rx="10"/>
+      <rect x="2" y="-10" width="24" height="20" rx="10"/>
+      <line x1="-6" y1="0" x2="6" y2="0"/>
+    </g>
+    <text x="192" y="1610" text-anchor="middle" font-size="22" font-weight="800" class="white" letter-spacing="2">BUILT TO</text>
+    <text x="192" y="1642" text-anchor="middle" font-size="22" font-weight="800" class="white" letter-spacing="2">LAST</text>
+
+    <!-- Icon 3: shield with check -->
+    <g transform="translate(192,1710)">
+      <path d="M-22,-22 L0,-28 L22,-22 V-2 Q22,18 0,28 Q-22,18 -22,-2 Z" fill="none" stroke="#ffffff" stroke-width="3.5"/>
+      <path d="M-10,-2 L-2,8 L12,-10" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    <text x="192" y="1775" text-anchor="middle" font-size="22" font-weight="800" class="white" letter-spacing="2">PROFESSIONAL</text>
+    <text x="192" y="1807" text-anchor="middle" font-size="22" font-weight="800" class="white" letter-spacing="2">GRADE</text>
+
+    <!-- US flag -->
+    <g transform="translate(192,1895)">
+      <rect x="-40" y="-22" width="80" height="44" fill="#ffffff"/>
+      <g fill="#131312">
+        <rect x="-40" y="-22" width="80" height="4"/>
+        <rect x="-40" y="-14" width="80" height="4"/>
+        <rect x="-40" y="-6" width="80" height="4"/>
+        <rect x="-40" y="2" width="80" height="4"/>
+        <rect x="-40" y="10" width="80" height="4"/>
+        <rect x="-40" y="18" width="80" height="4"/>
+      </g>
+      <rect x="-40" y="-22" width="32" height="22" fill="#131312"/>
+    </g>
+    <text x="192" y="1965" text-anchor="middle" font-size="22" font-weight="900" class="white" letter-spacing="2">DESIGNED IN</text>
+    <text x="192" y="1995" text-anchor="middle" font-size="22" font-weight="900" fill="#BED62C" letter-spacing="2">THE USA</text>
+  </g>
+
+  <!-- ============ RIGHT PANEL (back of package) ============ -->
+  <g>
+    <path class="green" d="M395,60 Q395,25 478,25 H502 Q585,25 585,60 V1978 Q585,2023 490,2023 Q395,2023 395,1978 Z"/>
+    <!-- Top cap -->
+    <path class="dark" d="M395,60 Q395,25 478,25 H502 Q585,25 585,60 V90 Q490,65 395,90 Z"/>
+    <!-- Bottom cap -->
+    <path class="dark" d="M395,1960 Q490,1995 585,1960 V1978 Q585,2023 490,2023 Q395,2023 395,1978 Z"/>
+
+    <!-- Top arrows (chevrons pointing up) -->
+    <g transform="translate(490,180)" fill="#131312">
+      <path d="M-20,0 L0,-22 L20,0 L15,0 L0,-15 L-15,0 Z"/>
+      <path d="M-20,22 L0,0 L20,22 L15,22 L0,7 L-15,22 Z"/>
+      <path d="M-20,44 L0,22 L20,44 L15,44 L0,29 L-15,44 Z"/>
+    </g>
+    <line x1="490" y1="260" x2="490" y2="540" stroke="#131312" stroke-width="6"/>
+
+    <!-- Vertical URL -->
+    <g transform="translate(490,1024) rotate(-90)">
+      <text text-anchor="middle" font-size="78" font-weight="900" fill="#131312" letter-spacing="2">LAWNIXINDUSTRY.COM</text>
+    </g>
+
+    <line x1="490" y1="1510" x2="490" y2="1790" stroke="#131312" stroke-width="6"/>
+    <!-- Bottom arrows pointing down -->
+    <g transform="translate(490,1825)" fill="#131312">
+      <path d="M-20,0 L0,22 L20,0 L15,0 L0,15 L-15,0 Z"/>
+      <path d="M-20,22 L0,44 L20,22 L15,22 L0,37 L-15,22 Z"/>
+      <path d="M-20,44 L0,66 L20,44 L15,44 L0,59 L-15,44 Z"/>
+    </g>
+
+    <!-- Dot grain texture toward bottom -->
+    <g fill="#131312">
+      <circle cx="445" cy="1908" r="1.6"/>
+      <circle cx="473" cy="1924" r="1.6"/>
+      <circle cx="515" cy="1924" r="1.6"/>
+      <circle cx="550" cy="1924" r="1.6"/>
+      <circle cx="438" cy="1932" r="1.6"/>
+      <circle cx="452" cy="1932" r="1.6"/>
+      <circle cx="466" cy="1932" r="1.6"/>
+      <circle cx="480" cy="1932" r="1.6"/>
+      <circle cx="494" cy="1932" r="1.6"/>
+      <circle cx="515" cy="1932" r="1.6"/>
+      <circle cx="522" cy="1932" r="1.6"/>
+      <circle cx="543" cy="1932" r="1.6"/>
+      <circle cx="557" cy="1932" r="1.6"/>
+      <circle cx="564" cy="1932" r="1.6"/>
+      <circle cx="424" cy="1940" r="1.6"/>
+      <circle cx="438" cy="1940" r="1.6"/>
+      <circle cx="501" cy="1940" r="1.6"/>
+      <circle cx="522" cy="1940" r="1.6"/>
+      <circle cx="543" cy="1940" r="1.6"/>
+      <circle cx="571" cy="1940" r="1.6"/>
+      <circle cx="417" cy="1948" r="1.6"/>
+      <circle cx="438" cy="1948" r="1.6"/>
+      <circle cx="452" cy="1948" r="1.6"/>
+      <circle cx="459" cy="1948" r="1.6"/>
+      <circle cx="466" cy="1948" r="1.6"/>
+      <circle cx="473" cy="1948" r="1.6"/>
+      <circle cx="480" cy="1948" r="1.6"/>
+      <circle cx="522" cy="1948" r="1.6"/>
+      <circle cx="536" cy="1948" r="1.6"/>
+      <circle cx="571" cy="1948" r="1.6"/>
+      <circle cx="424" cy="1956" r="1.6"/>
+      <circle cx="431" cy="1956" r="1.6"/>
+      <circle cx="445" cy="1956" r="1.6"/>
+      <circle cx="459" cy="1956" r="1.6"/>
+      <circle cx="466" cy="1956" r="1.6"/>
+      <circle cx="473" cy="1956" r="1.6"/>
+      <circle cx="480" cy="1956" r="1.6"/>
+      <circle cx="487" cy="1956" r="1.6"/>
+      <circle cx="508" cy="1956" r="1.6"/>
+      <circle cx="522" cy="1956" r="1.6"/>
+      <circle cx="571" cy="1956" r="1.6"/>
+      <circle cx="424" cy="1964" r="1.6"/>
+      <circle cx="431" cy="1964" r="1.6"/>
+      <circle cx="445" cy="1964" r="1.6"/>
+      <circle cx="473" cy="1964" r="1.6"/>
+      <circle cx="487" cy="1964" r="1.6"/>
+      <circle cx="494" cy="1964" r="1.6"/>
+      <circle cx="508" cy="1964" r="1.6"/>
+      <circle cx="515" cy="1964" r="1.6"/>
+      <circle cx="536" cy="1964" r="1.6"/>
+      <circle cx="564" cy="1964" r="1.6"/>
+      <circle cx="410" cy="1972" r="1.6"/>
+      <circle cx="417" cy="1972" r="1.6"/>
+      <circle cx="424" cy="1972" r="1.6"/>
+      <circle cx="438" cy="1972" r="1.6"/>
+      <circle cx="452" cy="1972" r="1.6"/>
+      <circle cx="466" cy="1972" r="1.6"/>
+      <circle cx="487" cy="1972" r="1.6"/>
+      <circle cx="494" cy="1972" r="1.6"/>
+      <circle cx="501" cy="1972" r="1.6"/>
+      <circle cx="508" cy="1972" r="1.6"/>
+      <circle cx="543" cy="1972" r="1.6"/>
+      <circle cx="410" cy="1980" r="1.6"/>
+      <circle cx="417" cy="1980" r="1.6"/>
+      <circle cx="431" cy="1980" r="1.6"/>
+      <circle cx="445" cy="1980" r="1.6"/>
+      <circle cx="480" cy="1980" r="1.6"/>
+      <circle cx="487" cy="1980" r="1.6"/>
+      <circle cx="494" cy="1980" r="1.6"/>
+      <circle cx="501" cy="1980" r="1.6"/>
+      <circle cx="508" cy="1980" r="1.6"/>
+      <circle cx="543" cy="1980" r="1.6"/>
+      <circle cx="550" cy="1980" r="1.6"/>
+      <circle cx="564" cy="1980" r="1.6"/>
+      <circle cx="571" cy="1980" r="1.6"/>
+      <circle cx="410" cy="1988" r="1.6"/>
+      <circle cx="417" cy="1988" r="1.6"/>
+      <circle cx="445" cy="1988" r="1.6"/>
+      <circle cx="452" cy="1988" r="1.6"/>
+      <circle cx="459" cy="1988" r="1.6"/>
+      <circle cx="480" cy="1988" r="1.6"/>
+      <circle cx="487" cy="1988" r="1.6"/>
+      <circle cx="494" cy="1988" r="1.6"/>
+      <circle cx="501" cy="1988" r="1.6"/>
+      <circle cx="522" cy="1988" r="1.6"/>
+      <circle cx="529" cy="1988" r="1.6"/>
+      <circle cx="543" cy="1988" r="1.6"/>
+      <circle cx="557" cy="1988" r="1.6"/>
+      <circle cx="571" cy="1988" r="1.6"/>
+      <circle cx="424" cy="1996" r="1.6"/>
+      <circle cx="431" cy="1996" r="1.6"/>
+      <circle cx="438" cy="1996" r="1.6"/>
+      <circle cx="445" cy="1996" r="1.6"/>
+      <circle cx="452" cy="1996" r="1.6"/>
+      <circle cx="466" cy="1996" r="1.6"/>
+      <circle cx="473" cy="1996" r="1.6"/>
+      <circle cx="480" cy="1996" r="1.6"/>
+      <circle cx="487" cy="1996" r="1.6"/>
+      <circle cx="515" cy="1996" r="1.6"/>
+      <circle cx="529" cy="1996" r="1.6"/>
+      <circle cx="564" cy="1996" r="1.6"/>
+      <circle cx="410" cy="2004" r="1.6"/>
+      <circle cx="431" cy="2004" r="1.6"/>
+      <circle cx="438" cy="2004" r="1.6"/>
+      <circle cx="445" cy="2004" r="1.6"/>
+      <circle cx="480" cy="2004" r="1.6"/>
+      <circle cx="501" cy="2004" r="1.6"/>
+      <circle cx="522" cy="2004" r="1.6"/>
+      <circle cx="543" cy="2004" r="1.6"/>
+      <circle cx="557" cy="2004" r="1.6"/>
+      <circle cx="564" cy="2004" r="1.6"/>
+      <circle cx="410" cy="2012" r="1.6"/>
+      <circle cx="417" cy="2012" r="1.6"/>
+      <circle cx="424" cy="2012" r="1.6"/>
+      <circle cx="431" cy="2012" r="1.6"/>
+      <circle cx="438" cy="2012" r="1.6"/>
+      <circle cx="445" cy="2012" r="1.6"/>
+      <circle cx="452" cy="2012" r="1.6"/>
+      <circle cx="466" cy="2012" r="1.6"/>
+      <circle cx="473" cy="2012" r="1.6"/>
+      <circle cx="480" cy="2012" r="1.6"/>
+      <circle cx="494" cy="2012" r="1.6"/>
+      <circle cx="508" cy="2012" r="1.6"/>
+      <circle cx="515" cy="2012" r="1.6"/>
+      <circle cx="522" cy="2012" r="1.6"/>
+      <circle cx="529" cy="2012" r="1.6"/>
+      <circle cx="536" cy="2012" r="1.6"/>
+      <circle cx="543" cy="2012" r="1.6"/>
+      <circle cx="550" cy="2012" r="1.6"/>
+      <circle cx="564" cy="2012" r="1.6"/>
+      <circle cx="417" cy="2020" r="1.6"/>
+      <circle cx="424" cy="2020" r="1.6"/>
+      <circle cx="445" cy="2020" r="1.6"/>
+      <circle cx="452" cy="2020" r="1.6"/>
+      <circle cx="459" cy="2020" r="1.6"/>
+      <circle cx="466" cy="2020" r="1.6"/>
+      <circle cx="473" cy="2020" r="1.6"/>
+      <circle cx="480" cy="2020" r="1.6"/>
+      <circle cx="487" cy="2020" r="1.6"/>
+      <circle cx="501" cy="2020" r="1.6"/>
+      <circle cx="508" cy="2020" r="1.6"/>
+      <circle cx="515" cy="2020" r="1.6"/>
+      <circle cx="522" cy="2020" r="1.6"/>
+      <circle cx="536" cy="2020" r="1.6"/>
+      <circle cx="543" cy="2020" r="1.6"/>
+      <circle cx="550" cy="2020" r="1.6"/>
+      <circle cx="557" cy="2020" r="1.6"/>
+      <circle cx="571" cy="2020" r="1.6"/>
+      <circle cx="417" cy="2028" r="1.6"/>
+      <circle cx="424" cy="2028" r="1.6"/>
+      <circle cx="431" cy="2028" r="1.6"/>
+      <circle cx="438" cy="2028" r="1.6"/>
+      <circle cx="445" cy="2028" r="1.6"/>
+      <circle cx="459" cy="2028" r="1.6"/>
+      <circle cx="466" cy="2028" r="1.6"/>
+      <circle cx="473" cy="2028" r="1.6"/>
+      <circle cx="480" cy="2028" r="1.6"/>
+      <circle cx="494" cy="2028" r="1.6"/>
+      <circle cx="501" cy="2028" r="1.6"/>
+      <circle cx="508" cy="2028" r="1.6"/>
+      <circle cx="515" cy="2028" r="1.6"/>
+      <circle cx="522" cy="2028" r="1.6"/>
+      <circle cx="529" cy="2028" r="1.6"/>
+      <circle cx="536" cy="2028" r="1.6"/>
+      <circle cx="550" cy="2028" r="1.6"/>
+      <circle cx="564" cy="2028" r="1.6"/>
+      <circle cx="571" cy="2028" r="1.6"/>
+      <circle cx="410" cy="2036" r="1.6"/>
+      <circle cx="417" cy="2036" r="1.6"/>
+      <circle cx="424" cy="2036" r="1.6"/>
+      <circle cx="431" cy="2036" r="1.6"/>
+      <circle cx="438" cy="2036" r="1.6"/>
+      <circle cx="445" cy="2036" r="1.6"/>
+      <circle cx="466" cy="2036" r="1.6"/>
+      <circle cx="473" cy="2036" r="1.6"/>
+      <circle cx="487" cy="2036" r="1.6"/>
+      <circle cx="494" cy="2036" r="1.6"/>
+      <circle cx="501" cy="2036" r="1.6"/>
+      <circle cx="508" cy="2036" r="1.6"/>
+      <circle cx="515" cy="2036" r="1.6"/>
+      <circle cx="522" cy="2036" r="1.6"/>
+      <circle cx="529" cy="2036" r="1.6"/>
+      <circle cx="536" cy="2036" r="1.6"/>
+      <circle cx="543" cy="2036" r="1.6"/>
+      <circle cx="550" cy="2036" r="1.6"/>
+      <circle cx="557" cy="2036" r="1.6"/>
+      <circle cx="564" cy="2036" r="1.6"/>
+      <circle cx="571" cy="2036" r="1.6"/>
+    </g>
+  </g>
+</svg>
