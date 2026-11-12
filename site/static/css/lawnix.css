@@ -553,7 +553,8 @@ p { text-wrap: pretty; }
 .benefit-copy h3 { font-style: italic; font-weight: 900; font-size: clamp(30px, 3.2vw, 46px); line-height: 0.98; }
 .benefit-copy p { margin: 16px 0 26px; max-width: 46ch; }
 .proof { display: flex; flex-wrap: wrap; gap: 18px 0; }
-.proof div { padding: 2px 28px 2px 16px; border-left: 4px solid var(--accent); }
+.proof div { padding: 0 32px 0 0; }
+.proof div::before { content: ""; display: block; width: 22px; height: 6px; margin-bottom: 10px; background: var(--accent); transform: skewX(var(--skew)); }
 .proof b { display: block; font-family: var(--display); font-style: italic; font-weight: 900; font-size: 40px; line-height: 1; font-variant-numeric: tabular-nums; }
 .proof span { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-2); }
 @media (max-width: 860px) {
